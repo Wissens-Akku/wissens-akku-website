@@ -211,7 +211,7 @@
                     <div class="bg-gray-800/50 rounded-lg p-6 flex flex-col border border-gray-700/50 hover:border-brand-accent-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-brand-accent-500/10">
                         <h3 class="text-xl font-bold font-heading mb-2 text-brand-accent-400">${item.title}</h3>
                         <p class="text-gray-400 flex-grow mb-4">${cleanSummary.substring(0, 150)}...</p>
-                        <audio controls class="w-full mt-auto" src="${item.enclosure.link}">
+                        <audio controls controlslist="nodownload" class="w-full mt-auto" src="${item.enclosure.link}">
                             Dein Browser unterstützt das Audio-Element nicht.
                         </audio>
                     </div>
