@@ -233,12 +233,8 @@
                 allEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
                 latestEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
                 try {
-                    // 1. Lade die RSS-Feed-URL aus der JSON-Datei
-                    const rssUrlResponse = await fetch('RSS.json');
-                    if (!rssUrlResponse.ok) {
-                        throw new Error(`Konnte RSS.json nicht laden: ${rssUrlResponse.statusText}`);
-                    }
-                    const rssUrl = (await rssUrlResponse.text()).trim();
+                    // 1. Definiere die RSS-Feed-URL direkt im Code
+                    const rssUrl = 'https://anchor.fm/s/107c46c58/podcast/rss';
 
                     // 2. Nutze rss2json.com, um den Feed als JSON via API abzurufen (löst CORS-Problem)
                     const apiEndpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
