@@ -1,0 +1,89 @@
+<svg width="100%" viewBox="0 0 1140 120" xmlns="http://www.w3.org/2000/svg" font-family="Montserrat, sans-serif" font-size="14" fill="#F8FAFC">
+    <style>
+        .box {
+            fill: #0F172A;
+            stroke: #22D3EE;
+            stroke-width: 1;
+            rx: 8;
+        }
+        .arrow-line {
+            stroke: #06B6D4;
+            stroke-width: 2;
+        }
+        .text-top {
+            font-weight: bold;
+            font-size: 12px;
+            font-family: 'Montserrat', sans-serif;
+        }
+        .text-bottom {
+            font-size: 10px;
+            fill: #94A3B8; /* gray-400 */
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+
+    <!-- Define arrow marker -->
+    <defs>
+        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#06B6D4" />
+        </marker>
+    </defs>
+
+    <!-- Boxes and Text -->
+    <g transform="translate(20, 20)">
+        <!-- Step 1 -->
+        <rect class="box" width="140" height="60"/>
+        <text x="70" y="30" text-anchor="middle" class="text-top">Themen-Recherche</text>
+        <text x="70" y="50" text-anchor="middle" class="text-bottom">(KI-gestützt)</text>
+
+        <!-- Arrow 1 -->
+        <line class="arrow-line" x1="170" y1="50" x2="200" y2="50" marker-end="url(#arrowhead)" />
+
+        <!-- Step 2 -->
+        <g transform="translate(210, 0)">
+            <rect class="box" width="140" height="60"/>
+            <text x="70" y="30" text-anchor="middle" class="text-top">Inhalts-Erstellung</text>
+            <text x="70" y="50" text-anchor="middle" class="text-bottom">(KI-gestützt)</text>
+        </g>
+
+        <!-- Arrow 2 -->
+        <line class="arrow-line" x1="360" y1="50" x2="390" y2="50" marker-end="url(#arrowhead)" />
+
+        <!-- Step 3 -->
+        <g transform="translate(400, 0)">
+            <rect class="box" width="140" height="60"/>
+            <text x="70" y="30" text-anchor="middle" class="text-top">Fakten-Check</text>
+            <text x="70" y="50" text-anchor="middle" class="text-bottom">(2 versch. KI-Anbieter)</text>
+        </g>
+
+        <!-- Arrow 3 -->
+        <line class="arrow-line" x1="550" y1="50" x2="580" y2="50" marker-end="url(#arrowhead)" />
+
+        <!-- Step 4 -->
+        <g transform="translate(590, 0)">
+            <rect class="box" width="140" height="60"/>
+            <text x="70" y="30" text-anchor="middle" class="text-top">Skript &amp; Vertonung</text>
+            <text x="70" y="50" text-anchor="middle" class="text-bottom">(TTS-Engine)</text>
+        </g>
+        
+        <!-- Arrow 4 -->
+        <line class="arrow-line" x1="740" y1="50" x2="770" y2="50" marker-end="url(#arrowhead)" />
+
+        <!-- Step 5 -->
+        <g transform="translate(780, 0)">
+            <rect class="box" width="140" height="60"/>
+            <text x="70" y="30" text-anchor="middle" class="text-top">Qualitätskontrolle</text>
+            <text x="70" y="50" text-anchor="middle" class="text-bottom">(Manuell durch mich)</text>
+        </g>
+
+        <!-- Arrow 5 -->
+        <line class="arrow-line" x1="930" y1="50" x2="960" y2="50" marker-end="url(#arrowhead)" />
+
+        <!-- Step 6 -->
+        <g transform="translate(970, 0)">
+            <rect class="box" width="140" height="60"/>
+            <text x="70" y="30" text-anchor="middle" class="text-top">Veröffentlichung</text>
+            <text x="70" y="50" text-anchor="middle" class="text-bottom">(Podcast &amp; Socials)</text>
+        </g>
+    </g>
+</svg>

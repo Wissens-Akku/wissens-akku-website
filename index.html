@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast</title>
+    <meta name="description" content="Wissens-Akku ist dein faktenbasierter Gesundheits-Podcast. Wir laden deinen Akku mit dem neuesten Wissen aus Gesundheit, Ernährung und Leistungsfähigkeit auf. Evidenzbasiert und auf den Punkt gebracht.">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -44,6 +45,13 @@
             color: #22D3EE; /* text-brand-accent-400 */
             border-bottom: 2px solid #22D3EE;
         }
+        /* Make button look like a link */
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
         /* Simple CSS for the loading spinner */
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.2);
@@ -66,7 +74,12 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="bg-brand-dark text-brand-light font-sans">
+<body class="text-brand-light font-sans">
+
+    <!-- Global Fixed Background -->
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+        <div class="absolute inset-0 bg-brand-dark/80"></div>
+    </div>
 
     <!-- Header & Navigation -->
     <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
@@ -75,10 +88,11 @@
                 <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
-            <nav class="hidden md:flex space-x-8">
+            <nav class="hidden md:flex items-center space-x-8">
                 <a href="#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="home">Start</a>
                 <a href="#episodes" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="episodes">Episoden</a>
-                <a href="#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="about">Über uns</a>
+                <a href="#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="about">Über Mich</a>
+                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-workflow-modal" data-section="workflow">Workflow</button>
                 <a href="#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="follow">Folgen</a>
             </nav>
             <!-- Mobile Menu Button -->
@@ -92,18 +106,16 @@
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="#home" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="home">Start</a>
             <a href="#episodes" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="episodes">Episoden</a>
-            <a href="#about" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="about">Über uns</a>
+            <a href="#about" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="about">Über Mich</a>
+            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-workflow-modal" data-section="workflow">Workflow</a>
             <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="follow">Folgen</a>
         </div>
     </header>
 
-    <main class="pt-20"> <!-- Padding top to avoid content being hidden by fixed header -->
+    <main class="relative z-10 pt-20"> <!-- Padding top to avoid content being hidden by fixed header -->
         <!-- Home Section -->
-        <section id="home" class="min-h-[calc(100vh-5rem)] flex items-center justify-center text-center p-6 relative overflow-hidden">
-            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('Bilder/hintergrund.png'); background-attachment: fixed;">
-                <div class="absolute inset-0 bg-brand-dark/70"></div>
-            </div>
-            <div class="relative z-10">
+        <section id="home" class="min-h-[calc(100vh-5rem)] flex items-center justify-center text-center p-6">
+            <div>
                 <h1 class="text-5xl md:text-7xl font-bold font-heading mb-4">Wissens-Akku</h1>
                 <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8">Dein faktenbasierter Gesundheits-Podcast. Auf den Punkt gebracht.</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
@@ -114,7 +126,7 @@
         </section>
 
         <!-- Dynamic Content Sections Container -->
-        <div class="container mx-auto px-6 py-24 bg-brand-dark/80 backdrop-blur-sm rounded-xl border border-gray-700/50">
+        <div class="container mx-auto px-6 py-24 bg-transparent backdrop-blur-sm rounded-xl border-none">
             <!-- Latest Episodes (part of home) -->
             <section id="latest-episodes" class="mb-24">
                 <h2 class="text-3xl font-bold font-heading text-center mb-12">Neueste Episoden</h2>
@@ -133,11 +145,12 @@
 
             <!-- About Section (add pt-24 for anchor offset) -->
             <section id="about" class="max-w-3xl mx-auto pt-24">
-                <h2 class="text-3xl font-bold font-heading text-center mb-8">Über Wissens-Akku</h2>
+                <h2 class="text-3xl font-bold font-heading text-center mb-8">Über Mich</h2>
                 <div class="text-lg text-gray-300 space-y-6 text-left md:text-justify">
-                    <p>Wissens-Akku ist der Podcast für alle, die ihre Gesundheit selbst in die Hand nehmen wollen – basierend auf Fakten, nicht auf Mythen. In jeder Folge laden wir unseren Akku mit dem neuesten Wissen aus der Welt der Gesundheit, Ernährung und Leistungsfähigkeit auf. </p>
-                    <p>Unser Host, ein passionierter Wissenschafts-Nerd, bricht komplexe Studien und biochemische Zusammenhänge in verständliche und praktisch anwendbare Häppchen herunter. Wir glauben, dass fundiertes Wissen die Grundlage für bessere Entscheidungen ist. Deswegen gibt es bei uns keine leeren Versprechungen, sondern nur evidenzbasierte Informationen, die du sofort in deinem Alltag umsetzen kannst.</p>
-                     <p>Egal, ob du deine sportliche Leistung verbessern, deinen Schlaf optimieren oder einfach nur gesünder leben möchtest – hier findest du die nötige Energie für deine Gesundheitsziele.</p>
+                    <p>Wissens-Akku ist mein Podcast für alle, die ihre Gesundheit selbst in die Hand nehmen wollen – basierend auf Fakten, nicht auf Mythen. In jeder Folge lade ich unseren gemeinsamen Akku mit dem neuesten Wissen aus der Welt der Gesundheit, Ernährung und Leistungsfähigkeit auf.</p>
+                    <p>Als passionierter Wissenschafts-Nerd ist es meine Mission, komplexe Studien und biochemische Zusammenhänge in verständliche und praktisch anwendbare Häppchen herunterzubrechen. <strong>Wichtig dabei ist: Ich bin weder Arzt noch Ernährungswissenschaftler.</strong> Meine Rolle ist die eines Forschers und Übersetzers. Ich suche und lese relevante Studien und nutze KI-gestützte Werkzeuge, um die Inhalte aufzubereiten und durch zwei verschiedene KI-Anbieter mehrfach auf Fakten prüfen zu lassen.</p>
+                    <p>Ich glaube, dass fundiertes Wissen die Grundlage für bessere Entscheidungen ist. Deswegen gibt es bei mir keine leeren Versprechungen, sondern nur sorgfältig recherchierte und geprüfte Informationen, die du sofort in deinem Alltag umsetzen kannst.</p>
+                    <p>Egal, ob du deine sportliche Leistung verbessern, deinen Schlaf optimieren oder einfach nur gesünder leben möchtest – hier findest du die nötige Energie für deine Gesundheitsziele.</p>
                 </div>
             </section>
 
@@ -163,6 +176,22 @@
             </section>
         </div>
     </main>
+
+    <!-- Workflow Modal -->
+    <div id="workflow-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-6xl w-full relative border border-gray-700">
+            <!-- Close Button -->
+            <button id="close-workflow-modal" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 class="text-3xl font-bold font-heading text-center mb-12">Mein KI-gestützter Workflow</h2>
+            <div class="px-4">
+                <img src="Bilder/workflow.svg" alt="Mein KI-gestützter Workflow für die Podcast-Erstellung" class="w-full">
+            </div>
+        </div>
+    </div>
 
     <!-- NotebookLM Modal -->
     <div id="notebooklm-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
@@ -193,9 +222,14 @@
             const sections = document.querySelectorAll('section[id]');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            const modal = document.getElementById('notebooklm-modal');
-            const openModalButton = document.getElementById('open-modal-button');
-            const closeModalButton = document.getElementById('close-modal-button');
+            
+            const notebookModal = document.getElementById('notebooklm-modal');
+            const openNotebookModalButton = document.getElementById('open-modal-button');
+            const closeNotebookModalButton = document.getElementById('close-modal-button');
+
+            const workflowModal = document.getElementById('workflow-modal');
+            const openWorkflowModalButtons = document.querySelectorAll('.open-workflow-modal');
+            const closeWorkflowModalButton = document.getElementById('close-workflow-modal');
 
             // --- Functions ---
             
@@ -287,10 +321,13 @@
             
             // Navigation links
             navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Close mobile menu on click
-                    mobileMenu.classList.add('hidden');
-                });
+                // Check if it's not a modal trigger
+                if (!link.classList.contains('open-workflow-modal')) {
+                    link.addEventListener('click', function(e) {
+                        // Close mobile menu on click
+                        mobileMenu.classList.add('hidden');
+                    });
+                }
             });
 
             // Mobile menu toggle
@@ -298,18 +335,40 @@
                 mobileMenu.classList.toggle('hidden');
             });
             
-            // Modal listeners
-            if (modal && openModalButton && closeModalButton) {
-                openModalButton.addEventListener('click', () => {
-                    modal.classList.remove('hidden');
+            // NotebookLM Modal listeners
+            if (notebookModal && openNotebookModalButton && closeNotebookModalButton) {
+                openNotebookModalButton.addEventListener('click', () => {
+                    notebookModal.classList.remove('hidden');
                 });
-                closeModalButton.addEventListener('click', () => {
-                    modal.classList.add('hidden');
+                closeNotebookModalButton.addEventListener('click', () => {
+                    notebookModal.classList.add('hidden');
                 });
                 // Close modal on backdrop click
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.add('hidden');
+                notebookModal.addEventListener('click', (e) => {
+                    if (e.target === notebookModal) {
+                        notebookModal.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Workflow Modal listeners
+            if (workflowModal && openWorkflowModalButtons.length && closeWorkflowModalButton) {
+                openWorkflowModalButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault(); // Prevent anchor link behavior if it's an <a>
+                        workflowModal.classList.remove('hidden');
+                        mobileMenu.classList.add('hidden'); // Close mobile menu if open
+                    });
+                });
+
+                closeWorkflowModalButton.addEventListener('click', () => {
+                    workflowModal.classList.add('hidden');
+                });
+
+                // Close modal on backdrop click
+                workflowModal.addEventListener('click', (e) => {
+                    if (e.target === workflowModal) {
+                        workflowModal.classList.add('hidden');
                     }
                 });
             }
