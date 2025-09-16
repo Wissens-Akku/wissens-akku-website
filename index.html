@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Tailwind Config for Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Roboto', 'sans-serif'],
+                        'heading': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0F172A', // Slate 900
+                        'brand-light': '#F8FAFC', // Slate 50
+                        'brand-accent': {
+                            '400': '#22D3EE', // Cyan 400
+                            '500': '#06B6D4', // Cyan 500
+                            '600': '#0891B2', // Cyan 600
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- RSS Parser für den Podcast-Feed -->
+    <script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
+
+    <style>
+        .nav-link.active, .nav-link-button.active {
+            color: #22D3EE; /* text-brand-accent-400 */
+            border-bottom: 2px solid #22D3EE;
+        }
+        /* Simple CSS for the loading spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-left-color: #22D3EE;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Styles for modal transition */
+        .modal.hidden {
+            display: none;
+        }
+        .modal {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-brand-dark text-brand-light font-sans">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-2 nav-link" data-section="home">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-heading font-bold">Wissens-Akku</span>
+            </a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="home">Start</a>
+                <a href="#episodes" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="episodes">Episoden</a>
+                <a href="#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="about">Über uns</a>
+                <a href="#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="follow">Folgen</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#home" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="home">Start</a>
+            <a href="#episodes" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="episodes">Episoden</a>
+            <a href="#about" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="about">Über uns</a>
+            <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="follow">Folgen</a>
+        </div>
+    </header>
+
+    <main class="pt-20"> <!-- Padding top to avoid content being hidden by fixed header -->
+        <!-- Home Section -->
+        <section id="home" class="min-h-[calc(100vh-5rem)] flex items-center justify-center text-center p-6 relative overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center bg-no-repeat" style="background-image: url('Bilder/hintergrund.png'); background-attachment: fixed;">
+                <div class="absolute inset-0 bg-brand-dark/70"></div>
+            </div>
+            <div class="relative z-10">
+                <h1 class="text-5xl md:text-7xl font-bold font-heading mb-4">Wissens-Akku</h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8">Dein faktenbasierter Gesundheits-Podcast. Auf den Punkt gebracht.</p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="open-modal-button" class="bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform w-full sm:w-auto">Frag den Podcast</button>
+                    <a href="#episodes" class="bg-transparent border-2 border-brand-accent-400 text-brand-accent-400 font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-400 hover:text-white transition-all w-full sm:w-auto">Alle Folgen entdecken</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Content Sections Container -->
+        <div class="container mx-auto px-6 py-24">
+            <!-- Latest Episodes (part of home) -->
+            <section id="latest-episodes" class="mb-24">
+                <h2 class="text-3xl font-bold font-heading text-center mb-12">Neueste Episoden</h2>
+                <div id="latest-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Loading spinner / Episodes will be injected by JS -->
+                </div>
+            </section>
+            
+            <!-- All Episodes Section -->
+            <section id="episodes">
+                <h2 class="text-3xl font-bold font-heading text-center mb-12">Alle Episoden</h2>
+                <div id="all-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Loading spinner / Episodes will be injected by JS -->
+                </div>
+            </section>
+
+            <!-- About Section (add pt-24 for anchor offset) -->
+            <section id="about" class="max-w-3xl mx-auto pt-24">
+                <h2 class="text-3xl font-bold font-heading text-center mb-8">Über Wissens-Akku</h2>
+                <div class="text-lg text-gray-300 space-y-6 text-left md:text-justify">
+                    <p>Wissens-Akku ist der Podcast für alle, die ihre Gesundheit selbst in die Hand nehmen wollen – basierend auf Fakten, nicht auf Mythen. In jeder Folge laden wir unseren Akku mit dem neuesten Wissen aus der Welt der Gesundheit, Ernährung und Leistungsfähigkeit auf. </p>
+                    <p>Unser Host, ein passionierter Wissenschafts-Nerd, bricht komplexe Studien und biochemische Zusammenhänge in verständliche und praktisch anwendbare Häppchen herunter. Wir glauben, dass fundiertes Wissen die Grundlage für bessere Entscheidungen ist. Deswegen gibt es bei uns keine leeren Versprechungen, sondern nur evidenzbasierte Informationen, die du sofort in deinem Alltag umsetzen kannst.</p>
+                     <p>Egal, ob du deine sportliche Leistung verbessern, deinen Schlaf optimieren oder einfach nur gesünder leben möchtest – hier findest du die nötige Energie für deine Gesundheitsziele.</p>
+                </div>
+            </section>
+
+            <!-- Follow Section (add pt-24 for anchor offset) -->
+            <section id="follow" class="max-w-3xl mx-auto text-center pt-24">
+                <h2 class="text-3xl font-bold font-heading mb-8">Folge uns auf deiner Lieblings-Plattform</h2>
+                <p class="text-gray-400 mb-12">Verpasse keine Episode und bleibe immer auf dem neuesten Stand der Wissenschaft.</p>
+                <div class="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
+                    <!-- Spotify -->
+                    <a href="https://open.spotify.com/show/4cvMLk6acssF3L31vMHy9H" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 text-gray-400 hover:text-white transition-all transform hover:scale-105">
+                        <img src="Bilder/Spotify_Primary_Logo_RGB_Green.png" alt="Spotify Logo" class="h-20 object-contain">
+                        <span class="text-xl font-bold font-heading">Spotify</span>
+                    </a>
+                    <!-- Apple Podcasts -->
+                    <a href="https://podcasts.apple.com/us/podcast/wissens-akku/id1833243965?itscg=30200&itsct=podcast_box&ls=1&mttnsubad=1833243965" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-end gap-4 text-gray-400 hover:text-white transition-all transform hover:scale-105">
+                        <img src="Bilder/badge.svg" alt="Listen on Apple Podcasts" class="h-10 object-contain">
+                        <span class="text-xl font-bold font-heading">Apple Podcasts</span>
+                    </a>
+                    <!-- YouTube -->
+                    <a href="https://www.youtube.com/@Wissens-Akku" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 text-gray-400 hover:text-white transition-all transform hover:scale-105">
+                        <img src="Bilder/yt_logo_fullcolor_white_digital.png" alt="YouTube Logo" class="h-20 object-contain">
+                        <span class="text-xl font-bold font-heading">YouTube</span>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- NotebookLM Modal -->
+    <div id="notebooklm-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-lg w-full relative border border-gray-700">
+            <!-- Close Button -->
+            <button id="close-modal-button" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+
+            <h3 class="text-2xl font-bold font-heading mb-4 text-brand-accent-400">Frag den Podcast</h3>
+            <p class="text-gray-300 mb-6">
+                Du wirst nun zu unserem interaktiven KI-Assistenten auf Google NotebookLM weitergeleitet. Dort kannst du alle unsere Podcast-Transkripte durchsuchen und direkt Fragen zu den Inhalten stellen.
+            </p>
+            <a href="https://notebooklm.google.com/notebook/6a6b04bd-2a12-4a4d-802b-18d869b4f263" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
+                Chat in neuem Tab öffnen
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Elements ---
+            const allEpisodesGrid = document.getElementById('all-episodes-grid');
+            const latestEpisodesGrid = document.getElementById('latest-episodes-grid');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section[id]');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const modal = document.getElementById('notebooklm-modal');
+            const openModalButton = document.getElementById('open-modal-button');
+            const closeModalButton = document.getElementById('close-modal-button');
+
+            // --- Functions ---
+            
+            // Function to create an episode card HTML
+            function createEpisodeCard(item) {
+                // Bereinigt die Zusammenfassung von HTML-Tags
+                const summary = item.description || 'Keine Zusammenfassung verfügbar.';
+                const cleanSummary = summary.replace(/<[^>]*>?/gm, '');
+
+                return `
+                    <div class="bg-gray-800/50 rounded-lg p-6 flex flex-col border border-gray-700/50 hover:border-brand-accent-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-brand-accent-500/10">
+                        <h3 class="text-xl font-bold font-heading mb-2 text-brand-accent-400">${item.title}</h3>
+                        <p class="text-gray-400 flex-grow mb-4">${cleanSummary.substring(0, 150)}...</p>
+                        <audio controls class="w-full mt-auto" src="${item.enclosure.link}">
+                            Dein Browser unterstützt das Audio-Element nicht.
+                        </audio>
+                    </div>
+                `;
+            }
+
+            // Function to create a loading spinner placeholder
+            function createLoadingSpinnerHTML() {
+                return `
+                    <div class="col-span-full flex justify-center items-center p-12">
+                        <div class="spinner"></div>
+                    </div>
+                `;
+            }
+
+            // Lade Episoden vom RSS Feed
+            async function loadEpisodesFromRSS() {
+                // Show loading spinners initially
+                allEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
+                latestEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
+                try {
+                    // 1. Lade die RSS-Feed-URL aus der JSON-Datei
+                    const rssUrlResponse = await fetch('RSS.json');
+                    if (!rssUrlResponse.ok) {
+                        throw new Error(`Konnte RSS.json nicht laden: ${rssUrlResponse.statusText}`);
+                    }
+                    const rssUrl = (await rssUrlResponse.text()).trim();
+
+                    // 2. Nutze rss2json.com, um den Feed als JSON via API abzurufen (löst CORS-Problem)
+                    const apiEndpoint = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+                    const feedResponse = await fetch(apiEndpoint);
+                    if (!feedResponse.ok) {
+                        throw new Error(`Fehler beim Abrufen des Feeds von rss2json.com: ${feedResponse.statusText}`);
+                    }
+                    const feed = await feedResponse.json();
+                    
+                    if (feed.status === 'ok' && feed.items) {
+                        allEpisodesGrid.innerHTML = feed.items.map(createEpisodeCard).join('');
+                        latestEpisodesGrid.innerHTML = feed.items.slice(0, 3).map(createEpisodeCard).join('');
+                    } else {
+                        throw new Error(feed.message || 'Die API-Antwort war nicht im erwarteten Format.');
+                    }
+
+                } catch (error) {
+                    console.error("Fehler beim Laden des Podcast-Feeds:", error);
+                    const errorMessage = `<div class="col-span-full text-center text-red-400 p-8"><p class="font-bold">Der Podcast-Feed konnte leider nicht geladen werden.</p><p class="text-sm text-gray-400 mt-2">Bitte versuchen Sie es später erneut.</p></div>`;
+                    allEpisodesGrid.innerHTML = errorMessage;
+                }
+            }
+
+            // Update active nav link on scroll
+            function updateActiveNavOnScroll() {
+                const scrollY = window.scrollY;
+
+                let currentSectionId = 'home'; // Default
+
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 150; // Offset for header height
+                    if (scrollY >= sectionTop) {
+                        currentSectionId = section.getAttribute('id');
+                    }
+                });
+
+                // Special case for latest-episodes, should also highlight 'home'
+                const latestEpisodesSection = document.getElementById('latest-episodes');
+                if (scrollY >= latestEpisodesSection.offsetTop - 150 && scrollY < document.getElementById('episodes').offsetTop - 150) {
+                    currentSectionId = 'home';
+                }
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-section') === currentSectionId) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            // --- Event Listeners ---
+            
+            // Navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Close mobile menu on click
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Modal listeners
+            if (modal && openModalButton && closeModalButton) {
+                openModalButton.addEventListener('click', () => {
+                    modal.classList.remove('hidden');
+                });
+                closeModalButton.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                });
+                // Close modal on backdrop click
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            }
+            
+            // Scroll listener for active nav state
+            window.addEventListener('scroll', updateActiveNavOnScroll);
+
+            // --- Initialization ---
+            loadEpisodesFromRSS();
+            updateActiveNavOnScroll(); // Set initial state
+        });
+    </script>
+</body>
+</html>
