@@ -25,7 +25,6 @@
                     },
                     colors: {
                         'brand-dark': '#0F172A', // Slate 900
-                        'brand-light': '#F8FAFC', // Slate 50
                         'brand-accent': {
                             '400': '#22D3EE', // Cyan 400
                             '500': '#06B6D4', // Cyan 500
@@ -74,7 +73,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
-<body class="text-brand-light font-sans">
+<body class="text-brand-accent-400 font-sans">
 
     <!-- Global Fixed Background -->
     <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
@@ -94,6 +93,7 @@
                 <a href="#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="about">Über Mich</a>
                 <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-workflow-modal" data-section="workflow">Workflow</button>
                 <a href="#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="follow">Folgen</a>
+                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal" data-section="contact">Kontakt</button>
             </nav>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2">
@@ -109,6 +109,7 @@
             <a href="#about" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="about">Über Mich</a>
             <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-workflow-modal" data-section="workflow">Workflow</a>
             <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="follow">Folgen</a>
+            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-contact-modal" data-section="contact">Kontakt</a>
         </div>
     </header>
 
@@ -117,9 +118,9 @@
         <section id="home" class="min-h-[calc(100vh-5rem)] flex items-center justify-center text-center p-6">
             <div>
                 <h1 class="text-5xl md:text-7xl font-bold font-heading mb-4">Wissens-Akku</h1>
-                <p class="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8">Dein faktenbasierter Gesundheits-Podcast. Auf den Punkt gebracht.</p>
+                <p class="text-xl md:text-2xl text-brand-accent-400 max-w-2xl mx-auto mb-8">Dein faktenbasierter Gesundheits-Podcast. Auf den Punkt gebracht.</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button id="open-modal-button" class="bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform w-full sm:w-auto">Frag den Podcast</button>
+                    <button id="open-modal-button" class="bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform w-full sm:w-auto">Wissens-Explorer</button>
                     <a href="#episodes" class="bg-transparent border-2 border-brand-accent-400 text-brand-accent-400 font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-400 hover:text-white transition-all w-full sm:w-auto">Alle Folgen entdecken</a>
                 </div>
             </div>
@@ -146,9 +147,9 @@
             <!-- About Section (add pt-24 for anchor offset) -->
             <section id="about" class="max-w-3xl mx-auto pt-24">
                 <h2 class="text-3xl font-bold font-heading text-center mb-8">Über Mich</h2>
-                <div class="text-lg text-gray-300 space-y-6 text-left md:text-justify">
+                <div class="text-lg text-brand-accent-400 space-y-6 text-left md:text-justify">
                     <p>Wissens-Akku ist mein Podcast für alle, die ihre Gesundheit selbst in die Hand nehmen wollen – basierend auf Fakten, nicht auf Mythen. In jeder Folge lade ich unseren gemeinsamen Akku mit dem neuesten Wissen aus der Welt der Gesundheit, Ernährung und Leistungsfähigkeit auf.</p>
-                    <p>Als passionierter Wissenschafts-Nerd ist es meine Mission, komplexe Studien und biochemische Zusammenhänge in verständliche und praktisch anwendbare Häppchen herunterzubrechen. <strong>Wichtig dabei ist: Ich bin weder Arzt noch Ernährungswissenschaftler.</strong> Meine Rolle ist die eines Forschers und Übersetzers. Ich suche und lese relevante Studien und nutze KI-gestützte Werkzeuge, um die Inhalte aufzubereiten und durch zwei verschiedene KI-Anbieter mehrfach auf Fakten prüfen zu lassen.</p>
+                    <p>Als passionierter Wissenschafts-Nerd ist es meine Mission, komplexe Studien und biochemische Zusammenhänge in verständliche und praktisch anwendbare Häppchen herunterzubrechen. <strong>Wichtig dabei ist: Ich bin weder Arzt noch Ernährungswissenschaftler.</strong> Meine Rolle ist die eines Forschers und Übersetzers. Ich suche und lese relevante Studien, nutze KI-gestützte Werkzeuge, um die Inhalte aufzubereiten, und lasse die Fakten von zwei verschiedenen KI-Anbietern prüfen. Anschließend lade ich alle recherchierten Daten und Quellen in unseren "Wissens-Explorer" (NotebookLM), damit du bei Nachfragen volle Transparenz hast.</p>
                     <p>Ich glaube, dass fundiertes Wissen die Grundlage für bessere Entscheidungen ist. Deswegen gibt es bei mir keine leeren Versprechungen, sondern nur sorgfältig recherchierte und geprüfte Informationen, die du sofort in deinem Alltag umsetzen kannst.</p>
                     <p>Egal, ob du deine sportliche Leistung verbessern, deinen Schlaf optimieren oder einfach nur gesünder leben möchtest – hier findest du die nötige Energie für deine Gesundheitsziele.</p>
                 </div>
@@ -157,19 +158,19 @@
             <!-- Follow Section (add pt-24 for anchor offset) -->
             <section id="follow" class="max-w-3xl mx-auto text-center pt-24">
                 <h2 class="text-3xl font-bold font-heading mb-8">Folge uns auf deiner Lieblings-Plattform</h2>
-                <p class="text-gray-400 mb-12">Verpasse keine Episode und bleibe immer auf dem neuesten Stand der Wissenschaft.</p>
+                <p class="text-brand-accent-400 mb-12">Verpasse keine Episode und bleibe immer auf dem neuesten Stand der Wissenschaft.</p>
                 <div class="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
                     <!-- Spotify -->
-                    <a href="https://open.spotify.com/show/4cvMLk6acssF3L31vMHy9H" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 text-gray-400 hover:text-white transition-all transform hover:scale-105">
+                    <a href="https://open.spotify.com/show/4cvMLk6acssF3L31vMHy9H" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 text-brand-accent-400 hover:text-brand-accent-500 transition-all transform hover:scale-105">
                         <img src="Bilder/Spotify_Primary_Logo_RGB_Green.png" alt="Spotify Logo" class="h-20 object-contain">
                         <span class="text-xl font-bold font-heading">Spotify</span>
                     </a>
                     <!-- Apple Podcasts -->
-                    <a href="https://podcasts.apple.com/us/podcast/wissens-akku/id1833243965?itscg=30200&itsct=podcast_box&ls=1&mttnsubad=1833243965" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center gap-4 text-gray-400 hover:text-white transition-all transform hover:scale-105">
+                    <a href="https://podcasts.apple.com/us/podcast/wissens-akku/id1833243965?itscg=30200&itsct=podcast_box&ls=1&mttnsubad=1833243965" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center gap-4 text-brand-accent-400 hover:text-brand-accent-500 transition-all transform hover:scale-105">
                         <img src="Bilder/badge.svg" alt="Listen on Apple Podcasts" class="h-10 object-contain">
                     </a>
                     <!-- YouTube -->
-                    <a href="https://www.youtube.com/@Wissens-Akku" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center gap-4 text-gray-400 hover:text-white transition-all transform hover:scale-105">
+                    <a href="https://www.youtube.com/@Wissens-Akku" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center gap-4 text-brand-accent-400 hover:text-brand-accent-500 transition-all transform hover:scale-105">
                         <img src="Bilder/yt_logo_fullcolor_white_digital.png" alt="YouTube Logo" class="h-20 object-contain">
                     </a>
                 </div>
@@ -177,11 +178,45 @@
         </div>
     </main>
 
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl w-full relative border border-gray-700">
+            <!-- Close Button -->
+            <button id="close-contact-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h2 class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
+            <form name="contact" method="POST" data-netlify="true" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname (optional)</label>
+                        <input type="text" name="firstname" id="firstname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name (optional)</label>
+                        <input type="text" name="lastname" id="lastname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
+                    <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
+                    <textarea name="message" id="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht senden</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <!-- Workflow Modal -->
     <div id="workflow-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-6xl w-full relative border border-gray-700">
             <!-- Close Button -->
-            <button id="close-workflow-modal" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10">
+            <button id="close-workflow-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -197,18 +232,18 @@
     <div id="notebooklm-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-lg w-full relative border border-gray-700">
             <!-- Close Button -->
-            <button id="close-modal-button" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10">
+            <button id="close-modal-button" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                 </svg>
             </button>
 
-            <h3 class="text-2xl font-bold font-heading mb-4 text-brand-accent-400">Frag den Podcast</h3>
-            <p class="text-gray-300 mb-6">
-                Du wirst nun zu unserem interaktiven KI-Assistenten auf Google NotebookLM weitergeleitet. Dort kannst du alle unsere Podcast-Transkripte durchsuchen und direkt Fragen zu den Inhalten stellen.
+            <h3 class="text-2xl font-bold font-heading mb-4 text-brand-accent-400">Wissens-Explorer</h3>
+            <p class="text-brand-accent-400 mb-6">
+                Du wirst nun zum Wissens-Explorer (unserem interaktiven KI-Assistenten auf Google NotebookLM) weitergeleitet. Dort kannst du alle unsere Podcast-Transkripte und Quellen durchsuchen und direkt Fragen zu den Inhalten stellen.
             </p>
             <a href="https://notebooklm.google.com/notebook/6a6b04bd-2a12-4a4d-802b-18d869b4f263" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
-                Chat in neuem Tab öffnen
+                Explorer in neuem Tab öffnen
             </a>
         </div>
     </div>
@@ -231,6 +266,11 @@
             const openWorkflowModalButtons = document.querySelectorAll('.open-workflow-modal');
             const closeWorkflowModalButton = document.getElementById('close-workflow-modal');
 
+            const contactModal = document.getElementById('contact-modal');
+            const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
+            const closeContactModalButton = document.getElementById('close-contact-modal');
+            const contactFormInputs = contactModal.querySelectorAll('input, textarea');
+
             // --- Functions ---
             
             // Function to create an episode card HTML
@@ -242,7 +282,7 @@
                 return `
                     <div class="bg-gray-800/50 rounded-lg p-6 flex flex-col border border-gray-700/50 hover:border-brand-accent-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-brand-accent-500/10">
                         <h3 class="text-xl font-bold font-heading mb-2 text-brand-accent-400">${item.title}</h3>
-                        <p class="text-gray-400 flex-grow mb-4">${cleanSummary.substring(0, 150)}...</p>
+                        <p class="text-brand-accent-400 flex-grow mb-4">${cleanSummary.substring(0, 150)}...</p>
                         <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="mt-auto w-full bg-brand-accent-500 text-white font-bold py-2 px-4 rounded-lg text-center hover:bg-brand-accent-600 transition-colors">
                             Jetzt anhören
                         </a>
@@ -285,7 +325,7 @@
 
                 } catch (error) {
                     console.error("Fehler beim Laden des Podcast-Feeds:", error);
-                    const errorMessage = `<div class="col-span-full text-center text-red-400 p-8"><p class="font-bold">Der Podcast-Feed konnte leider nicht geladen werden.</p><p class="text-sm text-gray-400 mt-2">Bitte versuchen Sie es später erneut.</p></div>`;
+                    const errorMessage = `<div class="col-span-full text-center text-red-400 p-8"><p class="font-bold">Der Podcast-Feed konnte leider nicht geladen werden.</p><p class="text-sm text-brand-accent-400 mt-2">Bitte versuchen Sie es später erneut.</p></div>`;
                     allEpisodesGrid.innerHTML = errorMessage;
                 }
             }
@@ -311,8 +351,11 @@
 
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    if (link.getAttribute('data-section') === currentSectionId) {
-                        link.classList.add('active');
+                    // Check if the link is not a modal trigger before applying active state
+                    if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
+                        if (link.getAttribute('data-section') === currentSectionId) {
+                            link.classList.add('active');
+                        }
                     }
                 });
             }
@@ -322,7 +365,7 @@
             // Navigation links
             navLinks.forEach(link => {
                 // Check if it's not a modal trigger
-                if (!link.classList.contains('open-workflow-modal')) {
+                if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
                     link.addEventListener('click', function(e) {
                         // Close mobile menu on click
                         mobileMenu.classList.add('hidden');
@@ -369,6 +412,31 @@
                 workflowModal.addEventListener('click', (e) => {
                     if (e.target === workflowModal) {
                         workflowModal.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Contact Modal Listeners
+            if (contactModal && openContactModalButtons.length && closeContactModalButton) {
+                openContactModalButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        contactModal.classList.remove('hidden');
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+
+                closeContactModalButton.addEventListener('click', () => {
+                    contactModal.classList.add('hidden');
+                });
+
+                contactModal.addEventListener('click', (e) => {
+                    if (e.target === contactModal) {
+                        // Check if all form fields are empty
+                        const isFormEmpty = Array.from(contactFormInputs).every(input => input.value === '');
+                        if (isFormEmpty) {
+                            contactModal.classList.add('hidden');
+                        }
                     }
                 });
             }
