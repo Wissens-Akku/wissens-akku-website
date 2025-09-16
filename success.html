@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danke! | Wissens-Akku</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'heading': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0F172A',
+                        'brand-accent': {
+                            '400': '#22D3EE',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-brand-dark text-brand-accent-400 font-heading flex items-center justify-center min-h-screen">
+    <div class="text-center p-8">
+        <h1 class="text-4xl md:text-6xl font-bold mb-4">Danke für deine Nachricht!</h1>
+        <p class="text-xl mb-8">Ich habe sie erhalten und melde mich so schnell wie möglich bei dir.</p>
+        <a href="/" class="bg-brand-accent-400 text-brand-dark font-bold py-3 px-8 rounded-lg text-lg hover:bg-opacity-80 transition-all">
+            Zurück zur Hauptseite
+        </a>
+    </div>
+</body>
+</html>

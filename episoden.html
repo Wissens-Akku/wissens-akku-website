@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alle Episoden | Wissens-Akku</title>
+    <link rel="icon" href="Bilder/wissenakku-logo.png">
+    <meta name="description" content="Durchsuche alle Episoden des Wissens-Akku Podcasts. Finde spezifische Themen und lade deinen Wissens-Akku auf.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Custom Tailwind Config for Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Roboto', 'sans-serif'],
+                        'heading': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0F172A', // Slate 900
+                        'brand-accent': {
+                            '400': '#22D3EE', // Cyan 400
+                            '500': '#06B6D4', // Cyan 500
+                            '600': '#0891B2', // Cyan 600
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- RSS Parser für den Podcast-Feed -->
+    <script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
+
+    <style>
+        .nav-link.active {
+            color: #22D3EE; /* text-brand-accent-400 */
+            border-bottom: 2px solid #22D3EE;
+        }
+        /* Make button look like a link */
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        /* Simple CSS for the loading spinner */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.2);
+            border-left-color: #22D3EE;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .category-tab.active {
+            background-color: #06B6D4; /* brand-accent-500 */
+            color: white;
+        }
+
+        /* Custom Scrollbar for the episode grid */
+        #all-episodes-grid {
+            max-height: 80vh; /* Adjust as needed, approx 3 rows */
+            overflow-y: auto;
+            padding-right: 1rem; /* Space for scrollbar */
+        }
+        #all-episodes-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+        #all-episodes-grid::-webkit-scrollbar-track {
+            background: #0F172A; /* brand-dark */
+        }
+        #all-episodes-grid::-webkit-scrollbar-thumb {
+            background-color: #0891B2; /* brand-accent-600 */
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="text-brand-accent-400 font-sans">
+
+    <!-- Global Fixed Background -->
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+        <div class="absolute inset-0 bg-brand-dark/80"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html#home" class="flex items-center space-x-2 nav-link" data-section="home">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-heading font-bold">Wissens-Akku</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="index.html#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="home">Start</a>
+                <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active" data-section="episodes">Episoden</a>
+                <a href="index.html#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="about">Über Mich</a>
+                <a href="index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="follow">Folgen</a>
+                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-workflow-modal" data-section="workflow">Workflow</button>
+                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal" data-section="contact">Kontakt</button>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="index.html#home" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="home">Start</a>
+            <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link active" data-section="episodes">Episoden</a>
+            <a href="index.html#about" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="about">Über Mich</a>
+            <a href="index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="follow">Folgen</a>
+            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-workflow-modal" data-section="workflow">Workflow</a>
+            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-contact-modal" data-section="contact">Kontakt</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-20">
+        <div class="container mx-auto px-6 py-12 md:py-24 bg-transparent backdrop-blur-sm rounded-xl border-none">
+            <!-- All Episodes Section -->
+            <section id="episodes">
+                <h1 class="text-4xl md:text-5xl font-bold font-heading text-center mb-12">Alle Episoden</h1>
+                <div class="mb-8 max-w-lg mx-auto flex gap-2">
+                    <input type="search" id="episode-search-input" placeholder="Episoden durchsuchen..." class="flex-grow bg-gray-900/50 border border-gray-600 rounded-lg py-3 px-5 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none text-lg">
+                    <button id="episode-search-button" class="bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-colors shrink-0">Suchen</button>
+                </div>
+                <!-- Category Tabs -->
+                <div id="category-tabs" class="mb-12 flex flex-wrap justify-center gap-2">
+                    <!-- Tabs will be injected by JS -->
+                </div>
+                <div id="all-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Loading spinner / Episodes will be injected by JS -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl w-full relative border border-gray-700">
+            <!-- Close Button -->
+            <button id="close-contact-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h2 class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
+            <form name="contact" method="POST" data-netlify="true" action="/success.html" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname (optional)</label>
+                        <input type="text" name="firstname" id="firstname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name (optional)</label>
+                        <input type="text" name="lastname" id="lastname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                    </div>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
+                    <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
+                    <textarea name="message" id="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht senden</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Workflow Modal -->
+    <div id="workflow-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+        <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-6xl w-full relative border border-gray-700">
+            <!-- Close Button -->
+            <button id="close-workflow-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <h2 class="text-4xl font-bold font-heading text-center mb-12">Mein KI-gestützter Workflow</h2>
+            <!-- Scrollable container for the large image -->
+            <div class="overflow-x-auto px-4 pb-4">
+                <img src="Bilder/workflow.svg" alt="Mein KI-gestützter Workflow für die Podcast-Erstellung" class="min-w-[1000px] w-auto mx-auto">
+            </div>
+            <div class="text-center text-lg text-gray-400 mt-2">
+                <p>⟷ Zum Scrollen ziehen oder wischen ⟷</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let allEpisodes = []; // To store all fetched episodes
+
+            // --- Elements ---
+            const allEpisodesGrid = document.getElementById('all-episodes-grid');
+            const searchInput = document.getElementById('episode-search-input');
+            const categoryTabsContainer = document.getElementById('category-tabs');
+            const searchButton = document.getElementById('episode-search-button');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            const workflowModal = document.getElementById('workflow-modal');
+            const openWorkflowModalButtons = document.querySelectorAll('.open-workflow-modal');
+            const closeWorkflowModalButton = document.getElementById('close-workflow-modal');
+
+            const contactModal = document.getElementById('contact-modal');
+            const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
+            const closeContactModalButton = document.getElementById('close-contact-modal');
+            const contactFormInputs = contactModal.querySelectorAll('input, textarea');
+
+
+            // --- Functions ---
+            
+            // Function to create an episode card HTML
+            function createEpisodeCard(item) {
+                const summary = item.description || 'Keine Zusammenfassung verfügbar.';
+                const cleanSummary = summary.replace(/<[^>]*>?/gm, '');
+
+                const shareLinks = `
+                    <div class="mt-auto pt-4">
+                        <div class="border-t border-gray-700/50 flex items-center gap-4 mb-4 pt-4">
+                            <span class="text-sm font-bold text-brand-accent-400">Teilen:</span>
+                            <a href="https://t.me/share/url?url=${encodeURIComponent(item.link)}&text=${encodeURIComponent(item.title)}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.48-.52-.19L7.74 13.3 3.64 12c-.53-.16-.54-.53.1-.73l16-6.1c.38-.14.7.12.53.53l-3.23 15.33c-.18.85-.72 1.01-1.4.63l-4.32-3.18-2.05 1.98c-.18.18-.33.33-.66.33"/></svg>
+                            </a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(item.link)}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg>
+                            </a>
+                            <a href="https://api.whatsapp.com/send?text=${encodeURIComponent(item.title + ' ' + item.link)}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zM12.04 20.12c-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31c-.82-1.31-1.26-2.83-1.26-4.38 0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.24 3.7 8.24 8.24s-3.7 8.24-8.24 8.24zm4.52-6.14c-.25-.12-1.47-.72-1.7-.82s-.39-.12-.56.12c-.17.25-.64.82-.79.99s-.29.17-.54.06c-.25-.12-1.06-.39-2.02-1.25s-1.45-1.93-1.62-2.25c-.17-.31-.02-.48.11-.61s.25-.29.37-.44c.13-.15.17-.25.25-.41s.12-.31.06-.44c-.06-.12-.56-1.34-.76-1.84s-.4-.42-.55-.42c-.15 0-.31-.02-.48-.02s-.41 0-1.06.5c-.65.5-1.02 1.4-1.02 2.8s1.04 3.25 1.19 3.47c.15.21 2.11 3.23 5.11 4.5s2.09.83 2.8.79c.71-.04 2.26-.92 2.58-1.8s.32-1.62.22-1.8c-.1-.18-.25-.29-.5-.41z"></path></svg>
+                            </a>
+                            <a href="https://t.me/share/url?url=${encodeURIComponent(item.link)}&text=${encodeURIComponent(item.title)}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.102.036.27.04.364.18 1.167.964 6.11 1.2 7.354.05.24.01.47-.13.57-.14.1-.31.04-.48-.05-.17-.09-1.08-1.05-1.55-1.44-.6-.4-1.01-.7-1.18-.82-.3-.15-.5-.2-.3-.4.1-.1.7-.7.8-1 .1-.1.1-.2-.04-.3-.1-.1-1.2 1-1.5.3-.2-.4.3-1.2.4-1.3.5-.7 1-2.4 1.2-2.6.2-.2.3-.3.2-.4-.1-.1-.2-.1-.4-.1-.2 0-1.7.8-2.2 1.2-.4.3-.8.4-1.1.4h-.1c-.2 0-1.3-.3-1.9-1.3-.6-1-.8-1.9-.1-2.1.7-.2 1.6-.7 2.4-1 .8-.3 1.5-.6 2.2-1 .3-.2.5-.2.7-.2z"></path></svg>
+                            </a>
+                        </div>
+                        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="w-full bg-brand-accent-500 text-white font-bold py-2 px-4 rounded-lg text-center hover:bg-brand-accent-600 transition-colors block">
+                            Jetzt anhören
+                        </a>
+                    </div>
+                `;
+
+                return `
+                    <div class="bg-gray-800/50 rounded-lg p-6 flex flex-col border border-gray-700/50 hover:border-brand-accent-400/50 transition-all duration-300 hover:shadow-xl hover:shadow-brand-accent-500/20 transform hover:-translate-y-1">
+                        <h3 class="text-xl font-bold font-heading mb-2 text-brand-accent-400">${item.title}</h3>
+                        <p class="text-brand-accent-400 flex-grow mb-4">${cleanSummary.substring(0, 150)}...</p>
+                        ${shareLinks}
+                    </div>
+                `;
+            }
+
+            function renderEpisodes(episodeList) {
+                // Fall 1: Gruppierte Suchergebnisse
+                if (typeof episodeList === 'object' && !Array.isArray(episodeList)) {
+                    if (Object.keys(episodeList).length === 0) {
+                        allEpisodesGrid.innerHTML = `<div class="col-span-full text-center text-brand-accent-400 p-8"><p>Keine Episoden für deine Suche gefunden.</p></div>`;
+                        return;
+                    }
+                    let html = '';
+                    for (const category in episodeList) {
+                        html += `<div class="col-span-full">
+                                     <h3 class="text-2xl font-bold font-heading mb-6 border-b-2 border-brand-accent-500/50 pb-2">${category}</h3>
+                                 </div>`;
+                        html += episodeList[category].map(createEpisodeCard).join('');
+                    }
+                    allEpisodesGrid.innerHTML = html;
+                } else { // Fall 2: Standard-Array von Episoden (initial oder nach Kategorie gefiltert)
+                    if (episodeList.length === 0) {
+                        allEpisodesGrid.innerHTML = `<div class="col-span-full text-center text-brand-accent-400 p-8"><p>Keine Episoden für deine Suche gefunden.</p></div>`;
+                        return;
+                    }
+                    allEpisodesGrid.innerHTML = episodeList.map(createEpisodeCard).join('');
+                }
+            }
+
+            // Function to create a loading spinner placeholder
+            function createLoadingSpinnerHTML() {
+                return `
+                    <div class="col-span-full flex justify-center items-center p-12">
+                        <div class="spinner"></div>
+                    </div>
+                `;
+            }
+
+            // Lade Episoden vom RSS Feed
+            async function loadAllEpisodesFromRSS() {
+                allEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
+                try {
+                    // Wir verwenden denselben zuverlässigen CORS-Proxy wie auf der Startseite.
+                    const rssUrl = encodeURIComponent('https://anchor.fm/s/107c46c58/podcast/rss');
+                    const proxyUrl = `https://api.allorigins.win/raw?url=${rssUrl}`;
+                    
+                    const parser = new RSSParser();
+                    // Wichtig: Da der Proxy den Feed direkt als Text zurückgibt,
+                    // müssen wir ihn zuerst fetchen und dann dem Parser übergeben.
+                    const feedText = await fetch(proxyUrl).then(response => response.text());
+                    const feed = await parser.parseString(feedText);
+
+                    feed.items.forEach(item => item.description = item.content); // Konsistente Zuweisung der Beschreibung
+                    allEpisodes = feed.items;
+                    renderEpisodes(allEpisodes);
+                    setupCategoryFilter(allEpisodes);
+
+                } catch (error) {
+                    console.error("Fehler beim Laden des Podcast-Feeds:", error);
+                    const errorMessage = `<div class="col-span-full text-center text-red-400 p-8"><p class="font-bold">Der Podcast-Feed konnte leider nicht geladen werden.</p><p class="text-sm text-brand-accent-400 mt-2">Bitte versuchen Sie es später erneut.</p></div>`;
+                    allEpisodesGrid.innerHTML = errorMessage;
+                }
+            }
+
+            // Extrahiert Kategorien aus dem Titel (z.B. "Supplements" aus "Supplements #1")
+            function extractCategoriesFromTitle(title) {
+                const regex = /([a-zA-ZäöüÄÖÜß]+)\s*#/g;
+                const matches = [...title.matchAll(regex)];
+                return matches.map(match => match[1].charAt(0).toUpperCase() + match[1].slice(1));
+            }
+
+            // Erstellt und verwaltet den Kategorie-Filter
+            function setupCategoryFilter(episodes) { 
+                const categories = new Set();
+                episodes.forEach(episode => {
+                    extractCategoriesFromTitle(episode.title).forEach(cat => categories.add(cat));
+                });
+
+                const sortedCategories = Array.from(categories).sort();
+                
+                let html = `<button data-category="all" class="category-tab active bg-transparent border border-brand-accent-500 text-brand-accent-400 font-semibold py-2 px-4 rounded-full transition-colors hover:bg-brand-accent-500 hover:text-white">Alle anzeigen</button>`;
+                sortedCategories.forEach(category => {
+                    html += `<button data-category="${category}" class="category-tab bg-transparent border border-brand-accent-500 text-brand-accent-400 font-semibold py-2 px-4 rounded-full transition-colors hover:bg-brand-accent-500 hover:text-white">${category}</button>`;
+                });
+                categoryTabsContainer.innerHTML = html;
+
+                categoryTabsContainer.addEventListener('click', (e) => {
+                    if (e.target.matches('.category-tab')) {
+                        const selectedCategory = e.target.dataset.category;
+
+                        categoryTabsContainer.querySelectorAll('.category-tab').forEach(btn => btn.classList.remove('active'));
+                        e.target.classList.add('active');
+                        searchInput.value = '';
+
+                        if (selectedCategory === 'all') {
+                            renderEpisodes(allEpisodes);
+                        } else {
+                            const filtered = allEpisodes.filter(episode => {
+                                const episodeCategories = extractCategoriesFromTitle(episode.title);
+                                return episodeCategories.includes(selectedCategory);
+                            });
+                            renderEpisodes(filtered);
+                        }
+                    }
+                });
+            }
+
+            // Funktion zum Ausführen der Suche
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const searchWords = searchTerm.split(/\s+/).filter(Boolean);
+
+                if (searchWords.length === 0) {
+                    renderEpisodes(allEpisodes);
+                    categoryTabsContainer.querySelectorAll('.category-tab').forEach(btn => btn.classList.remove('active'));
+                    const allBtn = categoryTabsContainer.querySelector('[data-category="all"]');
+                    if (allBtn) allBtn.classList.add('active');
+                    return;
+                }
+
+                const filteredEpisodes = allEpisodes.filter(episode => {
+                    const cleanTitle = episode.title.toLowerCase().replace(/[^a-z0-9\säöüß-]/g, '');
+                    const titleWords = cleanTitle.split(/\s+/);
+                    return searchWords.every(searchWord => titleWords.some(titleWord => titleWord.startsWith(searchWord)));
+                });
+
+                categoryTabsContainer.querySelectorAll('.category-tab').forEach(btn => btn.classList.remove('active'));
+
+                const groupedEpisodes = filteredEpisodes.reduce((acc, episode) => {
+                    const categories = extractCategoriesFromTitle(episode.title);
+                    if (categories.length > 0) {
+                        categories.forEach(category => {
+                            if (!acc[category]) acc[category] = [];
+                            acc[category].push(episode);
+                        });
+                    } else {
+                        if (!acc['Weitere Treffer']) acc['Weitere Treffer'] = [];
+                        acc['Weitere Treffer'].push(episode);
+                    }
+                    return acc;
+                }, {});
+
+                renderEpisodes(groupedEpisodes);
+            }
+
+            // --- Event Listeners ---
+            
+            // Search listeners
+            searchButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                performSearch();
+            });
+            searchInput.addEventListener('keyup', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+            });
+
+            // Mobile menu toggle
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Workflow Modal listeners
+            if (workflowModal && openWorkflowModalButtons.length && closeWorkflowModalButton) {
+                openWorkflowModalButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault(); // Prevent anchor link behavior if it's an <a>
+                        workflowModal.classList.remove('hidden');
+                        mobileMenu.classList.add('hidden'); // Close mobile menu if open
+                    });
+                });
+
+                closeWorkflowModalButton.addEventListener('click', () => {
+                    workflowModal.classList.add('hidden');
+                });
+
+                // Close modal on backdrop click
+                workflowModal.addEventListener('click', (e) => {
+                    if (e.target === workflowModal) {
+                        workflowModal.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Contact Modal Listeners
+            if (contactModal && openContactModalButtons.length && closeContactModalButton) {
+                openContactModalButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        contactModal.classList.remove('hidden');
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+
+                closeContactModalButton.addEventListener('click', () => {
+                    contactModal.classList.add('hidden');
+                });
+
+                contactModal.addEventListener('click', (e) => {
+                    if (e.target === contactModal) {
+                        const isFormEmpty = Array.from(contactFormInputs).every(input => input.value === '');
+                        if (isFormEmpty) {
+                            contactModal.classList.add('hidden');
+                        }
+                    }
+                });
+            }
+
+            // --- Initialization ---
+            loadAllEpisodesFromRSS();
+        });
+    </script>
+</body>
+</html>
