@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datenschutzerklärung | Wissens-Akku</title>
+    <link rel="icon" href="Bilder/wissenakku-logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Roboto', 'sans-serif'],
+                        'heading': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0F172A',
+                        'brand-accent': { '400': '#22D3EE', '500': '#06B6D4' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details[open] summary .arrow { transform: rotate(90deg); }
+        .prose-custom a { color: #22D3EE; }
+        .prose-custom a:hover { color: #06B6D4; }
+        .prose-custom ul { list-style-position: inside; }
+        .prose-custom li { margin-left: 1rem; }
+    </style>
+</head>
+<body class="text-brand-accent-400 font-sans bg-brand-dark">
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+        <div class="absolute inset-0 bg-brand-dark/80"></div>
+    </div>
+    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-heading font-bold">Wissens-Akku</span>
+            </a>
+            <nav>
+                <a href="index.html" class="text-lg hover:text-brand-accent-400 transition-colors pb-1">Zurück zur Hauptseite</a>
+            </nav>
+        </div>
+    </header>
+    <main class="relative z-10 pt-24">
+        <div class="container mx-auto px-6 py-12">
+            <div class="max-w-4xl mx-auto text-gray-300 prose-custom">
+                <h1 class="text-4xl font-bold font-heading text-center mb-4 text-white">Datenschutzerklärung</h1>
+                <p class="text-center text-lg text-gray-400 mb-12">Stand: 18. September 2025</p>
+                
+                <div class="space-y-4">
+
+                    <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center">
+                            <h2 class="text-xl font-heading font-bold text-white">1. Verantwortlicher & Datenschutzbeauftragter</h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-400">
+                            <p>Verantwortlicher für die Datenverarbeitung auf dieser Website im Sinne der Datenschutz-Grundverordnung (DSGVO) ist:<br>Shane Kielgast<br>(Vollständige Kontaktdaten finden Sie im <a href="impressum.html">Impressum</a>).</p>
+                            <p class="mt-4">Ein Datenschutzbeauftragter ist gesetzlich nicht vorgeschrieben und wurde nicht benannt.</p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center">
+                            <h2 class="text-xl font-heading font-bold text-white">2. Ihre Rechte als betroffene Person</h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-400">
+                            <p>Ihnen stehen bezüglich Ihrer bei uns verarbeiteten personenbezogenen Daten folgende Rechte zu:</p>
+                            <ul>
+                                <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
+                                <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
+                                <li>Recht auf Löschung („Recht auf Vergessenwerden“) (Art. 17 DSGVO)</li>
+                                <li>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO)</li>
+                                <li>Recht auf Datenübertragbarkeit (Art. 20 DSGVO)</li>
+                                <li><strong>Widerspruchsrecht (Art. 21 DSGVO)</strong></li>
+                            </ul>
+                            <p class="mt-4">Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch uns zu beschweren (Art. 77 DSGVO).</p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center">
+                            <h2 class="text-xl font-heading font-bold text-white">3. Datenerfassung auf dieser Website</h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-400 space-y-4">
+                            <h3 class="font-bold text-white">Server-Log-Dateien & Hosting</h3>
+                            <p>Unsere Website wird bei Netlify, Inc. (USA) gehostet. Unser Hoster erhebt in sog. Server-Log-Dateien automatisch Informationen, die Ihr Browser übermittelt. Dies sind: Browsertyp/-version, Betriebssystem, Referrer URL, Hostname des zugreifenden Rechners, Uhrzeit der Serveranfrage und IP-Adresse. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen. Grundlage der Verarbeitung ist unser berechtigtes Interesse an einer technisch fehlerfreien und sicheren Darstellung unserer Website (Art. 6 Abs. 1 lit. f DSGVO). Wir haben mit Netlify einen Vertrag zur Auftragsverarbeitung (AVV) bzw. nutzen die Standardvertragsklauseln und das EU-US Data Privacy Framework als Grundlage für die Datenübermittlung in die USA.</p>
+                            
+                            <h3 class="font-bold text-white">Kontaktformular</h3>
+                            <p>Wenn Sie uns per Kontaktformular kontaktieren, werden Ihre Angaben zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei uns gespeichert. Die Verarbeitung erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO). Die Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung widerrufen oder der Zweck für die Datenspeicherung entfällt (z.B. nach abgeschlossener Bearbeitung Ihrer Anfrage). Zwingende gesetzliche Bestimmungen – insbesondere Aufbewahrungsfristen – bleiben unberührt.</p>
+
+                            <h3 class="font-bold text-white">Cookies & Local Storage</h3>
+                            <p>Unsere Website nutzt Local Storage, um Daten direkt in Ihrem Browser zu speichern. Dies dient der Verbesserung der Benutzerfreundlichkeit und Performance, indem z.B. Episodenlisten für einen schnelleren Zugriff zwischengespeichert werden. Diese Daten verbleiben auf Ihrem Endgerät und werden nicht an uns übertragen. Wir setzen keine essenziellen Cookies. Dienste von Drittanbietern, die auf unserer Seite eingebunden sind, können jedoch eigene Cookies setzen. Darauf haben wir keinen Einfluss.</p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center">
+                            <h2 class="text-xl font-heading font-bold text-white">4. Dienste von Drittanbietern</h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-400 space-y-4">
+                            <h3 class="font-bold text-white">Google Fonts (lokal)</h3>
+                            <p>Wir nutzen für eine ansprechende Darstellung Schriftarten von Google Fonts. Die Einbindung erfolgt lokal von unserem eigenen Server. Es findet keine Datenübertragung an Google statt. Rechtsgrundlage ist unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).</p>
+                            <h3 class="font-bold text-white">Podcast-Feed via rss2json.com</h3>
+                            <p>Zur Darstellung der Podcast-Episoden nutzen wir den Dienst von api.rss2json.com. Zur technischen Auslieferung der Daten ist es notwendig, dass Ihre IP-Adresse an diesen Dienst übermittelt wird. Rechtsgrundlage ist unser berechtigtes Interesse an der Bereitstellung unserer Podcast-Inhalte auf der Webseite (Art. 6 Abs. 1 lit. f DSGVO).</p>
+                            <h3 class="font-bold text-white">Tailwind CSS via CDN</h3>
+                            <p>Wir nutzen ein Content Delivery Network (CDN) zur Bereitstellung des CSS-Frameworks Tailwind. Dies dient der schnellen und sicheren Auslieferung der Designdateien. Dabei wird Ihre IP-Adresse an den CDN-Anbieter übertragen. Rechtsgrundlage ist unser berechtigtes Interesse (Art. 6 Abs. 1 lit. f DSGVO).</p>
+                        </div>
+                    </details>
+
+                    <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
+                        <summary class="p-6 cursor-pointer flex justify-between items-center">
+                            <h2 class="text-xl font-heading font-bold text-white">5. Sicherheit und externe Links</h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </summary>
+                        <div class="p-6 pt-0 text-gray-400 space-y-4">
+                            <h3 class="font-bold text-white">SSL/TLS-Verschlüsselung</h3>
+                            <p>Diese Seite nutzt aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, wie zum Beispiel Anfragen, die Sie an uns als Seitenbetreiber senden, eine SSL- bzw. TLS-Verschlüsselung. Eine verschlüsselte Verbindung erkennen Sie daran, dass die Adresszeile des Browsers von „http://“ auf „https://“ wechselt und an dem Schloss-Symbol in Ihrer Browserzeile.</p>
+                            <h3 class="font-bold text-white">Links zu anderen Websites</h3>
+                            <p>Unsere Website enthält Links zu externen Websites. Wir haben keinen Einfluss auf deren Inhalte und Datenschutzpraktiken. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter verantwortlich.</p>
+                        </div>
+                    </details>
+
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-brand-dark/80 w-full mt-12">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
+            </div>
+            <p>&copy; 2025 Wissens-Akku. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+</body>
+</html>

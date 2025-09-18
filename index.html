@@ -165,7 +165,11 @@
         <div class="container mx-auto px-6 py-24 bg-transparent backdrop-blur-sm rounded-xl border-none">
             <!-- Latest Episodes (part of home) -->
             <section id="latest-episodes" class="mb-24">
-                <h2 class="text-3xl font-bold font-heading text-center mb-12">Neueste Episoden</h2>
+                <h2 class="text-3xl font-bold font-heading text-center mb-12">Episoden durchsuchen</h2>
+<div class="max-w-2xl mx-auto mb-12">
+    <label for="episode-search" class="sr-only">Episoden durchsuchen</label>
+    <input type="search" id="episode-search" placeholder="Worüber möchtest du heute lernen? (z.B. Schlaf, Vitamin D...)" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-3 px-5 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none text-lg text-white placeholder-gray-400">
+</div>
                 <div id="latest-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Loading spinner / Episodes will be injected by JS -->
                 </div>
@@ -311,9 +315,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             let allEpisodes = []; // To store all fetched episodes
+            const episodesCacheKey = 'wissensAkkuEpisodes';
+            const cacheTimestampKey = 'wissensAkkuTimestamp';
+            const CACHE_DURATION_MS = 60 * 60 * 1000; // 1 hour cache
 
             // --- Elements ---
-            const latestEpisodesGrid = document.getElementById('latest-episodes-grid');
+            const episodesGrid = document.getElementById('latest-episodes-grid');
+            const searchInput = document.getElementById('episode-search');
             const navLinks = document.querySelectorAll('.nav-link');
             const sections = document.querySelectorAll('section[id]');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -334,12 +342,9 @@
 
             // --- Functions ---
             
-            // Function to create an episode card HTML
             function createEpisodeCard(item) {
-                // Bereinigt die Zusammenfassung von HTML-Tags
                 const summary = item.description || 'Keine Zusammenfassung verfügbar.';
                 const cleanSummary = summary.replace(/<[^>]*>?/gm, '');
-
                 const shareLinks = `
                     <div class="mt-auto pt-4">
                         <div class="border-t border-gray-700/50 flex items-center gap-4 mb-4 pt-4">
@@ -365,7 +370,6 @@
                         </a>
                     </div>
                 `;
-
                 return `
                     <div class="bg-gray-800/50 rounded-lg p-6 flex flex-col border border-gray-700/50 hover:border-brand-accent-400/50 transition-all duration-300 hover:shadow-xl hover:shadow-brand-accent-500/20 transform hover:-translate-y-1">
                         <h3 class="text-xl font-bold font-heading mb-2 text-brand-accent-400">${item.title}</h3>
@@ -375,38 +379,26 @@
                 `;
             }
 
-            // Function to create a loading spinner placeholder
             function createLoadingSpinnerHTML() {
-                return `
-                    <div class="col-span-full flex justify-center items-center p-12">
-                        <div class="spinner"></div>
-                    </div>`;
+                return `<div class="col-span-full flex justify-center items-center p-12"><div class="spinner"></div></div>`;
             }
 
-            // Update active nav link on scroll
             function updateActiveNavOnScroll() {
                 const scrollY = window.scrollY;
-
-                let currentSectionId = 'home'; // Default
-
+                let currentSectionId = 'home';
                 sections.forEach(section => {
-                    const sectionTop = section.offsetTop - 150; // Offset for header height
+                    const sectionTop = section.offsetTop - 150;
                     if (scrollY >= sectionTop) {
                         currentSectionId = section.getAttribute('id');
                     }
                 });
-
-                // Special case for latest-episodes, should also highlight 'home'
                 const latestEpisodesSection = document.getElementById('latest-episodes');
                 if (latestEpisodesSection && scrollY >= latestEpisodesSection.offsetTop - 150 && scrollY < document.getElementById('about').offsetTop - 150) {
                     currentSectionId = 'home';
                 }
-
                 navLinks.forEach(link => {
                     link.classList.remove('active');
-                    // Check if the link is not a modal trigger before applying active state
                     if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
-                        // On index.html, only highlight links that point to an ID on this page
                         if (link.getAttribute('href').startsWith('#') && link.getAttribute('data-section') === currentSectionId) {
                             link.classList.add('active');
                         }
@@ -414,144 +406,161 @@
                 });
             }
 
-            // Lade Episoden vom RSS Feed
-            async function loadLatestEpisodesFromRSS() {
-                latestEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
+            function renderEpisodes(items) {
+                if (!episodesGrid) return;
+                if (items.length === 0) {
+                    episodesGrid.innerHTML = '<div class="col-span-full text-center text-brand-accent-400 p-8"><p class="font-bold">Keine Episoden für deine Suche gefunden.</p></div>';
+                    return;
+                }
+                episodesGrid.innerHTML = items.map(createEpisodeCard).join('');
+            }
+
+            function filterAndRenderEpisodes() {
+                const searchTerm = searchInput.value.toLowerCase();
+                if (!searchTerm) {
+                    renderEpisodes(allEpisodes.slice(0, 3)); // Show latest 3 if search is empty
+                    return;
+                }
+                const filtered = allEpisodes.filter(item => {
+                    const title = item.title.toLowerCase();
+                    const description = (item.description || '').toLowerCase();
+                    return title.includes(searchTerm) || description.includes(searchTerm);
+                });
+                renderEpisodes(filtered);
+            }
+
+            async function fetchAndCacheEpisodes() {
                 try {
                     const rssUrl = encodeURIComponent('https://anchor.fm/s/107c46c58/podcast/rss');
-                    // Wir verwenden einen zuverlässigeren CORS-Proxy.
-                    const proxyUrl = `https://api.allorigins.win/raw?url=${rssUrl}`;
+                    const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
                     
-                    const parser = new RSSParser();
-                    // Wichtig: Da der neue Proxy den Feed direkt als Text zurückgibt,
-                    // müssen wir ihn zuerst fetchen und dann dem Parser übergeben.
-                    const feedText = await fetch(proxyUrl).then(response => response.text());
-                    const feed = await parser.parseString(feedText);
+                    const response = await fetch(proxyUrl);
+                    if (!response.ok) throw new Error('Network response was not ok.');
+                    
+                    const data = await response.json();
+                    if (data.status !== 'ok') throw new Error('RSS to JSON API error.');
 
-                    feed.items.forEach(item => item.description = item.content);
-                    latestEpisodesGrid.innerHTML = feed.items.slice(0, 3).map(createEpisodeCard).join('');
+                    // Store all episodes and update cache
+                    allEpisodes = data.items;
+                    localStorage.setItem(episodesCacheKey, JSON.stringify(allEpisodes));
+                    localStorage.setItem(cacheTimestampKey, Date.now().toString());
+                    
+                    console.log('Fetched and cached all episodes.');
+                    return allEpisodes;
+
                 } catch (error) {
                     console.error("Fehler beim Laden des Podcast-Feeds:", error);
-                    latestEpisodesGrid.innerHTML = `<div class="col-span-full text-center text-red-400 p-8"><p class="font-bold">Der Podcast-Feed konnte leider nicht geladen werden.</p></div>`;
+                    if (episodesGrid) {
+                        episodesGrid.innerHTML = `<div class="col-span-full text-center text-red-400 p-8"><p class="font-bold">Der Podcast-Feed konnte leider nicht geladen werden.</p></div>`;
+                    }
+                    return []; // Return empty array on error
                 }
             }
 
-            // --- Event Listeners ---
+            async function initPage() {
+                if (!episodesGrid) return;
 
-            // --- Scroll Animation Observer ---
+                episodesGrid.innerHTML = createLoadingSpinnerHTML();
+
+                const cachedEpisodes = localStorage.getItem(episodesCacheKey);
+                const cachedTimestamp = localStorage.getItem(cacheTimestampKey);
+                const isCacheStale = !cachedTimestamp || (Date.now() - parseInt(cachedTimestamp)) > CACHE_DURATION_MS;
+
+                if (cachedEpisodes && !isCacheStale) {
+                    console.log('Loading episodes from cache.');
+                    allEpisodes = JSON.parse(cachedEpisodes);
+                    renderEpisodes(allEpisodes.slice(0, 3)); // Initially show the 3 latest
+                    // Fetch in background to update cache if needed
+                    fetchAndCacheEpisodes();
+                } else {
+                    console.log('Cache is stale or empty, fetching from network.');
+                    allEpisodes = await fetchAndCacheEpisodes();
+                    renderEpisodes(allEpisodes.slice(0, 3)); // Render after fetching
+                }
+            }
+
+            function setupEventListeners() {
+                if (searchInput) {
+                    searchInput.addEventListener('input', filterAndRenderEpisodes);
+                }
+
+                navLinks.forEach(link => {
+                    if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
+                        link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                    }
+                });
+
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+                
+                if (notebookModal && openNotebookModalButton && closeNotebookModalButton) {
+                    openNotebookModalButton.addEventListener('click', () => notebookModal.classList.remove('hidden'));
+                    closeNotebookModalButton.addEventListener('click', () => notebookModal.classList.add('hidden'));
+                    notebookModal.addEventListener('click', (e) => {
+                        if (e.target === notebookModal) notebookModal.classList.add('hidden');
+                    });
+                }
+
+                if (workflowModal && openWorkflowModalButtons.length && closeWorkflowModalButton) {
+                    openWorkflowModalButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            workflowModal.classList.remove('hidden');
+                            mobileMenu.classList.add('hidden');
+                        });
+                    });
+                    closeWorkflowModalButton.addEventListener('click', () => workflowModal.classList.add('hidden'));
+                    workflowModal.addEventListener('click', (e) => {
+                        if (e.target === workflowModal) workflowModal.classList.add('hidden');
+                    });
+                }
+
+                if (contactModal && openContactModalButtons.length && closeContactModalButton) {
+                    openContactModalButtons.forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            e.preventDefault();
+                            contactModal.classList.remove('hidden');
+                            mobileMenu.classList.add('hidden');
+                        });
+                    });
+                    closeContactModalButton.addEventListener('click', () => contactModal.classList.add('hidden'));
+                    contactModal.addEventListener('click', (e) => {
+                        if (e.target === contactModal) {
+                            const isFormEmpty = Array.from(contactFormInputs).every(input => input.value === '');
+                            if (isFormEmpty) contactModal.classList.add('hidden');
+                        }
+                    });
+                }
+                
+                window.addEventListener('scroll', updateActiveNavOnScroll);
+            }
+
             function setupScrollAnimations() {
                 const sectionsToAnimate = document.querySelectorAll('#about, #newsletter, #social-proof, #follow');
-                
-                sectionsToAnimate.forEach(section => {
-                    section.classList.add('fade-in-section');
-                });
-
+                sectionsToAnimate.forEach(section => section.classList.add('fade-in-section'));
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('is-visible');
-                            // Optional: unobserve after animation to save resources
-                            // observer.unobserve(entry.target);
-                        }
+                        if (entry.isIntersecting) entry.target.classList.add('is-visible');
                     });
-                }, {
-                    rootMargin: '0px',
-                    threshold: 0.15 // Trigger when 15% of the element is visible
-                });
-
-                sectionsToAnimate.forEach(section => {
-                    observer.observe(section);
-                });
+                }, { rootMargin: '0px', threshold: 0.15 });
+                sectionsToAnimate.forEach(section => observer.observe(section));
             }
-
-            // Navigation links
-            navLinks.forEach(link => {
-                // Check if it's not a modal trigger
-                if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
-                    link.addEventListener('click', function(e) {
-                        // Close mobile menu on click
-                        mobileMenu.classList.add('hidden');
-                    });
-                }
-            });
-
-            // Mobile menu toggle
-            mobileMenuButton.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-            
-            // NotebookLM Modal listeners
-            if (notebookModal && openNotebookModalButton && closeNotebookModalButton) {
-                openNotebookModalButton.addEventListener('click', () => {
-                    notebookModal.classList.remove('hidden');
-                });
-                closeNotebookModalButton.addEventListener('click', () => {
-                    notebookModal.classList.add('hidden');
-                });
-                // Close modal on backdrop click
-                notebookModal.addEventListener('click', (e) => {
-                    if (e.target === notebookModal) {
-                        notebookModal.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Workflow Modal listeners
-            if (workflowModal && openWorkflowModalButtons.length && closeWorkflowModalButton) {
-                openWorkflowModalButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault(); // Prevent anchor link behavior if it's an <a>
-                        workflowModal.classList.remove('hidden');
-                        mobileMenu.classList.add('hidden'); // Close mobile menu if open
-                    });
-                });
-
-                closeWorkflowModalButton.addEventListener('click', () => {
-                    workflowModal.classList.add('hidden');
-                });
-
-                // Close modal on backdrop click
-                workflowModal.addEventListener('click', (e) => {
-                    if (e.target === workflowModal) {
-                        workflowModal.classList.add('hidden');
-                    }
-                });
-            }
-
-            // Contact Modal Listeners
-            if (contactModal && openContactModalButtons.length && closeContactModalButton) {
-                openContactModalButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        contactModal.classList.remove('hidden');
-                        mobileMenu.classList.add('hidden');
-                    });
-                });
-
-                closeContactModalButton.addEventListener('click', () => {
-                    contactModal.classList.add('hidden');
-                });
-
-                contactModal.addEventListener('click', (e) => {
-                    if (e.target === contactModal) {
-                        // Check if all form fields are empty
-                        const isFormEmpty = Array.from(contactFormInputs).every(input => input.value === '');
-                        if (isFormEmpty) {
-                            contactModal.classList.add('hidden');
-                        }
-                    }
-                });
-            }
-            
-            // Scroll listener for active nav state
-            window.addEventListener('scroll', updateActiveNavOnScroll);
 
             // --- Initialization ---
-            loadLatestEpisodesFromRSS();
-            updateActiveNavOnScroll(); // Set initial state
+            initPage();
+            setupEventListeners();
+            updateActiveNavOnScroll();
             setupScrollAnimations();
         });
     </script>
+    <footer class="bg-brand-dark/80 border-t border-gray-700/50 mt-24">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
+            </div>
+            <p>&copy; 2025 Wissens-Akku. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
 </body>
 </html>
 <!-- Force redeploy -->

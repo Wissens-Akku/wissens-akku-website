@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum | Wissens-Akku</title>
+    <link rel="icon" href="Bilder/wissenakku-logo.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Roboto', 'sans-serif'],
+                        'heading': ['Montserrat', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-dark': '#0F172A',
+                        'brand-accent': { '400': '#22D3EE' }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="text-brand-accent-400 font-sans bg-brand-dark">
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+        <div class="absolute inset-0 bg-brand-dark/80"></div>
+    </div>
+    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-heading font-bold">Wissens-Akku</span>
+            </a>
+            <nav>
+                <a href="index.html" class="text-lg hover:text-brand-accent-400 transition-colors pb-1">Zurück zur Hauptseite</a>
+            </nav>
+        </div>
+    </header>
+    <main class="relative z-10 pt-24">
+        <div class="container mx-auto px-6 py-12 bg-transparent backdrop-blur-sm rounded-xl">
+            <h1 class="text-4xl font-bold font-heading text-center mb-12">Impressum</h1>
+            <div class="max-w-4xl mx-auto space-y-4 text-lg text-gray-300 bg-gray-800/50 p-8 rounded-lg border border-gray-700/50">
+                <h2 class="text-2xl font-bold font-heading text-brand-accent-400">Angaben gemäß § 5 DDG</h2>
+                <p>
+                    Wissens-Akku - Shane Kielgast<br>
+                    c/o Online-Impressum.de #37570<br>
+                    Europaring 90<br>
+                    53757 Sankt Augustin
+                </p>
+
+                <h2 class="text-2xl font-bold font-heading text-brand-accent-400 mt-6">Kontakt</h2>
+                <p>
+                    E-Mail: kontakt@wissens-akku.com
+                </p>
+
+                <h2 class="text-2xl font-bold font-heading text-brand-accent-400 mt-6">Zuständige Aufsichtsbehörde</h2>
+                <p>
+                    Medienanstalt Schleswig-Holstein/Hamburg<br>
+                    Sitz: Deutschland
+                </p>
+
+                <p class="text-sm text-gray-400 mt-8">
+                    Das hier angegebene Impressum gilt für alle Belange der Impressumspflicht nach §5 DDG, sowie für alle Social Media Auftritte.
+                </p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
