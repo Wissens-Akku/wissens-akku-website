@@ -6,24 +6,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datenschutzerklärung | Wissens-Akku</title>
     <link rel="icon" href="Bilder/wissenakku-logo.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['Roboto', 'sans-serif'],
-                        'heading': ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        'brand-dark': '#0F172A',
-                        'brand-accent': { '400': '#22D3EE', '500': '#06B6D4' }
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
+    <meta name="theme-color" content="#0F172A">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wissens-akku.com/">
+    <meta property="og:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
+    <meta property="og:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="og:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://wissens-akku.com/">
+    <meta property="twitter:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
+    <meta property="twitter:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="twitter:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
+
+    <link href="assets/css/local-fonts.css" rel="stylesheet">
+    <link href="assets/css/tailwind.css" rel="stylesheet">
     <style>
         details > summary { list-style: none; }
         details > summary::-webkit-details-marker { display: none; }
@@ -98,7 +98,9 @@
                         <div class="p-6 pt-0 text-gray-400 space-y-4">
                             <p>Unsere Website verwendet Cookies und ähnliche Technologien. Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Einige sind für den Betrieb der Seite technisch notwendig (essenzielle Cookies), während andere uns helfen, unser Angebot zu verbessern oder zu finanzieren (funktionale, Marketing- oder Analyse-Cookies).</p>
                             <p>Für den Einsatz von nicht-essenziellen Cookies und die damit verbundene Datenverarbeitung durch Drittanbieter holen wir über ein <strong>Cookie-Consent-Tool (Cookie-Banner)</strong> Ihre Einwilligung ein. Rechtsgrundlage für diese Verarbeitungen ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Verarbeitung essenzieller technischer Daten erfolgt auf Grundlage unseres berechtigten Interesses an einem funktionsfähigen und sicheren Online-Angebot gemäß Art. 6 Abs. 1 lit. f DSGVO.</p>
-                            <p>Sie können Ihre Einwilligung jederzeit über die Einstellungen des Consent-Tools für die Zukunft widerrufen oder Ihre Auswahl anpassen.</p>
+                            <p>Bitte beachten Sie, dass bei Ablehnung von Cookies bestimmte externe Inhalte (z.B. eingebettete Videos) oder Funktionen (z.B. die Zuordnung von Affiliate-Links) möglicherweise nicht wie erwartet funktionieren. Die Grundfunktionen der Webseite bleiben jedoch vollständig erhalten.</p>
+                            <p class="mt-4">Sie können Ihre Einwilligung jederzeit ändern oder widerrufen. Klicken Sie hier, um Ihre Cookie-Einstellungen anzupassen:</p>
+                            <p class="mt-2"><a href="javascript:Cookiebot.renew()" class="font-bold text-brand-accent-500 hover:underline">Cookie-Einstellungen ändern</a></p>
                         </div>
                     </details>
 
@@ -123,8 +125,7 @@
                             <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
                         </summary>
                         <div class="p-6 pt-0 text-gray-400 space-y-4">
-                            <h3 class="font-bold text-white">Google Fonts</h3>
-                            <p>Wir nutzen zur einheitlichen Darstellung von Schriftarten sogenannte Google Fonts, die von <strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Irland) bereitgestellt werden. Zur Darstellung der Schriften baut Ihr Browser eine Verbindung zu den Servern von Google auf, wodurch Ihre IP-Adresse an Google übertragen wird. Dies stellt ein berechtigtes Interesse im Sinne von Art. 6 Abs. 1 lit. f DSGVO dar. Soweit Daten in die USA übertragen werden, geschieht dies auf Basis des EU-US Data Privacy Framework.</p>
+                            
                             
                             <h3 class="font-bold text-white">Podcast-Feed (via rss2json.com)</h3>
                             <p>Zur Darstellung der Podcast-Episoden nutzen wir den Dienst von <strong>api.rss2json.com</strong>. Zur technischen Auslieferung der Daten ist es notwendig, dass Ihre IP-Adresse an diesen Dienst übermittelt wird. Rechtsgrundlage ist unser berechtigtes Interesse an der Bereitstellung unserer Podcast-Inhalte auf der Webseite (Art. 6 Abs. 1 lit. f DSGVO).</p>
@@ -164,5 +165,19 @@
             <p>&copy; 2025 Wissens-Akku. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const details = document.querySelectorAll('details');
+            details.forEach(targetDetail => {
+                targetDetail.addEventListener('click', () => {
+                    details.forEach(detail => {
+                        if (detail !== targetDetail) {
+                            detail.removeAttribute('open');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
 </body>
 </html>

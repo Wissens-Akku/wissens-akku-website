@@ -6,40 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast</title>
     <link rel="icon" href="Bilder/wissenakku-logo.png">
+    <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
+    <meta name="theme-color" content="#0F172A">
     <meta name="description" content="Wissens-Akku ist dein faktenbasierter Gesundheits-Podcast. Wir laden deinen Akku mit dem neuesten Wissen aus Gesundheit, Ernährung und Leistungsfähigkeit auf. Evidenzbasiert und auf den Punkt gebracht.">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wissens-akku.com/">
+    <meta property="og:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
+    <meta property="og:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="og:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
 
-    <!-- Custom Tailwind Config for Fonts -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['Roboto', 'sans-serif'],
-                        'heading': ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        'brand-dark': '#0F172A', // Slate 900
-                        'brand-accent': {
-                            '400': '#22D3EE', // Cyan 400
-                            '500': '#06B6D4', // Cyan 500
-                            '600': '#0891B2', // Cyan 600
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://wissens-akku.com/">
+    <meta property="twitter:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
+    <meta property="twitter:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="twitter:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
+
+    <!-- Local Fonts -->
+    <link href="assets/css/local-fonts.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link href="assets/css/tailwind.css" rel="stylesheet">
 
     <!-- RSS Parser für den Podcast-Feed -->
-    <script src="https://cdn.jsdelivr.net/npm/rss-parser@3.13.0/dist/rss-parser.min.js"></script>
+    <script data-cookieconsent="statistics, marketing" src="assets/js/rss-parser.min.js"></script>
 
     <style>
         .nav-link.active, .nav-link-button.active {
@@ -185,11 +177,8 @@
         <div class="container mx-auto px-6 py-24 bg-transparent backdrop-blur-sm rounded-xl border-none">
             <!-- Latest Episodes (part of home) -->
             <section id="latest-episodes" class="mb-24">
-                <h2 class="text-3xl font-bold font-heading text-center mb-12">Episoden durchsuchen</h2>
-<div class="max-w-2xl mx-auto mb-12">
-    <label for="episode-search" class="sr-only">Episoden durchsuchen</label>
-    <input type="search" id="episode-search" placeholder="Worüber möchtest du heute lernen? (z.B. Schlaf, Vitamin D...)" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-3 px-5 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none text-lg text-white placeholder-gray-400">
-</div>
+                <h2 class="text-3xl font-bold font-heading text-center mb-12">Neuste Episoden</h2>
+                <div id="episode-update-info" class="hidden"></div> <!-- Placeholder for info message -->
                 <div id="latest-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     <!-- Loading spinner / Episodes will be injected by JS -->
                 </div>
@@ -322,17 +311,31 @@
                 </svg>
             </button>
 
-            <h3 class="text-2xl font-bold font-heading mb-4 text-brand-accent-400">Wissens-Explorer</h3>
-            <p class="text-brand-accent-400 mb-6">
-                Du wirst nun zum Wissens-Explorer (unserem interaktiven KI-Assistenten auf Google NotebookLM) weitergeleitet. Dort kannst du die den Episoden zugrundeliegenden Recherche-Dokumente und Quellen durchsuchen und direkt Fragen zu den Inhalten stellen.
+            <h3 class="text-3xl font-bold font-heading mb-4 text-center text-brand-accent-400">Wissens-Explorer</h3>
+            <p class="text-brand-accent-400 mb-8 text-center max-w-md mx-auto">
+                Tauche tiefer in die Themen ein! Der Wissens-Explorer ist mein interaktiver KI-Assistent (auf Basis von Google NotebookLM), der mit allen Recherche-Dokumenten und Quellen der Episoden gefüttert ist. Wähle eine Kategorie und stelle direkt Fragen an die Inhalte.
             </p>
-            <a href="https://notebooklm.google.com/notebook/6a6b04bd-2a12-4a4d-802b-18d869b4f263" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
-                Explorer in neuem Tab öffnen
-            </a>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="https://notebooklm.google.com/notebook/1889e159-b0d5-4b5f-9032-98ccd9004d2a" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
+                    Gesundheit
+                </a>
+                <a href="https://notebooklm.google.com/notebook/dd30dd93-db64-452e-a38f-05e3fbbbc9bc" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
+                    Ernährung
+                </a>
+                <a href="https://notebooklm.google.com/notebook/28e19758-2e52-4f6c-a494-8c4ca1d6c4ab" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
+                    Supplements
+                </a>
+                <a href="https://notebooklm.google.com/notebook/9e85115e-b6ed-4e2a-86f8-4691a9d0715e" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
+                    Pflege Produkte
+                </a>
+                 <a href="https://notebooklm.google.com/notebook/97999756-ad1f-415e-ac5b-883e11ee1d22" target="_blank" rel="noopener noreferrer" class="block text-center w-full bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform sm:col-span-2">
+                    Pflege Trends
+                </a>
+            </div>
         </div>
     </div>
 
-    <script>
+    <script data-cookieconsent="statistics, marketing">
         document.addEventListener('DOMContentLoaded', function() {
             let allEpisodes = []; // To store all fetched episodes
             const episodesCacheKey = 'wissensAkkuEpisodes';
@@ -451,27 +454,41 @@
 
             async function fetchAndCacheEpisodes() {
                 try {
-                    const rssUrl = encodeURIComponent('https://anchor.fm/s/107c46c58/podcast/rss');
-                    const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}`;
-                    
-                    const response = await fetch(proxyUrl);
+                    let fetchUrl = 'assets/js/episodes.json'; // Default to local file
+                    const episodeUpdateInfoDiv = document.getElementById('episode-update-info');
+
+                    // Check Cookiebot consent for marketing cookies
+                    if (typeof Cookiebot !== 'undefined' && Cookiebot.consent && Cookiebot.consent.marketing) {
+                        fetchUrl = '/.netlify/functions/rss-proxy'; // Use Netlify Function for latest
+                        console.log('Cookie consent given. Fetching latest episodes from Netlify Function.');
+                        if (episodeUpdateInfoDiv) {
+                            episodeUpdateInfoDiv.classList.add('hidden'); // Hide message if consent given
+                        }
+                    } else {
+                        console.log('Cookie consent not given. Loading episodes from local build file.');
+                        if (episodeUpdateInfoDiv) {
+                            episodeUpdateInfoDiv.innerHTML = '<div class="col-span-full text-center text-yellow-400 p-4 bg-gray-800/50 rounded-lg mb-4"><p class="font-bold">Hinweis: Die angezeigten Folgen sind möglicherweise nicht die allerneuesten, da du die Marketing-Cookies nicht akzeptiert hast.</p></div>';
+                            episodeUpdateInfoDiv.classList.remove('hidden'); // Show message
+                        }
+                    }
+
+                    const response = await fetch(fetchUrl);
                     if (!response.ok) throw new Error('Network response was not ok.');
                     
                     const data = await response.json();
-                    if (data.status !== 'ok') throw new Error('RSS to JSON API error.');
+                    if (data.status !== 'ok') throw new Error('JSON data status is not ok.');
 
-                    // Store all episodes and update cache
                     allEpisodes = data.items;
-                    localStorage.setItem(episodesCacheKey, JSON.stringify(allEpisodes));
-                    localStorage.setItem(cacheTimestampKey, Date.now().toString());
                     
-                    console.log('Fetched and cached all episodes.');
                     return allEpisodes;
 
                 } catch (error) {
-                    console.error("Fehler beim Laden des Podcast-Feeds:", error);
+                    console.error("Fehler beim Laden der Episoden-Daten:", error);
                     if (episodesGrid) {
-                        episodesGrid.innerHTML = `<div class="col-span-full text-center text-red-400 p-8"><p class="font-bold">Der Podcast-Feed konnte leider nicht geladen werden.</p></div>`;
+                        episodesGrid.innerHTML = `<div class="col-span-full text-center text-red-400 p-8">
+                            <p class="font-bold">Die Episoden-Daten konnten leider nicht geladen werden.</p>
+                            <p class="text-sm mt-2">Bitte versuche es später erneut.</p>
+                        </div>`;
                     }
                     return []; // Return empty array on error
                 }
@@ -481,22 +498,10 @@
                 if (!episodesGrid) return;
 
                 episodesGrid.innerHTML = createLoadingSpinnerHTML();
-
-                const cachedEpisodes = localStorage.getItem(episodesCacheKey);
-                const cachedTimestamp = localStorage.getItem(cacheTimestampKey);
-                const isCacheStale = !cachedTimestamp || (Date.now() - parseInt(cachedTimestamp)) > CACHE_DURATION_MS;
-
-                if (cachedEpisodes && !isCacheStale) {
-                    console.log('Loading episodes from cache.');
-                    allEpisodes = JSON.parse(cachedEpisodes);
-                    renderEpisodes(allEpisodes.slice(0, 3)); // Initially show the 3 latest
-                    // Fetch in background to update cache if needed
-                    fetchAndCacheEpisodes();
-                } else {
-                    console.log('Cache is stale or empty, fetching from network.');
-                    allEpisodes = await fetchAndCacheEpisodes();
-                    renderEpisodes(allEpisodes.slice(0, 3)); // Render after fetching
-                }
+                
+                console.log('Fetching episodes from local file for index page.');
+                allEpisodes = await fetchAndCacheEpisodes();
+                renderEpisodes(allEpisodes.slice(0, 3)); // Render after fetching
             }
 
             function setupEventListeners() {
