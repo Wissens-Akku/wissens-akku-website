@@ -3,7 +3,7 @@ const path = require('path');
 
 // Define paths
 const episodesFilePath = path.join(__dirname, 'assets', 'js', 'episodes.json');
-const listTemplatePath = path.join(__dirname, 'episoden.html');
+const listTemplatePath = path.join(__dirname, 'episoden-template.html');
 const episodeTemplatePath = path.join(__dirname, 'episode-template.html');
 const outputDir = path.join(__dirname, 'episoden');
 
@@ -101,7 +101,8 @@ try {
     const finalListHtml = listTemplateContent.replace(placeholder, allEpisodeCards.join('\n'));
 
     // --- 5. Write the final list page ---
-    fs.writeFileSync(listTemplatePath, finalListHtml, 'utf-8');
+    const listOutputPath = path.join(__dirname, 'episoden.html');
+    fs.writeFileSync(listOutputPath, finalListHtml, 'utf-8');
 
     console.log('Build process complete!');
     console.log(`- Generated ${episodesData.items.length} individual episode pages in /episoden/`);
