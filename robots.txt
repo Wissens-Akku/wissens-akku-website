@@ -1,6 +1,8 @@
 User-agent: *
 Allow: /
 
+User-agent: Cookiebot
+Disallow: /episode.html
 User-agent: Cookiebot/1.0
 Disallow: /episode.html
 
