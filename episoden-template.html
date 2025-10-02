@@ -73,6 +73,17 @@
         body.modal-open {
             overflow: hidden;
         }
+        .modal {
+            display: none; /* Ensure it's hidden */
+            align-items: center;
+            justify-content: center;
+        }
+        .modal.flex {
+            display: flex;
+        }
+        .modal.hidden {
+            display: none;
+        }
     </style>
 </head>
 <body class="text-brand-accent-400 font-sans">
@@ -209,6 +220,20 @@
             </div>
         </div>
     </div>
+    
+    <!-- Platform Choice Modal -->
+    <div id="platform-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 p-4">
+        <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-sm w-full relative border border-gray-700">
+            <button id="close-platform-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+            </button>
+            <h3 class="text-2xl font-bold font-heading text-center mb-6 text-white">Hören auf...</h3>
+            <div id="platform-links" class="space-y-4">
+                <!-- Links will be injected here by JS -->
+            </div>
+        </div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -226,6 +251,10 @@
             const contactModal = document.getElementById('contact-modal');
             const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
             const closeContactModalButton = document.getElementById('close-contact-modal');
+            
+            const platformModal = document.getElementById('platform-modal');
+            const closePlatformModalButton = document.getElementById('close-platform-modal');
+            const platformLinksContainer = document.getElementById('platform-links');
 
             function extractCategoriesFromCard(card) {
                 return (card.dataset.category || '').split(' ').filter(Boolean);
@@ -359,6 +388,49 @@
                                 contactModal.classList.add('hidden');
                                 document.body.classList.remove('modal-open');
                             }
+                        }
+                    });
+                }
+                
+                // Platform Modal Logic
+                if (platformModal && allEpisodesGrid) {
+                    allEpisodesGrid.addEventListener('click', function(e) {
+                        const listenButton = e.target.closest('.listen-button');
+                        if (listenButton) {
+                            e.preventDefault();
+                            const spotifyUrl = listenButton.dataset.spotifyUrl;
+                            const appleUrl = listenButton.dataset.appleUrl;
+                            const youtubeUrl = listenButton.dataset.youtubeUrl;
+
+                            platformLinksContainer.innerHTML = ''; // Clear previous links
+
+                            if (spotifyUrl) {
+                                platformLinksContainer.innerHTML += `<a href="${spotifyUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform block no-underline">Spotify</a>`;
+                            }
+                            if (appleUrl) {
+                                platformLinksContainer.innerHTML += `<a href="${appleUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-purple-700 transition-transform hover:scale-105 transform block no-underline">Apple Podcasts</a>`;
+                            }
+                            if (youtubeUrl) {
+                                platformLinksContainer.innerHTML += `<a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-red-700 transition-transform hover:scale-105 transform block no-underline">YouTube</a>`;
+                            }
+                            
+                            platformModal.classList.remove('hidden');
+                            platformModal.classList.add('flex');
+                            document.body.classList.add('modal-open');
+                        }
+                    });
+
+                    closePlatformModalButton.addEventListener('click', () => {
+                        platformModal.classList.add('hidden');
+                        platformModal.classList.remove('flex');
+                        document.body.classList.remove('modal-open');
+                    });
+
+                    platformModal.addEventListener('click', (e) => {
+                        if (e.target === platformModal) {
+                            platformModal.classList.add('hidden');
+                            platformModal.classList.remove('flex');
+                            document.body.classList.remove('modal-open');
                         }
                     });
                 }
