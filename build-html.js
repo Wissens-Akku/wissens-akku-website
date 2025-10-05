@@ -52,8 +52,15 @@ try {
 
     const allEpisodeCards = [];
 
+    // --- Sort and filter episodes ---
+    const now = new Date();
+    const sortedItems = episodesData.items
+        .sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate)); // Neueste zuerst
+
+    console.log(`Processing ${sortedItems.length} published episodes...`);
+
     // --- 3. Process each episode ---
-    for (const episode of episodesData.items) {
+    for (const episode of sortedItems) {
         const cleanDescription = (episode.description || '').replace(/<[^>]*>?/gm, '').trim();
         
         // The URL to be shared will be the main Spotify show URL, as we don't have individual episode links.

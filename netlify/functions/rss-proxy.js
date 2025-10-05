@@ -1,8 +1,15 @@
 const Parser = require('rss-parser');
-const parser = new Parser();
+const parser = new Parser({
+  maxItems: 200 // Erhöhen, um sicherzustellen, dass alle Episoden aus großen Feeds geladen werden
+});
 const FEED_URL = 'https://anchor.fm/s/107c46c58/podcast/rss';
 
 exports.handler = async function(event, context) {
+  const headers = {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*', // Erlaubt Anfragen von jeder Herkunft
+  };
+
   try {
     const feed = await parser.parseURL(FEED_URL);
 
@@ -32,22 +39,14 @@ exports.handler = async function(event, context) {
 
     return {
       statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', // Allow requests from any origin
-        'Access-Control-Allow-Methods': 'GET',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
+      headers,
       body: JSON.stringify(data),
     };
   } catch (error) {
     console.error('Error fetching or parsing RSS feed in Netlify Function:', error);
     return {
       statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', 
-      },
+      headers,
       body: JSON.stringify({ error: 'Failed to fetch RSS feed' }),
     };
   }

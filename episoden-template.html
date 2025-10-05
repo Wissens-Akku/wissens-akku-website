@@ -133,11 +133,14 @@
                 <div id="category-tabs" class="mb-12 flex flex-wrap justify-center gap-2"></div>
                 <div id="episode-update-info" class="hidden"></div>
                 <div id="all-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- EPISODE-GRID-PLACEHOLDER -->
+                    <!-- Episoden werden hier dynamisch via JavaScript geladen -->
                 </div>
             </section>
         </div>
     </main>
+
+    <!-- Modals etc. ... -->
+    <!-- ... (rest of the file remains the same until the script tag) ... -->
 
     <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="max-h-[75vh] overflow-y-auto">
@@ -234,11 +237,14 @@
         </div>
     </div>
 
+    <!-- Centralized Episode Loader -->
+    <script src="assets/js/episode-loader.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let allEpisodeCards = [];
+            let allEpisodes = [];
             const allEpisodesGrid = document.getElementById('all-episodes-grid');
+            if (!allEpisodesGrid) return; // Guard clause
             const searchInput = document.getElementById('episode-search-input');
             const categoryTabsContainer = document.getElementById('category-tabs');
             const searchButton = document.getElementById('episode-search-button');
@@ -256,15 +262,13 @@
             const closePlatformModalButton = document.getElementById('close-platform-modal');
             const platformLinksContainer = document.getElementById('platform-links');
 
-            function extractCategoriesFromCard(card) {
-                return (card.dataset.category || '').split(' ').filter(Boolean);
-            }
+            function setupCategoryFilter(episodes) {
+                if (!categoryTabsContainer || !episodes || episodes.length === 0) return;
 
-            function setupCategoryFilter() {
-                if (!categoryTabsContainer || !allEpisodeCards.length) return;
                 const categories = new Set();
-                allEpisodeCards.forEach(card => {
-                    extractCategoriesFromCard(card).forEach(cat => categories.add(cat));
+                episodes.forEach(episode => {
+                    const category = episode.title.split(' ')[0].toLowerCase();
+                    categories.add(category);
                 });
 
                 const sortedCategories = Array.from(categories).sort();
@@ -286,15 +290,15 @@
                         e.target.classList.add('active', 'bg-brand-accent-500', 'text-white');
                         e.target.classList.remove('bg-transparent', 'border', 'border-brand-accent-500', 'text-brand-accent-400');
                         
-                        searchInput.value = '';
+                        if (searchInput) searchInput.value = '';
 
-                        allEpisodeCards.forEach(card => {
-                            const episodeCategories = extractCategoriesFromCard(card);
-                            if (selectedCategory === 'all' || episodeCategories.includes(selectedCategory)) {
-                                card.style.display = 'flex';
-                            } else {
-                                card.style.display = 'none';
-                            }
+                        const filteredEpisodes = selectedCategory === 'all' 
+                            ? allEpisodes 
+                            : allEpisodes.filter(ep => ep.title.split(' ')[0].toLowerCase() === selectedCategory);
+                        
+                        renderEpisodes(allEpisodesGrid, filteredEpisodes);
+                        allEpisodesGrid.querySelectorAll('.episode-card').forEach(card => {
+                            card.style.display = 'flex'; // Ensure they are visible
                         });
                     }
                 });
@@ -302,37 +306,23 @@
 
             function performSearch() {
                 const searchTerm = searchInput.value.toLowerCase().trim();
-                
-                categoryTabsContainer.querySelectorAll('.category-tab').forEach(btn => {
-                    btn.classList.remove('active', 'bg-brand-accent-500', 'text-white');
-                    btn.classList.add('bg-transparent', 'border', 'border-brand-accent-500', 'text-brand-accent-400');
-                });
-                 const allBtn = categoryTabsContainer.querySelector('[data-category="all"]');
-                 if(allBtn) allBtn.classList.add('active', 'bg-brand-accent-500', 'text-white');
 
-                allEpisodeCards.forEach(card => {
-                    const titleElement = card.querySelector('h3');
-                    const title = titleElement ? titleElement.textContent.toLowerCase() : '';
-                    const descriptionElement = card.querySelector('p');
-                    const description = descriptionElement ? descriptionElement.textContent.toLowerCase() : '';
-                    const cardText = title + ' ' + description;
-
-                    if (searchTerm === '' || cardText.includes(searchTerm)) {
-                        card.style.display = 'flex';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-            }
-
-            function initPage() {
-                if (!allEpisodesGrid) return;
-                allEpisodeCards = Array.from(allEpisodesGrid.querySelectorAll('.episode-card'));
-                if(allEpisodeCards.length > 0) {
-                    setupCategoryFilter();
-                } else {
-                    allEpisodesGrid.innerHTML = `<div class="col-span-full text-center text-brand-accent-400 p-8"><p>Keine Episoden gefunden. Führen Sie einen Build-Prozess aus, um die Episoden zu generieren.</p></div>`;
+                if (categoryTabsContainer) {
+                    categoryTabsContainer.querySelectorAll('.category-tab').forEach(btn => {
+                        btn.classList.remove('active', 'bg-brand-accent-500', 'text-white');
+                        btn.classList.add('bg-transparent', 'border', 'border-brand-accent-500', 'text-brand-accent-400');
+                    });
+                    const allBtn = categoryTabsContainer.querySelector('[data-category="all"]');
+                    if(allBtn) allBtn.classList.add('active', 'bg-brand-accent-500', 'text-white');
                 }
+
+                const filteredEpisodes = allEpisodes.filter(ep => {
+                    const title = ep.title.toLowerCase();
+                    const description = (ep.description || '').toLowerCase();
+                    return title.includes(searchTerm) || description.includes(searchTerm);
+                });
+
+                renderEpisodes(allEpisodesGrid, filteredEpisodes);
             }
 
             function setupEventListeners() {
@@ -405,13 +395,13 @@
                             platformLinksContainer.innerHTML = ''; // Clear previous links
 
                             if (spotifyUrl) {
-                                platformLinksContainer.innerHTML += `<a href="${spotifyUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform block no-underline">Spotify</a>`;
+                                platformLinksContainer.innerHTML += `<a href="${spotifyUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform block no-underline" aria-label="Auf Spotify anhören">Spotify</a>`;
                             }
                             if (appleUrl) {
-                                platformLinksContainer.innerHTML += `<a href="${appleUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-purple-700 transition-transform hover:scale-105 transform block no-underline">Apple Podcasts</a>`;
+                                platformLinksContainer.innerHTML += `<a href="${appleUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-purple-700 transition-transform hover:scale-105 transform block no-underline" aria-label="Auf Apple Podcasts anhören">Apple Podcasts</a>`;
                             }
                             if (youtubeUrl) {
-                                platformLinksContainer.innerHTML += `<a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-red-700 transition-transform hover:scale-105 transform block no-underline">YouTube</a>`;
+                                platformLinksContainer.innerHTML += `<a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-red-700 transition-transform hover:scale-105 transform block no-underline" aria-label="Auf YouTube ansehen">YouTube</a>`;
                             }
                             
                             platformModal.classList.remove('hidden');
@@ -434,6 +424,15 @@
                         }
                     });
                 }
+            }
+
+            // --- Main Initialization ---
+            async function initPage() {
+                if (!allEpisodesGrid) return;
+                allEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
+                allEpisodes = await fetchAndCacheEpisodes() || [];
+                renderEpisodes(allEpisodesGrid, allEpisodes);
+                setupCategoryFilter(allEpisodes);
             }
 
             initPage();
