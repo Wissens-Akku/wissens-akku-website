@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node update-episodes.js && node build-css.js",
+    "build": "node update-episodes.js && node build-html.js && node build-css.js",
     "start": "http-server -c-1"
   },
   "repository": {
