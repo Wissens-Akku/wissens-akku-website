@@ -31,13 +31,31 @@
     </div>
     <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
-                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+            <a href="./index.html#home" class="flex items-center space-x-2">
+                <img src="./Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
-            <nav>
-                <a href="index.html" class="text-lg hover:text-brand-accent-400 transition-colors pb-1">Zurück zur Hauptseite</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="./index.html#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Start</a>
+                <a href="./episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="./agenten.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Agenten</a>
+                <a href="./index.html#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Über Mich</a>
+                <a href="./index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Folgen</a>
             </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="./index.html#home" class="block py-2 px-6 text-sm hover:bg-gray-800">Start</a>
+            <a href="./episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
+            <a href="./agenten.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Agenten</a>
+            <a href="./index.html#about" class="block py-2 px-6 text-sm hover:bg-gray-800">Über Mich</a>
+            <a href="./index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
         </div>
     </header>
     <main class="relative z-10 pt-24">

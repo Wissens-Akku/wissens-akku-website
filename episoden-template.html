@@ -55,21 +55,6 @@
             color: white;
         }
 
-        #all-episodes-grid {
-            max-height: 80vh;
-            overflow-y: auto;
-            padding-right: 1rem;
-        }
-        #all-episodes-grid::-webkit-scrollbar {
-            width: 8px;
-        }
-        #all-episodes-grid::-webkit-scrollbar-track {
-            background: #0F172A;
-        }
-        #all-episodes-grid::-webkit-scrollbar-thumb {
-            background-color: #0891B2;
-            border-radius: 4px;
-        }
         body.modal-open {
             overflow: hidden;
         }
@@ -83,6 +68,38 @@
         }
         .modal.hidden {
             display: none;
+        }
+
+        /* New Sidebar Styles */
+        #task-bar, .flex-grow.overflow-y-auto {
+            scrollbar-width: thin;
+            scrollbar-color: #0891B2 #0F172A;
+        }
+        #task-bar::-webkit-scrollbar, .flex-grow.overflow-y-auto::-webkit-scrollbar {
+            width: 8px;
+        }
+        #task-bar::-webkit-scrollbar-track, .flex-grow.overflow-y-auto::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #task-bar::-webkit-scrollbar-thumb, .flex-grow.overflow-y-auto::-webkit-scrollbar-thumb {
+            background-color: #0891B2;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
+        #task-bar {
+            flex-shrink: 0; /* Prevent sidebar from shrinking */
+            transition: width 0.2s ease-in-out;
+        }
+        #resize-handle {
+            flex-shrink: 0;
+        }
+        #sidebar-content {
+            transition: opacity 0.2s ease-in-out;
+        }
+        #task-bar.collapsed #sidebar-content {
+            opacity: 0;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -123,19 +140,41 @@
     </header>
 
     <main class="relative z-10 pt-20">
-        <div class="container mx-auto px-6 py-12 md:py-24 bg-transparent backdrop-blur-sm rounded-xl border-none">
-            <section id="episodes">
-                <h1 class="text-4xl md:text-5xl font-bold font-heading text-center mb-12">Alle Episoden</h1>
-                <div class="mb-8 max-w-lg mx-auto flex gap-2">
-                    <input type="search" id="episode-search-input" placeholder="Episoden durchsuchen..." class="flex-grow bg-gray-900/50 border border-gray-600 rounded-lg py-3 px-5 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none text-lg">
-                    <button id="episode-search-button" class="bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-colors shrink-0">Suchen</button>
+        <div class="container mx-auto px-6">
+            <h1 class="text-4xl md:text-5xl font-bold font-heading text-center mb-8">Alle Episoden</h1>
+        </div>
+        <div id="episode-layout" class="flex h-[calc(100vh-12rem)] container mx-auto bg-gray-800/50 rounded-lg border border-gray-700">
+
+            <!-- Resizable Sidebar -->
+            <aside id="task-bar" class="p-4 flex flex-col" style="width: 280px; min-width: 80px; max-width: 500px;">
+                <div id="sidebar-content" class="flex-grow overflow-y-auto pr-2">
+                        <div class="mb-6">
+                            <h2 class="text-2xl font-bold font-heading mb-4 sidebar-text">Filter</h2>
+                            <div class="mb-2">
+                                <input type="search" id="episode-search-input" placeholder="Suchen..." class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none text-lg">
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold font-heading mb-4 sidebar-text">Kategorien</h3>
+                            <div id="category-tabs" class="grid grid-cols-1 gap-2"></div>
+                        </div>
                 </div>
-                <div id="category-tabs" class="mb-12 flex flex-wrap justify-center gap-2"></div>
+                 <button id="toggle-sidebar-btn" class="mt-4 p-2 bg-gray-700/60 rounded-lg text-center text-xs">
+                    <svg id="toggle-icon-collapse" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" /></svg>
+                    <svg id="toggle-icon-expand" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mx-auto hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 5l7 7-7 7M5 5l7 7-7 7" /></svg>
+                </button>
+            </aside>
+
+            <!-- Resize Handle -->
+            <div id="resize-handle" class="w-2 cursor-col-resize bg-gray-700/50 hover:bg-brand-accent-500 transition-colors"></div>
+
+            <!-- Episode Grid -->
+            <div class="flex-grow overflow-y-auto">
                 <div id="episode-update-info" class="hidden"></div>
-                <div id="all-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="all-episodes-grid" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 p-6">
                     <!-- EPISODE-GRID-PLACEHOLDER -->
                 </div>
-            </section>
+            </div>
         </div>
     </main>
 
@@ -247,7 +286,6 @@
             if (!allEpisodesGrid) return; // Guard clause
             const searchInput = document.getElementById('episode-search-input');
             const categoryTabsContainer = document.getElementById('category-tabs');
-            const searchButton = document.getElementById('episode-search-button');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             
@@ -262,6 +300,78 @@
             const closePlatformModalButton = document.getElementById('close-platform-modal');
             const platformLinksContainer = document.getElementById('platform-links');
 
+            // --- Sidebar Logic ---
+            const taskBar = document.getElementById('task-bar');
+            const resizeHandle = document.getElementById('resize-handle');
+            const toggleBtn = document.getElementById('toggle-sidebar-btn');
+            const iconCollapse = document.getElementById('toggle-icon-collapse');
+            const iconExpand = document.getElementById('toggle-icon-expand');
+            const sidebarContent = document.getElementById('sidebar-content');
+
+            const minWidth = 80; // px
+            const defaultWidth = 280; //px
+
+            function setSidebarWidth(width) {
+                const maxWidth = 500;
+                let newWidth = width;
+                if (newWidth < minWidth) newWidth = minWidth;
+                if (newWidth > maxWidth) newWidth = maxWidth;
+                taskBar.style.width = `${newWidth}px`;
+
+                if (newWidth <= minWidth) {
+                    taskBar.classList.add('collapsed');
+                    iconCollapse.classList.add('hidden');
+                    iconExpand.classList.remove('hidden');
+                    sidebarContent.classList.add('hidden');
+                } else {
+                    taskBar.classList.remove('collapsed');
+                    iconCollapse.classList.remove('hidden');
+                    iconExpand.classList.add('hidden');
+                    sidebarContent.classList.remove('hidden');
+                }
+            }
+
+            function initResize() {
+                // Load saved width or use default
+                let initialWidth = localStorage.getItem('sidebarWidth');
+                setSidebarWidth(initialWidth ? parseInt(initialWidth, 10) : defaultWidth);
+
+                toggleBtn.addEventListener('click', () => {
+                    const currentWidth = taskBar.offsetWidth;
+                    const newWidth = currentWidth > minWidth ? minWidth : defaultWidth;
+                    setSidebarWidth(newWidth);
+                    localStorage.setItem('sidebarWidth', newWidth);
+                });
+
+                let isResizing = false;
+                resizeHandle.addEventListener('mousedown', function(e) {
+                    e.preventDefault();
+                    isResizing = true;
+                    document.body.style.cursor = 'col-resize';
+                    document.body.style.userSelect = 'none';
+                });
+
+                document.addEventListener('mousemove', function(e) {
+                    if (!isResizing) return;
+                    
+                    const container = document.getElementById('episode-layout');
+                    const containerOffsetLeft = container.getBoundingClientRect().left;
+                    let newWidth = e.clientX - containerOffsetLeft;
+                    
+                    setSidebarWidth(newWidth);
+                });
+
+                document.addEventListener('mouseup', function(e) {
+                    if (isResizing) {
+                        isResizing = false;
+                        document.body.style.cursor = 'default';
+                        document.body.style.userSelect = 'auto';
+                        localStorage.setItem('sidebarWidth', taskBar.style.width.replace('px', ''));
+                    }
+                });
+            }
+
+            // --- Page Logic ---
             function setupCategoryFilter(episodes) {
                 if (!categoryTabsContainer || !episodes || episodes.length === 0) return;
 
@@ -273,9 +383,10 @@
 
                 const sortedCategories = Array.from(categories).sort();
                 
-                let html = `<button data-category="all" class="category-tab active bg-brand-accent-500 text-white font-semibold py-2 px-4 rounded-full transition-colors">Alle anzeigen</button>`;
+                let html = `<button data-category="all" class="category-tab active bg-brand-accent-500 text-white font-semibold py-2 px-4 rounded-lg transition-colors w-full text-left">Alle anzeigen</button>`;
                 sortedCategories.forEach(category => {
-                    html += `<button data-category="${category}" class="category-tab bg-transparent border border-brand-accent-500 text-brand-accent-400 font-semibold py-2 px-4 rounded-full transition-colors hover:bg-brand-accent-500 hover:text-white">${category}</button>`;
+                    const capitalizedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+                    html += `<button data-category="${category}" class="category-tab bg-transparent border border-brand-accent-500 text-brand-accent-400 font-semibold py-2 px-4 rounded-lg transition-colors hover:bg-brand-accent-500 hover:text-white w-full text-left">${capitalizedCategory}</button>`;
                 });
                 categoryTabsContainer.innerHTML = html;
 
@@ -327,11 +438,7 @@
 
             function setupEventListeners() {
                 if (searchInput) {
-                    searchButton.addEventListener('click', (e) => { e.preventDefault(); performSearch(); });
                     searchInput.addEventListener('keyup', (e) => { 
-                        if (e.key === 'Enter') { 
-                            e.preventDefault(); 
-                        }
                         performSearch(); 
                     });
                 }
@@ -433,6 +540,7 @@
                 allEpisodes = await fetchAndCacheEpisodes() || [];
                 renderEpisodes(allEpisodesGrid, allEpisodes);
                 setupCategoryFilter(allEpisodes);
+                initResize(); // Initialize the sidebar resizing logic
             }
 
             initPage();
