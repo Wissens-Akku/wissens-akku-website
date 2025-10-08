@@ -408,8 +408,6 @@
 
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        let allEpisodes = [];
-
         // --- Elements ---
         const episodesGrid = document.getElementById('latest-episodes-grid');
         const navLinks = document.querySelectorAll('.nav-link');
@@ -428,29 +426,32 @@
         const contactModal = document.getElementById('contact-modal');
         const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
         const closeContactModalButton = document.getElementById('close-contact-modal');
-        const contactFormInputs = contactModal.querySelectorAll('input, textarea');
+        const contactFormInputs = contactModal ? contactModal.querySelectorAll('input, textarea') : [];
 
         // --- Functions ---
 
         function updateActiveNavOnScroll() {
+            if (!sections.length) return;
             const scrollY = window.scrollY;
-            let currentSectionId = 'home';
+            let currentSectionId = '';
+
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - 150;
                 if (scrollY >= sectionTop) {
                     currentSectionId = section.getAttribute('id');
                 }
             });
+
             const latestEpisodesSection = document.getElementById('latest-episodes');
             if (latestEpisodesSection && scrollY >= latestEpisodesSection.offsetTop - 150 && scrollY < document.getElementById('about').offsetTop - 150) {
                 currentSectionId = 'home';
             }
+
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
-                    if (link.getAttribute('href').startsWith('#') && link.getAttribute('data-section') === currentSectionId) {
-                        link.classList.add('active');
-                    }
+                const section = link.getAttribute('data-section');
+                if (section === currentSectionId) {
+                    link.classList.add('active');
                 }
             });
         }
@@ -460,19 +461,27 @@
 
             episodesGrid.innerHTML = createLoadingSpinnerHTML();
             
-            allEpisodes = await fetchAndCacheEpisodes() || [];
-            renderEpisodes(episodesGrid, allEpisodes.slice(0, 3)); // Render after fetching
+            const allEpisodes = await fetchAndCacheEpisodes() || [];
+            renderEpisodes(episodesGrid, allEpisodes.slice(0, 3));
+            initializePlatformModalListener(episodesGrid);
         }
 
         function setupEventListeners() {
-            navLinks.forEach(link => {
-                if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
-                    link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
-                }
-            });
+            // Mobile Menu Toggle
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
 
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            // Close mobile menu on nav link click
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
+                        if(mobileMenu) mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
             
+            // NotebookLM Modal
             if (notebookModal && openNotebookModalButton && closeNotebookModalButton) {
                 openNotebookModalButton.addEventListener('click', () => {
                     document.body.classList.add('modal-open');
@@ -490,13 +499,14 @@
                 });
             }
 
+            // Workflow Modal
             if (workflowModal && openWorkflowModalButtons.length && closeWorkflowModalButton) {
                 openWorkflowModalButtons.forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
                         document.body.classList.add('modal-open');
                         workflowModal.classList.remove('hidden');
-                        mobileMenu.classList.add('hidden');
+                        if(mobileMenu) mobileMenu.classList.add('hidden');
                     });
                 });
                 closeWorkflowModalButton.addEventListener('click', () => {
@@ -511,13 +521,14 @@
                 });
             }
 
+            // Contact Modal
             if (contactModal && openContactModalButtons.length && closeContactModalButton) {
                 openContactModalButtons.forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
                         document.body.classList.add('modal-open');
                         contactModal.classList.remove('hidden');
-                        mobileMenu.classList.add('hidden');
+                        if(mobileMenu) mobileMenu.classList.add('hidden');
                     });
                 });
                 closeContactModalButton.addEventListener('click', () => {

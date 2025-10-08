@@ -4,112 +4,95 @@
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9" type="text/javascript" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wissens-Akku</title>
+    <title>Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast</title>
     <link rel="icon" href="Bilder/wissenakku-logo.png">
     <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
     <meta name="theme-color" content="#0F172A">
-    <meta name="description" content="">
-    <link rel="canonical" href="https://wissens-akku.com/episode.html" />
+    <meta name="description" content="Wissens-Akku ist dein faktenbasierter Gesundheits-Podcast. Wir laden deinen Akku mit dem neuesten Wissen aus Gesundheit, Ernährung und Leistungsfähigkeit auf. Evidenzbasiert und auf den Punkt gebracht.">
     
     <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="">
-    <meta property="og:title" content="Wissens-Akku">
-    <meta property="og:description" content="">
-    <meta property="og:image" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wissens-akku.com/">
+    <meta property="og:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
+    <meta property="og:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="og:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="">
-    <meta property="twitter:title" content="Wissens-Akku">
-    <meta property="twitter:description" content="">
-    <meta property="twitter:image" content="">
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://wissens-akku.com/">
+    <meta property="twitter:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
+    <meta property="twitter:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="twitter:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
 
-    <link href="assets/css/tailwind.css" rel="stylesheet">
+    <!-- Local Fonts -->
     <link href="assets/css/local-fonts.css" rel="stylesheet">
 
-    <script type="application/ld+json" id="json-ld-schema"></script>
+    <!-- Tailwind CSS -->
+    <link href="assets/css/tailwind.css" rel="stylesheet">
 
     <style>
-        .nav-link.active { color: #22D3EE; border-bottom: 2px solid #22D3EE; }
-        .nav-button { background: none; border: none; padding: 0; cursor: pointer; }
-        .visually-hidden { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
-        .episode-content h2 { font-size: 1.5rem; font-weight: 700; margin-top: 2rem; margin-bottom: 1rem; border-bottom: 1px solid #334155; padding-bottom: 0.5rem; }
-        .episode-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
-        .episode-content li { margin-bottom: 0.5rem; }
-        .episode-content a { color: #22D3EE; text-decoration: underline; }
-        .episode-content a:hover { color: #67E8F9; }
-        .spinner { border: 4px solid rgba(255, 255, 255, 0.2); border-left-color: #22D3EE; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .nav-link.active, .nav-link-button.active {
+            color: #22D3EE; /* text-brand-accent-400 */
+            border-bottom: 2px solid #22D3EE;
+        }
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+        .modal.hidden {
+            display: none;
+        }
+        .modal {
+            display: flex;
+        }
     </style>
 </head>
 <body class="text-brand-accent-400 font-sans">
 
+    <!-- Global Fixed Background -->
     <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
         <div class="absolute inset-0 bg-brand-dark/80"></div>
     </div>
 
+    <!-- Header & Navigation -->
     <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html#home" class="flex items-center space-x-2">
+            <a href="index.html" class="flex items-center space-x-2">
                 <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Start</a>
+                <a href="index.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Start</a>
                 <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active">Episoden</a>
+                <a href="agenten.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Agenten</a>
                 <a href="index.html#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Über Mich</a>
                 <a href="index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Folgen</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
             </button>
         </div>
+        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="index.html#home" class="block py-2 px-6 text-sm hover:bg-gray-800">Start</a>
+            <a href="index.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Start</a>
             <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800 active">Episoden</a>
+            <a href="agenten.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Agenten</a>
             <a href="index.html#about" class="block py-2 px-6 text-sm hover:bg-gray-800">Über Mich</a>
             <a href="index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
         </div>
     </header>
 
-    <main class="relative z-10 pt-20">
-        <div id="episode-container" class="container mx-auto px-6 py-12 md:py-24 bg-transparent backdrop-blur-sm rounded-xl border-none" style="display: none;">
-            <article class="max-w-4xl mx-auto">
-                <header class="mb-12 text-center">
-                    <p id="ep-date" class="text-lg text-gray-400 mb-2"></p>
-                    <h1 id="ep-title" class="text-4xl md:text-5xl font-bold font-heading text-white"></h1>
-                </header>
-
-                <section id="follow" class="max-w-3xl mx-auto text-center pt-8 pb-16">
-                    <h2 class="text-2xl font-bold font-heading mb-6">Jetzt anhören auf:</h2>
-                    <div class="flex justify-center items-center gap-8 md:gap-12 flex-wrap">
-                        <a id="spotify-link" href="https://open.spotify.com/show/4cvMLk6acssF3L31vMHy9H" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center gap-4 text-brand-accent-400 hover:text-brand-accent-500 transition-all transform hover:scale-105">
-                            <img src="Bilder/Spotify_Primary_Logo_RGB_Green.png" alt="Spotify Logo" class="h-20 object-contain">
-                            <span class="text-xl font-bold font-heading">Spotify</span>
-                        </a>
-                        <a id="apple-link" href="https://podcasts.apple.com/us/podcast/wissens-akku/id1833243965?itscg=30200&itsct=podcast_box&ls=1&mttnsubad=1833243965" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center gap-4 text-brand-accent-400 hover:text-brand-accent-500 transition-all transform hover:scale-105">
-                            <img src="Bilder/badge.svg" alt="Listen on Apple Podcasts" class="h-10 object-contain">
-                        </a>
-                        <a id="youtube-link" href="https://www.youtube.com/@Wissens-Akku" target="_blank" rel="noopener noreferrer" class="group flex flex-col items-center justify-center gap-4 text-brand-accent-400 hover:text-brand-accent-500 transition-all transform hover:scale-105">
-                            <img src="Bilder/yt_logo_fullcolor_white_digital.png" alt="YouTube Logo" class="h-20 object-contain">
-                        </a>
-                    </div>
-                </section>
-
-                <div class="visually-hidden episode-content" id="ep-content">
-                    <h2>Shownotes</h2>
-                </div>
-
-                <div class="mt-16 text-center">
-                    <a href="episoden.html" class="bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
-                        Zurück zu allen Episoden
-                    </a>
-                </div>
-            </article>
+    <main class="relative z-10 pt-24">
+        <div id="episode-content" class="container mx-auto px-6 py-12 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50">
+            <!-- Episode content will be loaded here -->
         </div>
-        <div id="loading-indicator" class="text-center py-24"><div class="spinner mx-auto"></div></div>
-        <div id="error-indicator" class="text-center py-24 text-red-400" style="display: none;"></div>
     </main>
 
     <footer class="bg-brand-dark/80 border-t border-gray-700/50 mt-24">
@@ -122,99 +105,70 @@
         </div>
     </footer>
 
+    <script src="assets/js/episode-loader.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const params = new URLSearchParams(window.location.search);
-            const slug = params.get('slug');
-
-            const container = document.getElementById('episode-container');
-            const loading = document.getElementById('loading-indicator');
-            const errorEl = document.getElementById('error-indicator');
+        document.addEventListener('DOMContentLoaded', async () => {
+            const contentContainer = document.getElementById('episode-content');
+            const urlParams = new URLSearchParams(window.location.search);
+            const slug = urlParams.get('slug');
 
             if (!slug) {
-                loading.style.display = 'none';
-                errorEl.style.display = 'block';
-                errorEl.innerHTML = '<h1 class="text-3xl font-bold">Episode nicht gefunden</h1><p class="mt-4">Es wurde keine Episoden-ID in der URL angegeben.</p>';
+                contentContainer.innerHTML = '<p class="text-center text-red-400">Fehler: Episoden-Slug nicht in der URL gefunden.</p>';
                 return;
             }
 
-            const slugify = (text) => {
-                return text.toString().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
+            // Helper function to create a slug (must match the one in episode-loader.js)
+            const createSlug = (title) => {
+                return (title || '').toString()
+                    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+                    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+                    .toLowerCase().trim().replace(/\s+/g, '-').replace(/[^\w-]+/g, '').replace(/--+/g, '-');
             };
 
-            fetch('assets/js/episodes.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Netzwerk-Antwort war nicht ok.');
-                    return response.json();
-                })
-                .then(data => {
-                    const episode = data.items.find(item => slugify(item.title) === slug);
+            try {
+                const response = await fetch('assets/js/episodes.json');
+                if (!response.ok) throw new Error('Episoden-Daten konnten nicht geladen werden.');
+                const data = await response.json();
+                const episode = data.items.find(item => createSlug(item.title) === slug);
 
-                    if (episode) {
-                        // --- Populate Meta Tags ---
-                        document.title = episode.title + ' | Wissens-Akku';
-                        document.querySelector('meta[name="description"]').setAttribute('content', episode.description);
-                        document.querySelector('meta[property="og:title"]').setAttribute('content', episode.title + ' | Wissens-Akku');
-                        document.querySelector('meta[property="og:description"]').setAttribute('content', episode.description);
-                        document.querySelector('meta[property="og:image"]').setAttribute('content', episode.thumbnail);
-                        document.querySelector('meta[property="og:url"]').setAttribute('content', window.location.href);
-                        document.querySelector('meta[property="twitter:title"]').setAttribute('content', episode.title + ' | Wissens-Akku');
-                        document.querySelector('meta[property="twitter:description"]').setAttribute('content', episode.description);
-                        document.querySelector('meta[property="twitter:image"]').setAttribute('content', episode.thumbnail);
-                        document.querySelector('meta[property="twitter:url"]').setAttribute('content', window.location.href);
+                if (episode) {
+                    document.title = `${episode.title} | Wissens-Akku`;
+                    
+                    const formattedDate = new Date(episode.pubDate).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' });
+                    const cleanContent = (episode.contentEncoded || episode.content || '').replace(/<br><br>/g, '</p><p>');
 
-                        // --- Populate Body Content ---
-                        document.getElementById('ep-title').textContent = episode.title;
-                        document.getElementById('ep-date').textContent = new Date(episode.pubDate).toLocaleDateString('de-DE', { year: 'numeric', month: 'long', day: 'numeric' });
-                        document.getElementById('ep-content').innerHTML = '<h2>Shownotes</h2>' + episode.content;
+                    const platforms = {
+                        spotify: episode.link || 'https://open.spotify.com/show/4cvMLk6acssF3L31vMHy9H',
+                        apple: 'https://podcasts.apple.com/us/podcast/wissens-akku/id1833243965',
+                        youtube: 'https://www.youtube.com/@Wissens-Akku'
+                    };
+
+                    contentContainer.innerHTML = `
+                        <h1 class="text-3xl md:text-4xl font-bold font-heading mb-4">${episode.title}</h1>
+                        <p class="text-gray-400 mb-8">${formattedDate}</p>
                         
-                        // --- Update external links if available ---
-                        if(episode.link) {
-                            document.getElementById('spotify-link').href = episode.link;
-                        }
+                        <div class="prose prose-invert max-w-none text-lg leading-relaxed">
+                           <p>${cleanContent}</p>
+                        </div>
 
-                        // --- Populate JSON-LD ---
-                        const episodeUrl = window.location.href;
-                        const episodeJsonLd = {
-                            "@context": "https://schema.org",
-                            "@type": "PodcastEpisode",
-                            "name": episode.title,
-                            "url": episodeUrl,
-                            "description": episode.description,
-                            "datePublished": new Date(episode.pubDate).toISOString(),
-                            "partOfSeries": {
-                                "@type": "PodcastSeries",
-                                "name": "Wissens-Akku",
-                                "url": "https://wissens-akku.com/"
-                            },
-                            "audio": {
-                                "@type": "AudioObject",
-                                "contentUrl": episode.enclosure.url,
-                                "encodingFormat": episode.enclosure.type
-                            },
-                            "image": episode.thumbnail
-                        };
-                        document.getElementById('json-ld-schema').textContent = JSON.stringify(episodeJsonLd, null, 2);
-
-                        // --- Show content ---
-                        loading.style.display = 'none';
-                        container.style.display = 'block';
-
-                    } else {
-                        throw new Error('Episode mit diesem Slug nicht gefunden.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Fehler beim Laden der Episoden-Daten:', error);
-                    loading.style.display = 'none';
-                    errorEl.style.display = 'block';
-                    errorEl.innerHTML = '<h1 class="text-3xl font-bold">Episode konnte nicht geladen werden</h1><p class="mt-4">Die angeforderte Episode wurde nicht gefunden oder die Daten konnten nicht abgerufen werden.</p>';
-                });
-            
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+                        <div class="mt-12 pt-8 border-t border-gray-700/50">
+                            <h2 class="text-2xl font-bold font-heading mb-6 text-center">Jetzt überall anhören</h2>
+                            <div class="flex justify-center items-center gap-4 md:gap-6 flex-wrap">
+                                <a href="${platforms.spotify}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform no-underline">Spotify</a>
+                                <a href="${platforms.apple}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-purple-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-purple-700 transition-transform hover:scale-105 transform no-underline">Apple Podcasts</a>
+                                <a href="${platforms.youtube}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-red-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-red-700 transition-transform hover:scale-105 transform no-underline">YouTube</a>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    contentContainer.innerHTML = '<p class="text-center text-red-400">Episode nicht gefunden.</p>';
+                }
+            } catch (error) {
+                console.error('Fehler beim Laden der Episode:', error);
+                contentContainer.innerHTML = '<p class="text-center text-red-400">Fehler beim Laden der Episode. Bitte versuche es später erneut.</p>';
+            }
         });
     </script>
+
 </body>
 </html>

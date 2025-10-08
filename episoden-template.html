@@ -120,9 +120,10 @@
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="index.html#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="home">Start</a>
                 <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active" data-section="episodes">Episoden</a>
+                <a href="agenten.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="agenten">Agenten</a>
                 <a href="index.html#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="about">Über Mich</a>
-                <a href="index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="follow">Folgen</a>
                 <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-workflow-modal" data-section="workflow">Workflow</button>
+                <a href="index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1" data-section="follow">Folgen</a>
                 <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal" data-section="contact">Kontakt</button>
             </nav>
             <button id="mobile-menu-button" class="md:hidden p-2">
@@ -132,6 +133,7 @@
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="index.html#home" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="home">Start</a>
             <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link active" data-section="episodes">Episoden</a>
+            <a href="agenten.html" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="agenten">Agenten</a>
             <a href="index.html#about" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="about">Über Mich</a>
             <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-workflow-modal" data-section="workflow">Workflow</a>
             <a href="index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link" data-section="follow">Folgen</a>
@@ -281,9 +283,9 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let allEpisodes = [];
             const allEpisodesGrid = document.getElementById('all-episodes-grid');
             if (!allEpisodesGrid) return; // Guard clause
+
             const searchInput = document.getElementById('episode-search-input');
             const categoryTabsContainer = document.getElementById('category-tabs');
             const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -295,10 +297,6 @@
             const contactModal = document.getElementById('contact-modal');
             const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
             const closeContactModalButton = document.getElementById('close-contact-modal');
-            
-            const platformModal = document.getElementById('platform-modal');
-            const closePlatformModalButton = document.getElementById('close-platform-modal');
-            const platformLinksContainer = document.getElementById('platform-links');
 
             // --- Sidebar Logic ---
             const taskBar = document.getElementById('task-bar');
@@ -318,21 +316,15 @@
                 if (newWidth > maxWidth) newWidth = maxWidth;
                 taskBar.style.width = `${newWidth}px`;
 
-                if (newWidth <= minWidth) {
-                    taskBar.classList.add('collapsed');
-                    iconCollapse.classList.add('hidden');
-                    iconExpand.classList.remove('hidden');
-                    sidebarContent.classList.add('hidden');
-                } else {
-                    taskBar.classList.remove('collapsed');
-                    iconCollapse.classList.remove('hidden');
-                    iconExpand.classList.add('hidden');
-                    sidebarContent.classList.remove('hidden');
-                }
+                const isCollapsed = newWidth <= minWidth;
+                taskBar.classList.toggle('collapsed', isCollapsed);
+                if (iconCollapse) iconCollapse.classList.toggle('hidden', isCollapsed);
+                if (iconExpand) iconExpand.classList.toggle('hidden', !isCollapsed);
+                if (sidebarContent) sidebarContent.classList.toggle('hidden', isCollapsed);
             }
 
             function initResize() {
-                // Load saved width or use default
+                if (!taskBar || !resizeHandle || !toggleBtn) return;
                 let initialWidth = localStorage.getItem('sidebarWidth');
                 setSidebarWidth(initialWidth ? parseInt(initialWidth, 10) : defaultWidth);
 
@@ -353,15 +345,13 @@
 
                 document.addEventListener('mousemove', function(e) {
                     if (!isResizing) return;
-                    
                     const container = document.getElementById('episode-layout');
                     const containerOffsetLeft = container.getBoundingClientRect().left;
                     let newWidth = e.clientX - containerOffsetLeft;
-                    
                     setSidebarWidth(newWidth);
                 });
 
-                document.addEventListener('mouseup', function(e) {
+                document.addEventListener('mouseup', function() {
                     if (isResizing) {
                         isResizing = false;
                         document.body.style.cursor = 'default';
@@ -372,13 +362,17 @@
             }
 
             // --- Page Logic ---
-            function setupCategoryFilter(episodes) {
-                if (!categoryTabsContainer || !episodes || episodes.length === 0) return;
+            function setupCategoryFilter() {
+                if (!categoryTabsContainer) return;
 
                 const categories = new Set();
-                episodes.forEach(episode => {
-                    const category = episode.title.split(' ')[0].toLowerCase();
-                    categories.add(category);
+                document.querySelectorAll('#all-episodes-grid .episode-card[data-category]').forEach(card => {
+                    const categoryString = card.dataset.category.trim();
+                    if (categoryString) {
+                        categoryString.split(' ').forEach(cat => {
+                            if(cat) categories.add(cat.toLowerCase());
+                        });
+                    }
                 });
 
                 const sortedCategories = Array.from(categories).sort();
@@ -403,13 +397,13 @@
                         
                         if (searchInput) searchInput.value = '';
 
-                        const filteredEpisodes = selectedCategory === 'all' 
-                            ? allEpisodes 
-                            : allEpisodes.filter(ep => ep.title.split(' ')[0].toLowerCase() === selectedCategory);
-                        
-                        renderEpisodes(allEpisodesGrid, filteredEpisodes);
-                        allEpisodesGrid.querySelectorAll('.episode-card').forEach(card => {
-                            card.style.display = 'flex'; // Ensure they are visible
+                        document.querySelectorAll('#all-episodes-grid .episode-card').forEach(card => {
+                            const cardCategories = (card.dataset.category || '').toLowerCase().split(' ');
+                            if (selectedCategory === 'all' || cardCategories.includes(selectedCategory)) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
                         });
                     }
                 });
@@ -427,20 +421,20 @@
                     if(allBtn) allBtn.classList.add('active', 'bg-brand-accent-500', 'text-white');
                 }
 
-                const filteredEpisodes = allEpisodes.filter(ep => {
-                    const title = ep.title.toLowerCase();
-                    const description = (ep.description || '').toLowerCase();
-                    return title.includes(searchTerm) || description.includes(searchTerm);
+                document.querySelectorAll('#all-episodes-grid .episode-card').forEach(card => {
+                    const title = (card.querySelector('h3')?.textContent || '').toLowerCase();
+                    const description = (card.querySelector('p')?.textContent || '').toLowerCase();
+                    if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 });
-
-                renderEpisodes(allEpisodesGrid, filteredEpisodes);
             }
 
             function setupEventListeners() {
                 if (searchInput) {
-                    searchInput.addEventListener('keyup', (e) => { 
-                        performSearch(); 
-                    });
+                    searchInput.addEventListener('keyup', performSearch);
                 }
                 if(mobileMenuButton) mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
                 
@@ -480,6 +474,7 @@
                     });
                     contactModal.addEventListener('click', (e) => {
                         if (e.target === contactModal) {
+                            const contactFormInputs = contactModal.querySelectorAll('input, textarea');
                             const isFormEmpty = Array.from(contactFormInputs).every(input => input.value === '');
                             if (isFormEmpty) {
                                 contactModal.classList.add('hidden');
@@ -488,59 +483,14 @@
                         }
                     });
                 }
-                
-                // Platform Modal Logic
-                if (platformModal && allEpisodesGrid) {
-                    allEpisodesGrid.addEventListener('click', function(e) {
-                        const listenButton = e.target.closest('.listen-button');
-                        if (listenButton) {
-                            e.preventDefault();
-                            const spotifyUrl = listenButton.dataset.spotifyUrl;
-                            const appleUrl = listenButton.dataset.appleUrl;
-                            const youtubeUrl = listenButton.dataset.youtubeUrl;
-
-                            platformLinksContainer.innerHTML = ''; // Clear previous links
-
-                            if (spotifyUrl) {
-                                platformLinksContainer.innerHTML += `<a href="${spotifyUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-green-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform block no-underline" aria-label="Auf Spotify anhören">Spotify</a>`;
-                            }
-                            if (appleUrl) {
-                                platformLinksContainer.innerHTML += `<a href="${appleUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-purple-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-purple-700 transition-transform hover:scale-105 transform block no-underline" aria-label="Auf Apple Podcasts anhören">Apple Podcasts</a>`;
-                            }
-                            if (youtubeUrl) {
-                                platformLinksContainer.innerHTML += `<a href="${youtubeUrl}" target="_blank" rel="noopener noreferrer" class="w-full bg-red-600 text-white font-bold py-3 px-4 rounded-lg text-center hover:bg-red-700 transition-transform hover:scale-105 transform block no-underline" aria-label="Auf YouTube ansehen">YouTube</a>`;
-                            }
-                            
-                            platformModal.classList.remove('hidden');
-                            platformModal.classList.add('flex');
-                            document.body.classList.add('modal-open');
-                        }
-                    });
-
-                    closePlatformModalButton.addEventListener('click', () => {
-                        platformModal.classList.add('hidden');
-                        platformModal.classList.remove('flex');
-                        document.body.classList.remove('modal-open');
-                    });
-
-                    platformModal.addEventListener('click', (e) => {
-                        if (e.target === platformModal) {
-                            platformModal.classList.add('hidden');
-                            platformModal.classList.remove('flex');
-                            document.body.classList.remove('modal-open');
-                        }
-                    });
-                }
             }
 
             // --- Main Initialization ---
-            async function initPage() {
+            function initPage() {
                 if (!allEpisodesGrid) return;
-                allEpisodesGrid.innerHTML = createLoadingSpinnerHTML();
-                allEpisodes = await fetchAndCacheEpisodes() || [];
-                renderEpisodes(allEpisodesGrid, allEpisodes);
-                setupCategoryFilter(allEpisodes);
+                setupCategoryFilter();
                 initResize(); // Initialize the sidebar resizing logic
+                initializePlatformModalListener(allEpisodesGrid); // Initialize the modal listener
             }
 
             initPage();
