@@ -22,6 +22,21 @@ function createSafeTitle(title) {
         .replace(/--+/g, '-'); // Replace multiple hyphens with a single one
 }
 
+function extractCategory(title) {
+    const separatorIndex = title.indexOf('#');
+    if (separatorIndex > 0) {
+        let category = title.substring(0, separatorIndex).trim();
+        // Handle known typos or variations
+        if (category.toLowerCase() === 'käruter und tee') {
+            return 'Kräuter und Tee';
+        }
+        return category;
+    }
+    // Fallback for titles that don't match the pattern
+    if (title.toLowerCase().includes('persönliches')) return 'Persönliches';
+    return 'Allgemein'; // Default category
+}
+
 (async () => {
     console.log(`[INFO] Starte den Abruf des RSS-Feeds von: ${FEED_URL}`);
 
@@ -37,6 +52,7 @@ function createSafeTitle(title) {
 
             return {
                 ...item,
+                category: extractCategory(item.title),
                 safe_title: createSafeTitle(item.title),
                 description: item.contentSnippet,
                 spotifyUrl: spotifyUrl,
@@ -62,7 +78,7 @@ function createSafeTitle(title) {
 
         // 3. JSON-Datei schreiben
         fs.writeFileSync(OUTPUT_PATH, JSON.stringify(outputData, null, 2), 'utf-8');
-        console.log(`[SUCCESS] Die Datei ${OUTPUT_PATH} wurde erfolgreich mit den neuesten Episoden aktualisiert.`);
+        console.log(`[SUCCESS] Die Datei ${OUTPUT_PATH} wurde erfolgreich mit den neuesten Episoden und Kategorien aktualisiert.`);
 
     } catch (error) {
         console.error('[ERROR] Ein Fehler ist aufgetreten:');
