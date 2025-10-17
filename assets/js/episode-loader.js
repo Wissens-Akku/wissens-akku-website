@@ -76,8 +76,8 @@ function renderEpisodes(gridElement, episodes) {
                     <p class="text-gray-400 line-clamp-3 flex-grow">${description}</p>
                 </div>
                 <div class="p-6 pt-0 mt-auto">
-                     <a href="episoden/${episode.id}.html" class="inline-block bg-brand-accent-500 text-white font-bold py-2 px-4 rounded-lg text-sm hover:bg-brand-accent-600 transition-colors">
-                        Details & Quellen
+                     <a href="${episode.spotifyUrl}" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-accent-500 text-white font-bold py-2 px-4 rounded-lg text-sm hover:bg-brand-accent-600 transition-colors">
+                        Zur Folge
                     </a>
                 </div>
             </div>
