@@ -5,53 +5,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danke! | Wissens-Akku</title>
+    <link rel="icon" href="Bilder/wissenakku-logo.png">
     <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
     <meta name="theme-color" content="#0F172A">
+    <meta name="robots" content="noindex">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wissens-akku.com/">
-    <meta property="og:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
-    <meta property="og:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="og:url" content="https://wissens-akku.com/success.html">
+    <meta property="og:title" content="Danke! | Wissens-Akku">
+    <meta property="og:description" content="Deine Nachricht wurde erfolgreich gesendet.">
     <meta property="og:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://wissens-akku.com/">
-    <meta property="twitter:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
-    <meta property="twitter:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="twitter:url" content="https://wissens-akku.com/success.html">
+    <meta property="twitter:title" content="Danke! | Wissens-Akku">
+    <meta property="twitter:description" content="Deine Nachricht wurde erfolgreich gesendet.">
     <meta property="twitter:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
 
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href="assets/css/local-fonts.css" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'heading': ['Montserrat', 'sans-serif'],
-                    },
-                    colors: {
-                        'brand-dark': '#0F172A',
-                        'brand-accent': {
-                            '400': '#22D3EE',
-                        }
-                    }
-                }
-            }
+    <link href="assets/css/tailwind.css" rel="stylesheet">
+    <style>
+        .nav-link.active, .nav-link-button.active {
+            color: #22D3EE; /* text-brand-accent-400 */
+            border-bottom: 2px solid #22D3EE;
         }
-    </script>
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="bg-brand-dark text-brand-accent-400 font-heading flex flex-col min-h-screen">
+<body class="text-brand-accent-400 font-sans flex flex-col min-h-screen">
+
+    <!-- Global Fixed Background -->
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+        <div class="absolute inset-0 bg-brand-dark/80"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html#home" class="flex items-center space-x-2 nav-link" data-section="home">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-heading font-bold">Wissens-Akku</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
+                <a href="#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
+            <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
+            <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
+            <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
+        </div>
+    </header>
+
     <main class="flex-grow flex items-center justify-center">
         <div class="text-center p-8">
-            <h1 class="text-4xl md:text-6xl font-bold mb-4">Danke für deine Nachricht!</h1>
-            <p class="text-xl mb-8">Ich habe sie erhalten und melde mich so schnell wie möglich bei dir.</p>
-            <a href="index.html" class="bg-brand-accent-400 text-brand-dark font-bold py-3 px-8 rounded-lg text-lg hover:bg-opacity-80 transition-all">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">Danke für deine Nachricht!</h1>
+            <p class="text-xl mb-8 text-gray-300">Ich habe sie erhalten und melde mich so schnell wie möglich bei dir.</p>
+            <a href="index.html" class="bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">
                 Zurück zur Hauptseite
             </a>
         </div>
     </main>
-    <footer class="bg-brand-dark/80 w-full">
+
+    <!-- Contact Modal -->
+    <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+        <div class="max-h-[75vh] overflow-y-auto">
+            <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl w-full relative border border-gray-700">
+                <!-- Close Button -->
+                <button id="close-contact-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <h2 class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
+                <form name="contact" method="POST" data-netlify="true" action="/success.html" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname (optional)</label>
+                            <input type="text" name="firstname" id="firstname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name (optional)</label>
+                            <input type="text" name="lastname" id="lastname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
+                        <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
+                        <textarea name="message" id="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht senden</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-brand-dark/80 border-t border-gray-700/50">
         <div class="container mx-auto px-6 py-8 text-center text-gray-400">
             <div class="flex justify-center space-x-6 mb-4">
                 <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
@@ -60,5 +130,39 @@
             <p>&copy; 2025 Wissens-Akku. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(mobileMenuButton) mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        const contactModal = document.getElementById('contact-modal');
+        const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
+        const closeContactModalButton = document.getElementById('close-contact-modal');
+
+        if (contactModal && openContactModalButtons.length && closeContactModalButton) {
+            openContactModalButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.body.classList.add('modal-open');
+                    contactModal.classList.remove('hidden');
+                    if(mobileMenu) mobileMenu.classList.add('hidden');
+                });
+            });
+            closeContactModalButton.addEventListener('click', () => {
+                contactModal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            });
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) {
+                    contactModal.classList.add('hidden');
+                    document.body.classList.remove('modal-open');
+                }
+            });
+        }
+    });
+    </script>
+
 </body>
 </html>

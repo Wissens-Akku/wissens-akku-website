@@ -8,41 +8,57 @@
     <link rel="icon" href="Bilder/wissenakku-logo.png">
     <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
     <meta name="theme-color" content="#0F172A">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Impressum der Wissens-Akku Webseite.">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://wissens-akku.com/">
-    <meta property="og:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
-    <meta property="og:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="og:url" content="https://wissens-akku.com/impressum.html">
+    <meta property="og:title" content="Impressum | Wissens-Akku">
+    <meta property="og:description" content="Impressum der Wissens-Akku Webseite.">
     <meta property="og:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary">
-    <meta property="twitter:url" content="https://wissens-akku.com/">
-    <meta property="twitter:title" content="Wissens-Akku | Dein faktenbasierter Gesundheits-Podcast">
-    <meta property="twitter:description" content="Dein faktenbasierter Podcast für komplexe Themen. Auf den Punkt gebracht.">
+    <meta property="twitter:url" content="https://wissens-akku.com/impressum.html">
+    <meta property="twitter:title" content="Impressum | Wissens-Akku">
+    <meta property="twitter:description" content="Impressum der Wissens-Akku Webseite.">
     <meta property="twitter:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
 
-    <link href="assets/css/tailwind.css" rel="stylesheet">
     <link href="assets/css/local-fonts.css" rel="stylesheet">
+    <link href="assets/css/tailwind.css" rel="stylesheet">
+    <style>
+        .nav-link.active, .nav-link-button.active {
+            color: #22D3EE; /* text-brand-accent-400 */
+            border-bottom: 2px solid #22D3EE;
+        }
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
+        }
+    </style>
 </head>
-<body class="text-brand-accent-400 font-sans bg-brand-dark">
+<body class="text-brand-accent-400 font-sans">
+
+    <!-- Global Fixed Background -->
     <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
         <div class="absolute inset-0 bg-brand-dark/80"></div>
     </div>
+
+    <!-- Header & Navigation -->
     <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="./index.html#home" class="flex items-center space-x-2">
-                <img src="./Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+            <a href="index.html#home" class="flex items-center space-x-2 nav-link" data-section="home">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="./index.html#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Start</a>
-                <a href="./episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
-                <a href="./agenten.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Agenten</a>
-                <a href="./index.html#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Über Mich</a>
-                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-workflow-modal" data-section="workflow">Workflow</button>
-                <a href="./index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Folgen</a>
-                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal" data-section="contact">Kontakt</button>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
+                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
+                <a href="index.html#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
             </nav>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2">
@@ -53,42 +69,42 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="./index.html#home" class="block py-2 px-6 text-sm hover:bg-gray-800">Start</a>
-            <a href="./episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
-            <a href="./agenten.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Agenten</a>
-            <a href="./index.html#about" class="block py-2 px-6 text-sm hover:bg-gray-800">Über Mich</a>
-            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-workflow-modal" data-section="workflow">Workflow</a>
-            <a href="./index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
-            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-contact-modal" data-section="contact">Kontakt</a>
+            <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
+            <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
+            <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
+            <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
         </div>
     </header>
+
     <main class="relative z-10 pt-24">
-        <div class="container mx-auto px-6 py-12 bg-transparent backdrop-blur-sm rounded-xl">
-            <h1 class="text-4xl font-bold font-heading text-center mb-12">Impressum</h1>
-            <div class="max-w-4xl mx-auto space-y-4 text-lg text-gray-300 bg-gray-800/50 p-8 rounded-lg border border-gray-700/50">
-                <h2 class="text-2xl font-bold font-heading text-brand-accent-400">Angaben gemäß § 5 DDG</h2>
-                <p>
-                    Wissens-Akku - Shane Kielgast<br>
-                    c/o Online-Impressum.de #37570<br>
-                    Europaring 90<br>
-                    53757 Sankt Augustin
-                </p>
+        <div class="container mx-auto px-6 py-12">
+            <div class="max-w-4xl mx-auto bg-gray-900/30 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8 md:p-12 text-gray-300">
+                <h1 class="text-4xl font-bold font-heading text-center mb-12 text-white">Impressum</h1>
+                <div class="space-y-4 text-lg">
+                    <h2 class="text-2xl font-bold font-heading text-brand-accent-400">Angaben gemäß § 5 DDG</h2>
+                    <p>
+                        Wissens-Akku - Shane Kielgast<br>
+                        c/o Online-Impressum.de #4249<br>
+                        Europaring 90<br>
+                        53757 Sankt Augustin
+                    </p>
 
-                <h2 class="text-2xl font-bold font-heading text-brand-accent-400 mt-6">Kontakt</h2>
-                <p>
-                    E-Mail: kontakt@wissens-akku.com<br>
-                    Telefon: +4917673003478
-                </p>
+                    <h2 class="text-2xl font-bold font-heading text-brand-accent-400 mt-6">Kontakt</h2>
+                    <p>
+                        E-Mail: kontakt@wissens-akku.com<br>
+                        Zweiter Kontaktweg
+                    </p>
 
-                <h2 class="text-2xl font-bold font-heading text-brand-accent-400 mt-6">Zuständige Aufsichtsbehörde</h2>
-                <p>
-                    Medienanstalt Schleswig-Holstein/Hamburg<br>
-                    Sitz: Deutschland
-                </p>
+                    <h2 class="text-2xl font-bold font-heading text-brand-accent-400 mt-6">Zuständige Regulierungs- und Aufsichtsbehörde</h2>
+                    <p>
+                        Medienanstalt Schleswig-Holstein/Hamburg<br>
+                        Sitz: Deutschland
+                    </p>
 
-                <p class="text-sm text-gray-400 mt-8">
-                    Das hier angegebene Impressum gilt für alle Belange der Impressumspflicht nach §5 DDG, sowie für alle Social Media Auftritte.
-                </p>
+                    <p class="text-sm text-gray-400 mt-8">
+                        Das hier angegebene Impressum gilt für alle Belange der Impressumspflicht nach §5 DDG, § 55 Abs.2 RStV & MStV §18 sowie für alle Social Media Auftritte des Creators
+                    </p>
+                </div>
             </div>
         </div>
     </main>
@@ -129,72 +145,7 @@
         </div>
     </div>
 
-    <div id="workflow-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
-        <div class="max-h-[90vh] overflow-y-auto">
-            <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-7xl w-full relative border border-gray-700">
-                <!-- Close Button -->
-                <button id="close-workflow-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-                <h2 class="text-4xl font-bold font-heading text-center mb-4 text-white">Der Podcast Autopilot</h2>
-                <p class="text-center text-lg text-gray-400 mb-12 max-w-3xl mx-auto">Ein transparenter Einblick, wie jede Episode entsteht – eine Zusammenarbeit von Mensch und Maschine.</p>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-
-                    <!-- Manuelle Spalte -->
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4">
-                            <div class="bg-indigo-500/20 p-3 rounded-full">
-                                <svg class="w-8 h-8 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                            </div>
-                            <h3 class="text-3xl font-heading font-bold text-indigo-400">Manuelle Schritte</h3>
-                        </div>
-
-                        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 space-y-4">
-                            <h4 class="text-xl font-bold text-white">1. Prozess Starten</h4>
-                            <p class="text-gray-400">Ich stoße den gesamten Prozess mit einem Klick an. Das System kann dann entweder vollautomatisch neue Themen finden oder ein von mir bereitgestelltes Dokument verarbeiten.</p>
-                        </div>
-
-                        <div class="flex justify-center py-4">
-                            <svg class="w-8 h-8 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg>
-                        </div>
-
-                        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 space-y-4">
-                            <h4 class="text-xl font-bold text-white">3. Finale Kontrolle & Freigabe</h4>
-                            <p class="text-gray-400">Am Ende des gesamten Prozesses prüfe ich persönlich alle generierten Inhalte (Skripte, Wörterbuch). Ich wähle die beste der automatisch erstellten Audio-Versionen aus, gebe der Episode den finalen Schliff und plane die Veröffentlichung.</p>
-                        </div>
-                    </div>
-
-                    <!-- Automatisierte Spalte -->
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4">
-                            <div class="bg-cyan-500/20 p-3 rounded-full">
-                                <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 01.8 0l2.121 2.121a.563.563 0 010 .8l-2.471 2.471M11.42 15.17l-2.47-2.47a.563.563 0 00-.8 0l-2.122 2.121a.563.563 0 000 .8l2.47 2.47M12 13.5v-7.5m0 0l3 3m-3-3l-3 3" /></svg>
-                            </div>
-                            <h3 class="text-3xl font-heading font-bold text-cyan-400">Automatisierte Prozesse</h3>
-                        </div>
-
-                        <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 space-y-4">
-                            <h4 class="text-xl font-bold text-white">2. Die Content-Pipeline</h4>
-                            <p class="text-gray-400">Nach dem Startsignal arbeitet die KI die folgenden Schritte selbstständig ab:</p>
-                            <ol class="list-decimal list-inside space-y-3 text-gray-400 pl-2">
-                                <li><strong>Themen-Analyse:</strong> Das System analysiert alle bisherigen Episoden und generiert selbstständig neue, passende Themenvorschläge.</li>
-                                <li><strong>Tiefenrecherche:</strong> Das System führt eine umfassende Recherche zum ausgewählten Thema durch oder extrahiert die Inhalte aus dem bereitgestellten Dokument.</li>
-                                <li><strong>Skript-Erstellung:</strong> Aus der Recherche wird ein erstes Podcast-Skript im Dialogformat generiert.</li>
-                                <li><strong>Qualitätssicherung:</strong> Eine zweite, unabhängige KI-Prüfung korrigiert das Skript auf Logik, Stil und Fakten.</li>
-                                <li><strong>Sprach-Optimierung:</strong> Das Skript wird für eine natürliche Aussprache durch die Text-to-Speech-Engine optimiert.</li>
-                                <li><strong>Wörterbuch-Erstellung:</strong> Das System extrahiert Fachbegriffe und erstellt eine phonetische Übersetzung für die korrekte Aussprache.</li>
-                                <li><strong>Audio-Generierung (Optional):</strong> Aus dem finalen Skript werden automatisch mehrere verschiedene Stimm-Versionen als Audio-Dateien erzeugt.</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <footer class="bg-brand-dark/80 w-full mt-12">
+    <footer class="bg-brand-dark/80 border-t border-gray-700/50 mt-24">
         <div class="container mx-auto px-6 py-8 text-center text-gray-400">
             <div class="flex justify-center space-x-6 mb-4">
                 <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
@@ -203,62 +154,39 @@
             <p>&copy; 2025 Wissens-Akku. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            if(mobileMenuButton) mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    document.addEventListener('DOMContentLoaded', function () {
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        if(mobileMenuButton) mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-            const workflowModal = document.getElementById('workflow-modal');
-            const openWorkflowModalButtons = document.querySelectorAll('.open-workflow-modal');
-            const closeWorkflowModalButton = document.getElementById('close-workflow-modal');
+        const contactModal = document.getElementById('contact-modal');
+        const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
+        const closeContactModalButton = document.getElementById('close-contact-modal');
 
-            if (workflowModal && openWorkflowModalButtons.length && closeWorkflowModalButton) {
-                openWorkflowModalButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        document.body.classList.add('modal-open');
-                        workflowModal.classList.remove('hidden');
-                        if(mobileMenu) mobileMenu.classList.add('hidden');
-                    });
+        if (contactModal && openContactModalButtons.length && closeContactModalButton) {
+            openContactModalButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.body.classList.add('modal-open');
+                    contactModal.classList.remove('hidden');
+                    if(mobileMenu) mobileMenu.classList.add('hidden');
                 });
-                closeWorkflowModalButton.addEventListener('click', () => {
-                    workflowModal.classList.add('hidden');
-                    document.body.classList.remove('modal-open');
-                });
-                workflowModal.addEventListener('click', (e) => {
-                    if (e.target === workflowModal) {
-                        workflowModal.classList.add('hidden');
-                        document.body.classList.remove('modal-open');
-                    }
-                });
-            }
-
-            const contactModal = document.getElementById('contact-modal');
-            const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
-            const closeContactModalButton = document.getElementById('close-contact-modal');
-
-            if (contactModal && openContactModalButtons.length && closeContactModalButton) {
-                openContactModalButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        document.body.classList.add('modal-open');
-                        contactModal.classList.remove('hidden');
-                        if(mobileMenu) mobileMenu.classList.add('hidden');
-                    });
-                });
-                closeContactModalButton.addEventListener('click', () => {
+            });
+            closeContactModalButton.addEventListener('click', () => {
+                contactModal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            });
+            contactModal.addEventListener('click', (e) => {
+                if (e.target === contactModal) {
                     contactModal.classList.add('hidden');
                     document.body.classList.remove('modal-open');
-                });
-                contactModal.addEventListener('click', (e) => {
-                    if (e.target === contactModal) {
-                        contactModal.classList.add('hidden');
-                        document.body.classList.remove('modal-open');
-                    }
-                });
-            }
-        });
+                }
+            });
+        }
+    });
     </script>
+
 </body>
 </html>

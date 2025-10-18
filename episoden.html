@@ -65,6 +65,13 @@
         .modal {
             display: flex;
         }
+        @media (max-width: 768px) {
+            .episode-details-content {
+                max-height: 50vh;
+                overflow-y: auto;
+                padding-right: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="text-brand-accent-400 font-sans">
@@ -77,19 +84,17 @@
     <!-- Header & Navigation -->
     <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="index.html" class="flex items-center space-x-2">
+            <a href="index.html#home" class="flex items-center space-x-2 nav-link" data-section="home">
                 <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="index.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Start</a>
+            <nav class="hidden md:flex items-center space-x-6">
                 <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active">Episoden</a>
-                <a href="agenten.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Agenten</a>
-                <a href="index.html#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Über Mich</a>
-                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-workflow-modal">Workflow</button>
-                <a href="index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Folgen</a>
+                <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
                 <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
+                <a href="index.html#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
             </nav>
+            <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
@@ -98,13 +103,10 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="index.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Start</a>
             <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800 active">Episoden</a>
-            <a href="agenten.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Agenten</a>
-            <a href="index.html#about" class="block py-2 px-6 text-sm hover:bg-gray-800">Über Mich</a>
-            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 open-workflow-modal">Workflow</a>
-            <a href="index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
-            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</a>
+            <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
+            <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
+            <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
         </div>
     </header>
 
@@ -116,6 +118,13 @@
                     <input type="search" id="search-input" placeholder="Suche nach Episoden..." class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-accent-400">
                     <div id="category-filters" class="flex flex-wrap gap-2">
                         <!-- Category buttons will be loaded here -->
+                    </div>
+                    <div class="pt-4 border-t border-gray-700/50">
+                        <label for="sort-select" class="block text-sm font-medium text-brand-accent-400 mb-2">Sortieren nach:</label>
+                        <select id="sort-select" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-brand-accent-400">
+                            <option value="newest">Neueste zuerst</option>
+                            <option value="oldest">Älteste zuerst</option>
+                        </select>
                     </div>
                 </div>
 
@@ -243,6 +252,7 @@
             const searchInput = document.getElementById('search-input');
             const categoryFiltersContainer = document.getElementById('category-filters');
             const episodeAccordion = document.getElementById('episode-accordion');
+            const sortSelect = document.getElementById('sort-select');
             
             const workflowModal = document.getElementById('workflow-modal');
             const openWorkflowModalButtons = document.querySelectorAll('.open-workflow-modal');
@@ -279,10 +289,8 @@
                                 </svg>
                             </button>
                             <div class="accordion-content">
-                                <div class="prose prose-invert max-w-none text-lg leading-relaxed pb-6">
-                                    <p>${cleanContent}</p>
-                                </div>
-                                <div class="pt-6 border-t border-gray-700/50">
+                                                        <p class="text-gray-300 mb-6">${episode.summary}</p>
+                                                        <a href="${episode.link}" class="inline-block bg-green-500 text-white font-bold py-3 px-6 rounded-full hover:bg-green-600 transition-colors duration-300">Zur Episode</a>                                <div class="pt-6 border-t border-gray-700/50">
                                     <h4 class="text-lg font-bold font-heading mb-4 text-center">Jetzt überall anhören</h4>
                                     <div class="flex justify-center items-center gap-4 md:gap-6 flex-wrap">
                                         <a href="${platforms.spotify}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform no-underline">Spotify</a>
@@ -310,7 +318,7 @@
                 }
             };
 
-            const applyFilters = () => {
+            const applyFiltersAndSort = () => {
                 const searchTerm = searchInput.value.toLowerCase();
                 let filteredEpisodes = allEpisodes;
 
@@ -326,10 +334,18 @@
                     });
                 }
 
+                const sortOrder = sortSelect.value;
+                filteredEpisodes.sort((a, b) => {
+                    const dateA = new Date(a.pubDate);
+                    const dateB = new Date(b.pubDate);
+                    return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+                });
+
                 renderEpisodeList(filteredEpisodes);
             };
 
-            searchInput.addEventListener('input', applyFilters);
+            searchInput.addEventListener('input', applyFiltersAndSort);
+            sortSelect.addEventListener('change', applyFiltersAndSort);
 
             // Modal Logic
             function setupModal(modal, openButtons, closeButton) {
@@ -376,11 +392,11 @@
                         document.querySelectorAll('.category-button').forEach(btn => btn.classList.remove('active'));
                         button.classList.add('active');
                         activeCategory = button.dataset.category;
-                        applyFilters();
+                        applyFiltersAndSort();
                     });
                 });
 
-                applyFilters();
+                applyFiltersAndSort();
 
             } catch (error) {
                 console.error('Fehler beim Laden der Episodenliste:', error);

@@ -4,55 +4,51 @@
     <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9" type="text/javascript" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agenten | Wissens-Akku</title>
-    <link rel="icon" href="./Bilder/wissenakku-logo.png">
-    <link rel="apple-touch-icon" href="./Bilder/wissenakku-logo.png">
+    <title>Das Projekt | Wissens-Akku</title>
+    <link rel="icon" href="Bilder/wissenakku-logo.png">
+    <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
     <meta name="theme-color" content="#0F172A">
-    <meta name="description" content="Eine Übersicht der Agenten, die im Wissens-Akku Projekt verwendet werden.">
+    <meta name="description" content="Die Geschichte und Technologie hinter dem Wissens-Akku Podcast. Ein KI-Experiment zur automatisierten Wissensvermittlung.">
 
-    <link href="./assets/css/tailwind.css" rel="stylesheet">
-    <link href="./assets/css/local-fonts.css" rel="stylesheet">
+    <link href="assets/css/tailwind.css" rel="stylesheet">
+    <link href="assets/css/local-fonts.css" rel="stylesheet">
 
     <style>
-        .nav-link.active {
+        .nav-link.active, .nav-link-button.active {
             color: #22D3EE; /* text-brand-accent-400 */
             border-bottom: 2px solid #22D3EE;
         }
-        body.modal-open {
-            overflow: hidden;
+        .nav-button {
+            background: none;
+            border: none;
+            padding: 0;
+            cursor: pointer;
         }
-        .modal.hidden {
-            display: none;
-        }
-        .modal {
-            display: flex;
-            animation: fadeIn 0.3s ease-out;
-        }
+        body.modal-open { overflow: hidden; }
+        .modal.hidden { display: none; }
+        .modal { display: flex; animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body class="text-brand-accent-400 font-sans">
 
     <!-- Global Fixed Background -->
-    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('./Bilder/hintergrund.png');">
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
         <div class="absolute inset-0 bg-brand-dark/80"></div>
     </div>
 
     <!-- Header & Navigation -->
     <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="./index.html#home" class="flex items-center space-x-2">
-                <img src="./Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+            <a href="index.html#home" class="flex items-center space-x-2 nav-link" data-section="home">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
-            <nav class="hidden md:flex items-center space-x-8">
-                <a href="./index.html#home" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Start</a>
-                <a href="./episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
-                <a href="agenten.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active">Agenten</a>
-                <a href="./index.html#about" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Über Mich</a>
-                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-workflow-modal" data-section="workflow">Workflow</button>
-                <a href="./index.html#follow" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Folgen</a>
-                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal" data-section="contact">Kontakt</button>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active">Das Projekt</a>
+                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
+                <a href="index.html#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
             </nav>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2">
@@ -63,73 +59,86 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
-            <a href="./index.html#home" class="block py-2 px-6 text-sm hover:bg-gray-800">Start</a>
-            <a href="./episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
-            <a href="agenten.html" class="block py-2 px-6 text-sm hover:bg-gray-800 active">Agenten</a>
-            <a href="./index.html#about" class="block py-2 px-6 text-sm hover:bg-gray-800">Über Mich</a>
-            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-workflow-modal" data-section="workflow">Workflow</a>
-            <a href="./index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
-            <a href="#" class="block py-2 px-6 text-sm hover:bg-gray-800 nav-link open-contact-modal" data-section="contact">Kontakt</a>
+            <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
+            <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800 active">Das Projekt</a>
+            <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
+            <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
         </div>
     </header>
 
-    <main class="relative z-10 pt-20">
-        <div class="container mx-auto px-6 py-12 md:py-24">
-            <div class="max-w-6xl mx-auto bg-gray-900/30 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8 md:p-12">
-                <header class="mb-12 text-center">
-                    <h1 class="text-4xl md:text-5xl font-bold font-heading text-white">Meine Agenten</h1>
-                    <p class="text-lg text-gray-400 mt-4">Eine Übersicht der spezialisierten Agenten im Projekt.</p>
-                </header>
+    <main class="relative z-10 pt-24">
+        <div class="container mx-auto px-6 py-12 md:py-16">
+            <div class="max-w-4xl mx-auto">
 
-                <!-- Agent Definition -->
-                <div class="mb-16">
-                    <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
-                        <div class="p-6">
-                            <h2 class="text-2xl font-bold font-heading text-white mb-2">Social Media & Content Agent</h2>
-                            <p class="text-gray-400">Dieser Agent ist verantwortlich für die Erstellung von ansprechenden Titeln und Beschreibungen für verschiedene Plattformen wie TikTok, Instagram und Spotify, um die Reichweite zu maximieren.</p>
-                        </div>
-                        <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
-                            <div class="space-y-8">
-                                <img src="./Bilder/Agent Bild 1.png" alt="Funktionsweise des Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                <img src="./Bilder/Agent Bild 2.png" alt="Funktionsweise des Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                <img src="./Bilder/Agent Bild 3.png" alt="Funktionsweise des Agenten - Schritt 3" class="w-full h-auto object-cover rounded-md shadow-lg">
+                <!-- Story Section -->
+                <section id="story" class="mb-12">
+                    <h1 class="text-4xl md:text-5xl font-bold font-heading text-center mb-8 text-white">Ein KI-Experiment</h1>
+                    <div class="text-lg text-brand-accent-400 space-y-6 text-left md:text-justify bg-gray-900/30 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8">
+                        <p>Willkommen bei Wissens-Akku, einem Projekt, das die Grenzen der künstlichen Intelligenz auslotet. Fast alles, was Sie hier sehen und hören, ist das Ergebnis eines automatisierten Prozesses. Der Podcast, die Skripte, die Stimme, die Social-Media-Videos und sogar diese Webseite – all das wird von KI-Systemen generiert.</p>
+                        <p>Meine Rolle in diesem Experiment ist die eines Dirigenten oder Herausgebers. Ich gebe die Themen vor, starte die Content-Pipeline und übernehme am Ende die finale Qualitätskontrolle. Das bedeutet, ich schneide die Audio-Dateien zusammen und kümmere mich um die Veröffentlichung der fertigen Episoden und Videos. Jeder andere Schritt, von der Recherche bis zur Erstellung der Inhalte, ist vollautomatisiert.</p>
+                        <p>Dieses Projekt ist aus meiner Faszination für KI und dem Wunsch nach transparenter, faktenbasierter Wissensvermittlung entstanden. Es soll zeigen, was heute schon möglich ist, wenn man menschliche Neugier mit der Leistung von künstlicher Intelligenz kombiniert.</p>
+                    </div>
+                </section>
+
+                <!-- Workflow Button -->
+                <div class="text-center mb-16 md:mb-24">
+                    <button class="open-workflow-modal bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
+                        So funktioniert der Autopilot
+                    </button>
+                </div>
+
+                <!-- Agents Section -->
+                <section id="agents">
+                    <h2 class="text-3xl md:text-4xl font-bold font-heading text-center mb-12 text-white">Die KI-Agenten im Detail</h2>
+
+                    <!-- Agent Definition -->
+                    <div class="mb-12">
+                        <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold font-heading text-white mb-2">Social Media & Content Agent</h3>
+                                <p class="text-gray-400">Dieser Agent ist verantwortlich für die Erstellung von ansprechenden Titeln und Beschreibungen für verschiedene Plattformen wie TikTok, Instagram und Spotify, um die Reichweite zu maximieren.</p>
+                            </div>
+                            <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
+                                <div class="space-y-8">
+                                    <img src="./Bilder/Agent Bild 1.png" alt="Funktionsweise des Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent Bild 2.png" alt="Funktionsweise des Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent Bild 3.png" alt="Funktionsweise des Agenten - Schritt 3" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                 <!-- Agent Definition -->
-                <div class="mb-16">
-                    <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
-                        <div class="p-6">
-                            <h2 class="text-2xl font-bold font-heading text-white mb-2">Recherche & Skript Agent</h2>
-                            <p class="text-gray-400">Dieser Agent ist für die tiefgehende Recherche zu komplexen Themen und die anschließende Erstellung von detaillierten, gut strukturierten Podcast-Skripten verantwortlich.</p>
-                        </div>
-                        <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
-                            <div class="space-y-8">
-                                <img src="./Bilder/Agent 2 Bild 1.png" alt="Funktionsweise des Recherche-Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                <img src="./Bilder/Agent 2 Bild 2.png" alt="Funktionsweise des Recherche-Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                <img src="./Bilder/Agent 2 Bild 3.png" alt="Funktionsweise des Recherche-Agenten - Schritt 3" class="w-full h-auto object-cover rounded-md shadow-lg">
+                    <!-- Agent Definition -->
+                    <div class="mb-12">
+                        <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold font-heading text-white mb-2">Recherche & Skript Agent</h3>
+                                <p class="text-gray-400">Dieser Agent ist für die tiefgehende Recherche zu komplexen Themen und die anschließende Erstellung von detaillierten, gut strukturierten Podcast-Skripten verantwortlich.</p>
+                            </div>
+                            <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
+                                <div class="space-y-8">
+                                    <img src="./Bilder/Agent 2 Bild 1.png" alt="Funktionsweise des Recherche-Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 2 Bild 2.png" alt="Funktionsweise des Recherche-Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 2 Bild 3.png" alt="Funktionsweise des Recherche-Agenten - Schritt 3" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                 <!-- Agent Definition -->
-                <div class="mb-16">
-                    <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
-                        <div class="p-6">
-                            <h2 class="text-2xl font-bold font-heading text-white mb-2">Prompt Agent</h2>
-                            <p class="text-gray-400">Dieser Agent ist darauf spezialisiert, die von mir erstellten Prompts zu analysieren und zu optimieren. Er verfeinert die Anweisungen, um die bestmöglichen Ergebnisse von der KI zu erhalten und die Qualität der Inhalte sicherzustellen.</p>
-                        </div>
-                        <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
-                            <div class="space-y-8">
-                                <img src="./Bilder/Agent 3 Bild 1.png" alt="Funktionsweise des Audio-Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                <img src="./Bilder/Agent 3 Bild 2.png" alt="Funktionsweise des Audio-Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
+                    <!-- Agent Definition -->
+                    <div class="mb-12">
+                        <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
+                            <div class="p-6">
+                                <h3 class="text-2xl font-bold font-heading text-white mb-2">Prompt Agent</h3>
+                                <p class="text-gray-400">Dieser Agent ist darauf spezialisiert, die von mir erstellten Prompts zu analysieren und zu optimieren. Er verfeinert die Anweisungen, um die bestmöglichen Ergebnisse von der KI zu erhalten und die Qualität der Inhalte sicherzustellen.</p>
+                            </div>
+                            <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
+                                <div class="space-y-8">
+                                    <img src="./Bilder/Agent 3 Bild 1.png" alt="Funktionsweise des Audio-Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 3 Bild 2.png" alt="Funktionsweise des Audio-Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
+                </section>
             </div>
         </div>
     </main>
@@ -188,7 +197,7 @@
                     <div class="space-y-6">
                         <div class="flex items-center gap-4">
                             <div class="bg-indigo-500/20 p-3 rounded-full">
-                                <svg class="w-8 h-8 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <svg class="w-8 h-8 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 9 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                             </div>
                             <h3 class="text-3xl font-heading font-bold text-indigo-400">Manuelle Schritte</h3>
                         </div>
@@ -239,8 +248,8 @@
     <footer class="bg-brand-dark/80 border-t border-gray-700/50 mt-24">
         <div class="container mx-auto px-6 py-8 text-center text-gray-400">
             <div class="flex justify-center space-x-6 mb-4">
-                <a href="./impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
-                <a href="./datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
+                <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
             </div>
             <p>&copy; 2025 Wissens-Akku. Alle Rechte vorbehalten.</p>
         </div>
@@ -250,7 +259,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            if (mobileMenuButton) {
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+            }
 
             const workflowModal = document.getElementById('workflow-modal');
             const openWorkflowModalButtons = document.querySelectorAll('.open-workflow-modal');
@@ -262,7 +273,7 @@
                         e.preventDefault();
                         document.body.classList.add('modal-open');
                         workflowModal.classList.remove('hidden');
-                        mobileMenu.classList.add('hidden');
+                        if(mobileMenu) mobileMenu.classList.add('hidden');
                     });
                 });
                 closeWorkflowModalButton.addEventListener('click', () => {
@@ -287,7 +298,7 @@
                         e.preventDefault();
                         document.body.classList.add('modal-open');
                         contactModal.classList.remove('hidden');
-                        mobileMenu.classList.add('hidden');
+                        if(mobileMenu) mobileMenu.classList.add('hidden');
                     });
                 });
                 closeContactModalButton.addEventListener('click', () => {
