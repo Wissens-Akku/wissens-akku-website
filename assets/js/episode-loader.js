@@ -67,9 +67,7 @@ function renderEpisodes(gridElement, episodes) {
 
     episodes.forEach(episode => {
         // Make sure description is not null or undefined
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = episode.content || '';
-        const description = tempDiv.textContent || 'Keine Beschreibung verfügbar.';
+        const description = episode.description || 'Keine Beschreibung verfügbar.';
         const episodeCard = `
             <div class="bg-gray-800/50 border border-gray-700/50 rounded-lg overflow-hidden shadow-lg hover:shadow-brand-accent-500/30 transition-shadow duration-300 flex flex-col h-full">
                 <div class="p-6 flex-grow flex flex-col">
