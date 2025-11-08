@@ -527,7 +527,33 @@
             // Setup all modals
             setupModal(notebookModal, [openNotebookModalButton], closeNotebookModalButton);
             setupModal(workflowModal, Array.from(openWorkflowModalButtons), closeWorkflowModalButton);
-            setupModal(contactModal, Array.from(openContactModalButtons), closeContactModalButton, Array.from(contactFormInputs));
+            
+            // Dedicated setup for Contact Modal to prevent conflicts
+            if (contactModal && openContactModalButtons.length && closeContactModalButton) {
+                openContactModalButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.body.classList.add('modal-open');
+                        contactModal.classList.remove('hidden');
+                        if(mobileMenu) mobileMenu.classList.add('hidden');
+                    });
+                });
+
+                closeContactModalButton.addEventListener('click', () => {
+                    contactModal.classList.add('hidden');
+                    document.body.classList.remove('modal-open');
+                });
+
+                contactModal.addEventListener('click', (e) => {
+                    if (e.target === contactModal) {
+                        const isFormEmpty = Array.from(contactFormInputs).every(input => input.value === '');
+                        if (isFormEmpty) {
+                            contactModal.classList.add('hidden');
+                            document.body.classList.remove('modal-open');
+                        }
+                    }
+                });
+            }
             
             window.addEventListener('scroll', updateActiveNavOnScroll);
         }

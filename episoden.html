@@ -30,9 +30,6 @@
     <!-- Tailwind CSS -->
     <link href="assets/css/tailwind.css" rel="stylesheet">
 
-    <!-- WhatsApp Popup CSS -->
-    <link href="assets/css/whatsapp-popup.css" rel="stylesheet">
-
     <style>
         .nav-link.active, .nav-link-button.active {
             color: #22D3EE; /* text-brand-accent-400 */
@@ -341,7 +338,7 @@
                 filteredEpisodes.sort((a, b) => {
                     const dateA = new Date(a.pubDate);
                     const dateB = new Date(b.pubDate);
-                    return sortOrder === 'newest' ? dateB - dateA : dateA - dateB;
+                    return sortOrder === 'newest' ? dateB - dateA : dateA - b;
                 });
 
                 renderEpisodeList(filteredEpisodes);
@@ -413,7 +410,5 @@
             });
         });
     </script>
-
-    <script src="assets/js/whatsapp-popup.js"></script>
 </body>
 </html>
