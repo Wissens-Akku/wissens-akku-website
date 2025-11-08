@@ -30,6 +30,9 @@
     <!-- Tailwind CSS -->
     <link href="assets/css/tailwind.css" rel="stylesheet">
 
+    <!-- WhatsApp Popup CSS -->
+    <link href="assets/css/whatsapp-popup.css" rel="stylesheet">
+
     <!-- RSS Parser für den Podcast-Feed -->
     <script data-cookieconsent="statistics, marketing" src="assets/js/rss-parser.min.js"></script>
 
@@ -471,9 +474,48 @@
 
             episodesGrid.innerHTML = createLoadingSpinnerHTML();
             
-            const allEpisodes = await fetchAndCacheEpisodes() || [];
-            renderEpisodes(episodesGrid, allEpisodes.slice(0, 3));
-            initializePlatformModalListener(episodesGrid);
+            try {
+                const allEpisodes = await fetchAndCacheEpisodes() || [];
+                renderEpisodes(episodesGrid, allEpisodes.slice(0, 3));
+                initializePlatformModalListener(episodesGrid);
+            } catch (error) {
+                console.error("Error loading latest episodes:", error);
+                episodesGrid.innerHTML = '<p class="col-span-full text-center text-red-400">Fehler beim Laden der neuesten Episoden.</p>';
+            }
+        }
+
+        function setupModal(modal, openButtons, closeButton, formInputs = []) {
+            if (!modal || !openButtons.length || !closeButton) return;
+
+            openButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    document.body.classList.add('modal-open');
+                    modal.classList.remove('hidden');
+                    if(mobileMenu) mobileMenu.classList.add('hidden');
+                });
+            });
+
+            closeButton.addEventListener('click', () => {
+                modal.classList.add('hidden');
+                document.body.classList.remove('modal-open');
+            });
+
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    // For contact form, only close if empty
+                    if (formInputs.length > 0) {
+                        const isFormEmpty = Array.from(formInputs).every(input => input.value === '');
+                        if (isFormEmpty) {
+                            modal.classList.add('hidden');
+                            document.body.classList.remove('modal-open');
+                        }
+                    } else {
+                        modal.classList.add('hidden');
+                        document.body.classList.remove('modal-open');
+                    }
+                }
+            });
         }
 
         function setupEventListeners() {
@@ -482,82 +524,18 @@
                 mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             }
 
-            // Close mobile menu on nav link click
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (!link.classList.contains('open-workflow-modal') && !link.classList.contains('open-contact-modal')) {
-                        if(mobileMenu) mobileMenu.classList.add('hidden');
-                    }
-                });
-            });
-            
-            // NotebookLM Modal
-            if (notebookModal && openNotebookModalButton && closeNotebookModalButton) {
-                openNotebookModalButton.addEventListener('click', () => {
-                    document.body.classList.add('modal-open');
-                    notebookModal.classList.remove('hidden');
-                });
-                closeNotebookModalButton.addEventListener('click', () => {
-                    notebookModal.classList.add('hidden');
-                    document.body.classList.remove('modal-open');
-                });
-                notebookModal.addEventListener('click', (e) => {
-                    if (e.target === notebookModal) {
-                        notebookModal.classList.add('hidden');
-                        document.body.classList.remove('modal-open');
-                    }
-                });
-            }
-
-            // Workflow Modal
-            if (workflowModal && openWorkflowModalButtons.length && closeWorkflowModalButton) {
-                openWorkflowModalButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        document.body.classList.add('modal-open');
-                        workflowModal.classList.remove('hidden');
-                        if(mobileMenu) mobileMenu.classList.add('hidden');
-                    });
-                });
-                closeWorkflowModalButton.addEventListener('click', () => {
-                    workflowModal.classList.add('hidden');
-                    document.body.classList.remove('modal-open');
-                });
-                workflowModal.addEventListener('click', (e) => {
-                    if (e.target === workflowModal) {
-                        workflowModal.classList.add('hidden');
-                        document.body.classList.remove('modal-open');
-                    }
-                });
-            }
-
-            // Contact Modal
-            if (contactModal && openContactModalButtons.length && closeContactModalButton) {
-                openContactModalButtons.forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        document.body.classList.add('modal-open');
-                        contactModal.classList.remove('hidden');
-                        if(mobileMenu) mobileMenu.classList.add('hidden');
-                    });
-                });
-                closeContactModalButton.addEventListener('click', () => {
-                    contactModal.classList.add('hidden');
-                    document.body.classList.remove('modal-open');
-                });
-                contactModal.addEventListener('click', (e) => {
-                    if (e.target === contactModal) {
-                        const isFormEmpty = Array.from(contactFormInputs).every(input => input.value === '');
-                        if (isFormEmpty) {
-                            contactModal.classList.add('hidden');
-                            document.body.classList.remove('modal-open');
-                        }
-                    }
-                });
-            }
+            // Setup all modals
+            setupModal(notebookModal, [openNotebookModalButton], closeNotebookModalButton);
+            setupModal(workflowModal, Array.from(openWorkflowModalButtons), closeWorkflowModalButton);
+            setupModal(contactModal, Array.from(openContactModalButtons), closeContactModalButton, Array.from(contactFormInputs));
             
             window.addEventListener('scroll', updateActiveNavOnScroll);
         }
+
+        // --- Initialization ---
+        initPage();
+        setupEventListeners();
+        updateActiveNavOnScroll();
 
         // --- YouTube Video Embed ---
         function loadYoutubeVideo() {
@@ -601,12 +579,8 @@
         if (window.Cookiebot) {
             initYoutube();
         }
-
-        // --- Initialization ---
-        initPage();
-        setupEventListeners();
-        updateActiveNavOnScroll();
     });
     </script>
+    <script src="assets/js/whatsapp-popup.js"></script>
 </body>
 </html>

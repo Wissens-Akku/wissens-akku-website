@@ -30,6 +30,9 @@
     <!-- Tailwind CSS -->
     <link href="assets/css/tailwind.css" rel="stylesheet">
 
+    <!-- WhatsApp Popup CSS -->
+    <link href="assets/css/whatsapp-popup.css" rel="stylesheet">
+
     <style>
         .nav-link.active, .nav-link-button.active {
             color: #22D3EE; /* text-brand-accent-400 */
@@ -288,7 +291,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
                                 </svg>
                             </button>
-                            <div class="accordion-content">
+                            <div class="accordion-content episode-details-content">
                                                         <p class="text-gray-300 mb-6">${episode.contentSnippet}</p>
                                                         <a href="${episode.link}" class="inline-block bg-green-500 text-white font-bold py-3 px-6 rounded-full hover:bg-green-600 transition-colors duration-300">Zur Episode</a>                                <div class="pt-6 border-t border-gray-700/50">
                                     <h4 class="text-lg font-bold font-heading mb-4 text-center">Jetzt überall anhören</h4>
@@ -411,5 +414,6 @@
         });
     </script>
 
+    <script src="assets/js/whatsapp-popup.js"></script>
 </body>
 </html>
