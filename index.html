@@ -123,6 +123,7 @@
             </a>
             <nav class="hidden md:flex items-center space-x-6">
                 <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="wissens-explorer.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Wissens-Explorer</a>
                 <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
                 <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
                 <a href="#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
@@ -137,6 +138,7 @@
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden">
             <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
+            <a href="wissens-explorer.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Wissens-Explorer</a>
             <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
             <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
             <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
@@ -152,7 +154,7 @@
                 <h1 class="text-5xl md:text-7xl font-bold font-heading mb-4 animated-gradient-text">Wissens-Akku</h1>
                 <p class="text-xl md:text-2xl text-brand-accent-400 max-w-2xl mx-auto mb-8">Dein faktenbasierter Podcast für komplexe Themen.<br>Auf den Punkt gebracht.</p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button id="open-modal-button" class="bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform w-full sm:w-auto">Wissens-Explorer</button>
+                    <a href="wissens-explorer.html" class="bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform w-full sm:w-auto">Wissens-Explorer</a>
                     <a href="episoden.html" class="bg-transparent border-2 border-brand-accent-400 text-brand-accent-400 font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-400 hover:text-white transition-all w-full sm:w-auto">Alle Folgen entdecken</a>
                 </div>
             </div>
@@ -325,61 +327,6 @@
         </div>
     </div>
 
-    <!-- NotebookLM Modal -->
-    <div id="notebooklm-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
-        <div class="max-h-[85vh] overflow-y-auto">
-            <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-4xl w-full relative border border-gray-700">
-                <!-- Close Button -->
-                <button id="close-modal-button" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-
-                <h3 class="text-3xl font-bold font-heading mb-4 text-center text-brand-accent-400">Wissens-Explorer</h3>
-                <p class="text-brand-accent-400 mb-8 text-center max-w-2xl mx-auto">
-                    Tauche tiefer in die Themen ein! Der Wissens-Explorer ist mein interaktiver KI-Assistent (auf Basis von Google NotebookLM), der mit allen Recherche-Dokumenten und Quellen der Episoden gefüttert ist. Wähle eine Kategorie und stelle direkt Fragen an die Inhalte.
-                </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Supplements -->
-                    <a href="https://notebooklm.google.com/notebook/c48448e8-88d1-494b-85a7-475c43cdb4fa" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-1">
-                        <h4 class="text-xl font-bold text-white mb-2">Supplements</h4>
-                        <p class="text-brand-accent-400 text-sm">Fragen zu Nahrungsergänzungsmitteln.</p>
-                    </a>
-                    <!-- Ernährung -->
-                    <a href="https://notebooklm.google.com/notebook/799ee760-cdf1-4bff-ad4e-c7abb6c24e2c" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-1">
-                        <h4 class="text-xl font-bold text-white mb-2">Ernährung</h4>
-                        <p class="text-brand-accent-400 text-sm">Fragen zu Ernährungsweisen und Lebensmitteln.</p>
-                    </a>
-                    <!-- Trends -->
-                    <a href="https://notebooklm.google.com/notebook/9604f57a-298c-416a-b260-3759ba492b0a" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-1">
-                        <h4 class="text-xl font-bold text-white mb-2">Trends</h4>
-                        <p class="text-brand-accent-400 text-sm">Fragen zu aktuellen Gesundheitstrends.</p>
-                    </a>
-                    <!-- Pflegeprodukte -->
-                    <a href="https://notebooklm.google.com/notebook/b0cca168-a4d6-4159-8276-c58ea5e6f0ca" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-1">
-                        <h4 class="text-xl font-bold text-white mb-2">Pflegeprodukte</h4>
-                        <p class="text-brand-accent-400 text-sm">Fragen zu Inhaltsstoffen und Produkten.</p>
-                    </a>
-                    <!-- Alltagsgegenstände -->
-                    <a href="https://notebooklm.google.com/notebook/2202f560-36f8-465d-9a66-f09524f1e79c" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-1">
-                        <h4 class="text-xl font-bold text-white mb-2">Alltagsgegenstände</h4>
-                        <p class="text-brand-accent-400 text-sm">Fragen zu Materialien und deren Einfluss.</p>
-                    </a>
-                    <!-- Kräuter -->
-                    <a href="https://notebooklm.google.com/notebook/f4124bca-7819-4ea3-a62e-596f9877fe9e" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-1">
-                        <h4 class="text-xl font-bold text-white mb-2">Kräuter</h4>
-                        <p class="text-brand-accent-400 text-sm">Fragen zu Heilkräutern und deren Wirkung.</p>
-                    </a>
-                    <!-- Psychologie -->
-                    <a href="https://notebooklm.google.com/notebook/cd1ca2fa-afd1-471b-b08c-2c786aa01a08" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-6 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-1">
-                        <h4 class="text-xl font-bold text-white mb-2">Psychologie</h4>
-                        <p class="text-brand-accent-400 text-sm">Fragen zur menschlichen Psyche und Verhalten.</p>
-                    </a>
-                </div>
-        </div>
-    </div>
-    
     <!-- Contact Modal -->
     <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="max-h-[75vh] overflow-y-auto">
@@ -428,10 +375,6 @@
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         
-        const notebookModal = document.getElementById('notebooklm-modal');
-        const openNotebookModalButton = document.getElementById('open-modal-button');
-        const closeNotebookModalButton = document.getElementById('close-modal-button');
-
         const workflowModal = document.getElementById('workflow-modal');
         const openWorkflowModalButtons = document.querySelectorAll('.open-workflow-modal');
         const closeWorkflowModalButton = document.getElementById('close-workflow-modal');
@@ -525,7 +468,6 @@
             }
 
             // Setup all modals
-            setupModal(notebookModal, [openNotebookModalButton], closeNotebookModalButton);
             setupModal(workflowModal, Array.from(openWorkflowModalButtons), closeWorkflowModalButton);
             
             // Dedicated setup for Contact Modal to prevent conflicts

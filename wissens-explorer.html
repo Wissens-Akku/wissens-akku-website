@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9" type="text/javascript" async></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wissens-Explorer | Wissens-Akku</title>
+    <link rel="icon" href="Bilder/wissenakku-logo.png">
+    <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
+    <meta name="theme-color" content="#0F172A">
+    <meta name="description" content="Tauche tiefer in die Themen des Wissens-Akku Podcasts ein. Interagiere mit dem KI-Assistenten und stelle Fragen zu den Inhalten.">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://wissens-akku.com/wissens-explorer.html">
+    <meta property="og:title" content="Wissens-Explorer | Wissens-Akku">
+    <meta property="og:description" content="Tauche tiefer in die Themen des Wissens-Akku Podcasts ein. Interagiere mit dem KI-Assistenten und stelle Fragen zu den Inhalten.">
+    <meta property="og:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:url" content="https://wissens-akku.com/wissens-explorer.html">
+    <meta property="twitter:title" content="Wissens-Explorer | Wissens-Akku">
+    <meta property="twitter:description" content="Tauche tiefer in die Themen des Wissens-Akku Podcasts ein. Interagiere mit dem KI-Assistenten und stelle Fragen zu den Inhalten.">
+    <meta property="twitter:image" content="https://wissens-akku.com/Bilder/wissenakku-logo.png">
+
+    <!-- Local Fonts -->
+    <link href="assets/css/local-fonts.css" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <link href="assets/css/tailwind.css" rel="stylesheet">
+    
+    <style>
+        .nav-link.active, .nav-link-button.active {
+            color: #22D3EE; /* text-brand-accent-400 */
+            border-bottom: 2px solid #22D3EE;
+        }
+        /* Styles for modal transition */
+        .modal.hidden {
+            display: none;
+        }
+        .modal {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans flex flex-col min-h-screen">
+
+    <!-- Global Fixed Background -->
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+        <div class="absolute inset-0 bg-brand-dark/80"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center space-x-2">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-heading font-bold">Wissens-Akku</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="wissens-explorer.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active">Wissens-Explorer</a>
+                <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
+                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
+                <a href="index.html#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
+            </nav>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
+            <a href="wissens-explorer.html" class="block py-2 px-6 text-sm hover:bg-gray-800 active">Wissens-Explorer</a>
+            <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
+            <a href="index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
+            <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-36 flex-grow">
+        <div class="container mx-auto px-6 py-12">
+            <h1 class="text-4xl md:text-5xl font-bold font-heading text-center mb-6 animated-gradient-text">Wissens-Explorer</h1>
+            <p class="text-lg md:text-xl text-brand-accent-400 max-w-3xl mx-auto mb-12 text-center">
+                Tauche tiefer in die Themen ein! Der Wissens-Explorer ist mein interaktiver KI-Assistent (auf Basis von Google NotebookLM), der mit allen Recherche-Dokumenten und Quellen der Episoden gefüttert ist. Wähle eine Kategorie und stelle direkt Fragen an die Inhalte.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Sport -->
+                <a href="https://notebooklm.google.com/notebook/b941967c-20ae-486f-8e21-2051459eb76b" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h2 class="text-2xl font-bold text-white mb-3">Sport</h2>
+                    <p class="text-brand-accent-400">Fragen rund um Training, Leistungsfähigkeit und Sportwissenschaft.</p>
+                </a>
+                
+                <!-- Gesundheit -->
+                <a href="https://notebooklm.google.com/notebook/d8f04194-67dd-44c9-bcd2-247482ed9436" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h2 class="text-2xl font-bold text-white mb-3">Gesundheit</h2>
+                    <p class="text-brand-accent-400">Fragen zu allgemeinen Gesundheitsthemen, Prävention und Wohlbefinden.</p>
+                </a>
+
+                <!-- KI erklärt -->
+                <a href="https://notebooklm.google.com/notebook/1f17f7d3-dfd3-4e24-b230-601f80bc821e" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h2 class="text-2xl font-bold text-white mb-3">KI erklärt</h2>
+                    <p class="text-brand-accent-400">Fragen zur Funktionsweise und den Technologien hinter diesem Projekt.</p>
+                </a>
+
+                 <!-- Supplements -->
+                 <a href="https://notebooklm.google.com/notebook/c48448e8-88d1-494b-85a7-475c43cdb4fa" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h4 class="text-2xl font-bold text-white mb-3">Supplements</h4>
+                    <p class="text-brand-accent-400">Fragen zu Nahrungsergänzungsmitteln.</p>
+                </a>
+                <!-- Ernährung -->
+                <a href="https://notebooklm.google.com/notebook/799ee760-cdf1-4bff-ad4e-c7abb6c24e2c" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h4 class="text-2xl font-bold text-white mb-3">Ernährung</h4>
+                    <p class="text-brand-accent-400">Fragen zu Ernährungsweisen und Lebensmitteln.</p>
+                </a>
+                <!-- Trends -->
+                <a href="https://notebooklm.google.com/notebook/9604f57a-298c-416a-b260-3759ba492b0a" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h4 class="text-2xl font-bold text-white mb-3">Trends</h4>
+                    <p class="text-brand-accent-400">Fragen zu aktuellen Gesundheitstrends.</p>
+                </a>
+                <!-- Pflegeprodukte -->
+                <a href="https://notebooklm.google.com/notebook/b0cca168-a4d6-4159-8276-c58ea5e6f0ca" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h4 class="text-2xl font-bold text-white mb-3">Pflegeprodukte</h4>
+                    <p class="text-brand-accent-400">Fragen zu Inhaltsstoffen und Produkten.</p>
+                </a>
+                <!-- Alltagsgegenstände -->
+                <a href="https://notebooklm.google.com/notebook/2202f560-36f8-465d-9a66-f09524f1e79c" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h4 class="text-2xl font-bold text-white mb-3">Alltagsgegenstände</h4>
+                    <p class="text-brand-accent-400">Fragen zu Materialien und deren Einfluss.</p>
+                </a>
+                <!-- Kräuter -->
+                <a href="https://notebooklm.google.com/notebook/f4124bca-7819-4ea3-a62e-596f9877fe9e" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h4 class="text-2xl font-bold text-white mb-3">Kräuter</h4>
+                    <p class="text-brand-accent-400">Fragen zu Heilkräutern und deren Wirkung.</p>
+                </a>
+                <!-- Psychologie -->
+                <a href="https://notebooklm.google.com.com/notebook/cd1ca2fa-afd1-471b-b08c-2c786aa01a08" target="_blank" rel="noopener noreferrer" class="bg-gray-900/50 border border-gray-700 rounded-lg p-8 text-center hover:bg-gray-700/50 hover:border-brand-accent-500 transition-all transform hover:-translate-y-2 flex flex-col justify-center items-center">
+                    <h4 class="text-2xl font-bold text-white mb-3">Psychologie</h4>
+                    <p class="text-brand-accent-400">Fragen zur menschlichen Psyche und Verhalten.</p>
+                </a>
+            </div>
+        </div>
+    </main>
+
+
+    <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+        <div class="max-h-[75vh] overflow-y-auto">
+            <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl w-full relative border border-gray-700">
+                <!-- Close Button -->
+                <button id="close-contact-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+                <h2 class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
+                <form name="contact" method="POST" data-netlify="true" action="/success.html" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname (optional)</label>
+                            <input type="text" name="firstname" id="firstname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name (optional)</label>
+                            <input type="text" name="lastname" id="lastname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
+                        <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
+                        <textarea name="message" id="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
+                    </div>
+                    <div>
+                        <button type="submit" class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht senden</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="bg-brand-dark/80 border-t-2 border-gray-700/50 py-12 mt-16">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
+            </div>
+            <p>&copy; 2025 Wissens-Akku. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Simple mobile menu toggle
+            document.getElementById('mobile-menu-button').addEventListener('click', function() {
+                document.getElementById('mobile-menu').classList.toggle('hidden');
+            });
+
+            // Contact Modal
+            const contactModal = document.getElementById('contact-modal');
+            const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
+            const closeContactModalButton = document.getElementById('close-contact-modal');
+
+            function setupModal(modal, openButtons, closeButton) {
+                if (!modal || !openButtons.length || !closeButton) return;
+
+                openButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.body.classList.add('modal-open');
+                        modal.classList.remove('hidden');
+                        if(document.getElementById('mobile-menu')) {
+                            document.getElementById('mobile-menu').classList.add('hidden');
+                        }
+                    });
+                });
+
+                closeButton.addEventListener('click', () => {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('modal-open');
+                });
+
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.classList.add('hidden');
+                        document.body.classList.remove('modal-open');
+                    }
+                });
+            }
+
+            setupModal(contactModal, openContactModalButtons, closeContactModalButton);
+        });
+    </script>
+</body>
+</html>
