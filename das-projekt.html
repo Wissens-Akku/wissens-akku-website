@@ -1,35 +1,60 @@
 <!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
+
 <head>
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9" type="text/javascript" async></script>
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9"
+        type="text/javascript" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Das Projekt | Wissens-Akku</title>
     <link rel="icon" href="Bilder/wissenakku-logo.png">
     <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
     <meta name="theme-color" content="#0F172A">
-    <meta name="description" content="Die Geschichte und Technologie hinter dem Wissens-Akku Podcast. Ein KI-Experiment zur automatisierten Wissensvermittlung.">
+    <meta name="description"
+        content="Die Geschichte und Technologie hinter dem Wissens-Akku Podcast. Ein KI-Experiment zur automatisierten Wissensvermittlung.">
 
     <link href="assets/css/tailwind.css" rel="stylesheet">
     <link href="assets/css/local-fonts.css" rel="stylesheet">
 
     <style>
-        .nav-link.active, .nav-link-button.active {
-            color: #22D3EE; /* text-brand-accent-400 */
+        .nav-link.active,
+        .nav-link-button.active {
+            color: #22D3EE;
+            /* text-brand-accent-400 */
             border-bottom: 2px solid #22D3EE;
         }
+
         .nav-button {
             background: none;
             border: none;
-            padding: 0;
             cursor: pointer;
         }
-        body.modal-open { overflow: hidden; }
-        .modal.hidden { display: none; }
-        .modal { display: flex; animation: fadeIn 0.3s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
+
 <body class="text-brand-accent-400 font-sans">
 
     <!-- Global Fixed Background -->
@@ -38,33 +63,42 @@
     </div>
 
     <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+    <header
+        class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50 text-brand-accent-400">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html#home" class="flex items-center space-x-2 nav-link" data-section="home">
                 <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
-                <a href="wissens-explorer.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Wissens-Explorer</a>
-                <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active">Das Projekt</a>
-                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
-                <a href="index.html#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
+                <a href="episoden.html"
+                    class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="wissens-explorer.html"
+                    class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Wissens-Explorer</a>
+                <a href="das-projekt.html"
+                    class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 active">Das Projekt</a>
+                <button
+                    class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
+                <a href="index.html#follow"
+                    class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
             </nav>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
+        <div id="mobile-menu"
+            class="hidden bg-brand-dark border-t border-gray-700/50 absolute left-0 right-0 top-full shadow-lg pb-4">
             <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
             <a href="wissens-explorer.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Wissens-Explorer</a>
             <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800 active">Das Projekt</a>
             <a href="index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
-            <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
+            <button
+                class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
         </div>
     </header>
 
@@ -74,37 +108,56 @@
 
                 <!-- Story Section -->
                 <section id="story" class="mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold font-heading text-center mb-8 text-white">Ein KI-Experiment</h1>
-                    <div class="text-lg text-brand-accent-400 space-y-6 text-left md:text-justify bg-gray-900/30 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8">
-                        <p>Willkommen bei Wissens-Akku, einem Projekt, das die Grenzen der künstlichen Intelligenz auslotet. Fast alles, was Sie hier sehen und hören, ist das Ergebnis eines automatisierten Prozesses. Der Podcast, die Skripte, die Stimme, die Social-Media-Videos und sogar diese Webseite – all das wird von KI-Systemen generiert.</p>
-                        <p>Meine Rolle in diesem Experiment ist die eines Dirigenten oder Herausgebers. Ich gebe die Themen vor, starte die Content-Pipeline und übernehme am Ende die finale Qualitätskontrolle. Das bedeutet, ich schneide die Audio-Dateien zusammen und kümmere mich um die Veröffentlichung der fertigen Episoden und Videos. Jeder andere Schritt, von der Recherche bis zur Erstellung der Inhalte, ist vollautomatisiert.</p>
-                        <p>Dieses Projekt ist aus meiner Faszination für KI und dem Wunsch nach transparenter, faktenbasierter Wissensvermittlung entstanden. Es soll zeigen, was heute schon möglich ist, wenn man menschliche Neugier mit der Leistung von künstlicher Intelligenz kombiniert.</p>
+                    <h1 class="text-4xl md:text-5xl font-bold font-heading text-center mb-8 text-white">Ein
+                        KI-Experiment</h1>
+                    <div
+                        class="text-lg text-brand-accent-400 space-y-6 text-left md:text-justify bg-gray-900/30 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8">
+                        <p>Willkommen bei Wissens-Akku, einem Projekt, das die Grenzen der künstlichen Intelligenz
+                            auslotet. Fast alles, was Sie hier sehen und hören, ist das Ergebnis eines automatisierten
+                            Prozesses. Der Podcast, die Skripte, die Stimme, die Social-Media-Videos und sogar diese
+                            Webseite – all das wird von KI-Systemen generiert.</p>
+                        <p>Meine Rolle in diesem Experiment ist die eines Dirigenten oder Herausgebers. Ich gebe die
+                            Themen vor, starte die Content-Pipeline und übernehme am Ende die finale Qualitätskontrolle.
+                            Das bedeutet, ich schneide die Audio-Dateien zusammen und kümmere mich um die
+                            Veröffentlichung der fertigen Episoden und Videos. Jeder andere Schritt, von der Recherche
+                            bis zur Erstellung der Inhalte, ist vollautomatisiert.</p>
+                        <p>Dieses Projekt ist aus meiner Faszination für KI und dem Wunsch nach transparenter,
+                            faktenbasierter Wissensvermittlung entstanden. Es soll zeigen, was heute schon möglich ist,
+                            wenn man menschliche Neugier mit der Leistung von künstlicher Intelligenz kombiniert.</p>
                     </div>
                 </section>
 
                 <!-- Workflow Button -->
                 <div class="text-center mb-16 md:mb-24">
-                    <button class="open-workflow-modal bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
+                    <button
+                        class="open-workflow-modal bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">
                         So funktioniert der Autopilot
                     </button>
                 </div>
 
                 <!-- Agents Section -->
                 <section id="agents">
-                    <h2 class="text-3xl md:text-4xl font-bold font-heading text-center mb-12 text-white">Die KI-Agenten im Detail</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold font-heading text-center mb-12 text-white">Die KI-Agenten
+                        im Detail</h2>
 
                     <!-- Agent Definition -->
                     <div class="mb-12">
                         <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold font-heading text-white mb-2">Social Media & Content Agent</h3>
-                                <p class="text-gray-400">Dieser Agent ist verantwortlich für die Erstellung von ansprechenden Titeln und Beschreibungen für verschiedene Plattformen wie TikTok, Instagram und Spotify, um die Reichweite zu maximieren.</p>
+                                <h3 class="text-2xl font-bold font-heading text-white mb-2">Social Media & Content Agent
+                                </h3>
+                                <p class="text-gray-400">Dieser Agent ist verantwortlich für die Erstellung von
+                                    ansprechenden Titeln und Beschreibungen für verschiedene Plattformen wie TikTok,
+                                    Instagram und Spotify, um die Reichweite zu maximieren.</p>
                             </div>
                             <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
                                 <div class="space-y-8">
-                                    <img src="./Bilder/Agent Bild 1.png" alt="Funktionsweise des Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                    <img src="./Bilder/Agent Bild 2.png" alt="Funktionsweise des Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                    <img src="./Bilder/Agent Bild 3.png" alt="Funktionsweise des Agenten - Schritt 3" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent Bild 1.png" alt="Funktionsweise des Agenten - Schritt 1"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent Bild 2.png" alt="Funktionsweise des Agenten - Schritt 2"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent Bild 3.png" alt="Funktionsweise des Agenten - Schritt 3"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
                                 </div>
                             </div>
                         </div>
@@ -113,14 +166,23 @@
                     <div class="mb-12">
                         <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
                             <div class="p-6">
-                                <h3 class="text-2xl font-bold font-heading text-white mb-2">Recherche & Skript Agent</h3>
-                                <p class="text-gray-400">Dieser Agent ist für die tiefgehende Recherche zu komplexen Themen und die anschließende Erstellung von detaillierten, gut strukturierten Podcast-Skripten verantwortlich.</p>
+                                <h3 class="text-2xl font-bold font-heading text-white mb-2">Recherche & Skript Agent
+                                </h3>
+                                <p class="text-gray-400">Dieser Agent ist für die tiefgehende Recherche zu komplexen
+                                    Themen und die anschließende Erstellung von detaillierten, gut strukturierten
+                                    Podcast-Skripten verantwortlich.</p>
                             </div>
                             <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
                                 <div class="space-y-8">
-                                    <img src="./Bilder/Agent 2 Bild 1.png" alt="Funktionsweise des Recherche-Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                    <img src="./Bilder/Agent 2 Bild 2.png" alt="Funktionsweise des Recherche-Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                    <img src="./Bilder/Agent 2 Bild 3.png" alt="Funktionsweise des Recherche-Agenten - Schritt 3" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 2 Bild 1.png"
+                                        alt="Funktionsweise des Recherche-Agenten - Schritt 1"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 2 Bild 2.png"
+                                        alt="Funktionsweise des Recherche-Agenten - Schritt 2"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 2 Bild 3.png"
+                                        alt="Funktionsweise des Recherche-Agenten - Schritt 3"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
                                 </div>
                             </div>
                         </div>
@@ -130,12 +192,19 @@
                         <div class="bg-gray-800/50 rounded-lg border border-gray-700/50 overflow-hidden">
                             <div class="p-6">
                                 <h3 class="text-2xl font-bold font-heading text-white mb-2">Prompt Agent</h3>
-                                <p class="text-gray-400">Dieser Agent ist darauf spezialisiert, die von mir erstellten Prompts zu analysieren und zu optimieren. Er verfeinert die Anweisungen, um die bestmöglichen Ergebnisse von der KI zu erhalten und die Qualität der Inhalte sicherzustellen.</p>
+                                <p class="text-gray-400">Dieser Agent ist darauf spezialisiert, die von mir erstellten
+                                    Prompts zu analysieren und zu optimieren. Er verfeinert die Anweisungen, um die
+                                    bestmöglichen Ergebnisse von der KI zu erhalten und die Qualität der Inhalte
+                                    sicherzustellen.</p>
                             </div>
                             <div class="p-6 bg-gray-900/50 max-h-[600px] overflow-y-auto">
                                 <div class="space-y-8">
-                                    <img src="./Bilder/Agent 3 Bild 1.png" alt="Funktionsweise des Audio-Agenten - Schritt 1" class="w-full h-auto object-cover rounded-md shadow-lg">
-                                    <img src="./Bilder/Agent 3 Bild 2.png" alt="Funktionsweise des Audio-Agenten - Schritt 2" class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 3 Bild 1.png"
+                                        alt="Funktionsweise des Audio-Agenten - Schritt 1"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
+                                    <img src="./Bilder/Agent 3 Bild 2.png"
+                                        alt="Funktionsweise des Audio-Agenten - Schritt 2"
+                                        class="w-full h-auto object-cover rounded-md shadow-lg">
                                 </div>
                             </div>
                         </div>
@@ -146,52 +215,73 @@
     </main>
 
     <!-- Contact Modal -->
-    <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+    <div id="contact-modal"
+        class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="max-h-[75vh] overflow-y-auto">
             <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl w-full relative border border-gray-700">
                 <!-- Close Button -->
-                <button id="close-contact-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                <button id="close-contact-modal"
+                    class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </button>
                 <h2 class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
                 <form name="contact" method="POST" data-netlify="true" action="/success.html" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname (optional)</label>
-                            <input type="text" name="firstname" id="firstname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                            <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname
+                                (optional)</label>
+                            <input type="text" name="firstname" id="firstname"
+                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
                         </div>
                         <div>
-                            <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name (optional)</label>
-                            <input type="text" name="lastname" id="lastname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                            <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name
+                                (optional)</label>
+                            <input type="text" name="lastname" id="lastname"
+                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
                         </div>
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
-                        <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                        <label for="email"
+                            class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
+                        <input type="email" name="email" id="email" required
+                            class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
-                        <textarea name="message" id="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
+                        <label for="message"
+                            class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
+                        <textarea name="message" id="message" rows="4" required
+                            class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
                     </div>
                     <div>
-                        <button type="submit" class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht senden</button>
+                        <button type="submit"
+                            class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht
+                            senden</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-    <div id="workflow-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+    <div id="workflow-modal"
+        class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="max-h-[90vh] overflow-y-auto">
             <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-7xl w-full relative border border-gray-700">
                 <!-- Close Button -->
-                <button id="close-workflow-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                <button id="close-workflow-modal"
+                    class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
                 <h2 class="text-4xl font-bold font-heading text-center mb-4 text-white">Der Podcast Autopilot</h2>
-                <p class="text-center text-lg text-gray-400 mb-12 max-w-3xl mx-auto">Ein transparenter Einblick, wie jede Episode entsteht – eine Zusammenarbeit von Mensch und Maschine.</p>
+                <p class="text-center text-lg text-gray-400 mb-12 max-w-3xl mx-auto">Ein transparenter Einblick, wie
+                    jede Episode entsteht – eine Zusammenarbeit von Mensch und Maschine.</p>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
 
@@ -199,23 +289,36 @@
                     <div class="space-y-6">
                         <div class="flex items-center gap-4">
                             <div class="bg-indigo-500/20 p-3 rounded-full">
-                                <svg class="w-8 h-8 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 9 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                <svg class="w-8 h-8 text-indigo-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 9 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
                             </div>
                             <h3 class="text-3xl font-heading font-bold text-indigo-400">Manuelle Schritte</h3>
                         </div>
 
                         <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 space-y-4">
                             <h4 class="text-xl font-bold text-white">1. Prozess Starten</h4>
-                            <p class="text-gray-400">Ich stoße den gesamten Prozess mit einem Klick an. Das System kann dann entweder vollautomatisch neue Themen finden oder ein von mir bereitgestelltes Dokument verarbeiten.</p>
+                            <p class="text-gray-400">Ich stoße den gesamten Prozess mit einem Klick an. Das System kann
+                                dann entweder vollautomatisch neue Themen finden oder ein von mir bereitgestelltes
+                                Dokument verarbeiten.</p>
                         </div>
 
                         <div class="flex justify-center py-4">
-                            <svg class="w-8 h-8 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" /></svg>
+                            <svg class="w-8 h-8 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19.5 13.5L12 21m0 0l-7.5-7.5M12 21V3" />
+                            </svg>
                         </div>
 
                         <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 space-y-4">
                             <h4 class="text-xl font-bold text-white">3. Finale Kontrolle & Freigabe</h4>
-                            <p class="text-gray-400">Am Ende des gesamten Prozesses prüfe ich persönlich alle generierten Inhalte (Skripte, Wörterbuch). Ich wähle die beste der automatisch erstellten Audio-Versionen aus, gebe der Episode den finalen Schliff und plane die Veröffentlichung.</p>
+                            <p class="text-gray-400">Am Ende des gesamten Prozesses prüfe ich persönlich alle
+                                generierten Inhalte (Skripte, Wörterbuch). Ich wähle die beste der automatisch
+                                erstellten Audio-Versionen aus, gebe der Episode den finalen Schliff und plane die
+                                Veröffentlichung.</p>
                         </div>
                     </div>
 
@@ -223,22 +326,35 @@
                     <div class="space-y-6">
                         <div class="flex items-center gap-4">
                             <div class="bg-cyan-500/20 p-3 rounded-full">
-                                <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 01.8 0l2.121 2.121a.563.563 0 010 .8l-2.471 2.471M11.42 15.17l-2.47-2.47a.563.563 0 00-.8 0l-2.122 2.121a.563.563 0 000 .8l2.47 2.47M12 13.5v-7.5m0 0l3 3m-3-3l-3 3" /></svg>
+                                <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M11.42 15.17L17.25 21A2.652 2.652 0 0021 17.25l-5.877-5.877M11.42 15.17l2.471-2.471a.563.563 0 01.8 0l2.121 2.121a.563.563 0 010 .8l-2.471 2.471M11.42 15.17l-2.47-2.47a.563.563 0 00-.8 0l-2.122 2.121a.563.563 0 000 .8l2.47 2.47M12 13.5v-7.5m0 0l3 3m-3-3l-3 3" />
+                                </svg>
                             </div>
                             <h3 class="text-3xl font-heading font-bold text-cyan-400">Automatisierte Prozesse</h3>
                         </div>
 
                         <div class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 space-y-4">
                             <h4 class="text-xl font-bold text-white">2. Die Content-Pipeline</h4>
-                            <p class="text-gray-400">Nach dem Startsignal arbeitet die KI die folgenden Schritte selbstständig ab:</p>
+                            <p class="text-gray-400">Nach dem Startsignal arbeitet die KI die folgenden Schritte
+                                selbstständig ab:</p>
                             <ol class="list-decimal list-inside space-y-3 text-gray-400 pl-2">
-                                <li><strong>Themen-Analyse:</strong> Das System analysiert alle bisherigen Episoden und generiert selbstständig neue, passende Themenvorschläge.</li>
-                                <li><strong>Tiefenrecherche:</strong> Das System führt eine umfassende Recherche zum ausgewählten Thema durch oder extrahiert die Inhalte aus dem bereitgestellten Dokument.</li>
-                                <li><strong>Skript-Erstellung:</strong> Aus der Recherche wird ein erstes Podcast-Skript im Dialogformat generiert.</li>
-                                <li><strong>Qualitätssicherung:</strong> Eine zweite, unabhängige KI-Prüfung korrigiert das Skript auf Logik, Stil und Fakten.</li>
-                                <li><strong>Sprach-Optimierung:</strong> Das Skript wird für eine natürliche Aussprache durch die Text-to-Speech-Engine optimiert.</li>
-                                <li><strong>Wörterbuch-Erstellung:</strong> Das System extrahiert Fachbegriffe und erstellt eine phonetische Übersetzung für die korrekte Aussprache.</li>
-                                <li><strong>Audio-Generierung (Optional):</strong> Aus dem finalen Skript werden automatisch mehrere verschiedene Stimm-Versionen als Audio-Dateien erzeugt.</li>
+                                <li><strong>Themen-Analyse:</strong> Das System analysiert alle bisherigen Episoden und
+                                    generiert selbstständig neue, passende Themenvorschläge.</li>
+                                <li><strong>Tiefenrecherche:</strong> Das System führt eine umfassende Recherche zum
+                                    ausgewählten Thema durch oder extrahiert die Inhalte aus dem bereitgestellten
+                                    Dokument.</li>
+                                <li><strong>Skript-Erstellung:</strong> Aus der Recherche wird ein erstes Podcast-Skript
+                                    im Dialogformat generiert.</li>
+                                <li><strong>Qualitätssicherung:</strong> Eine zweite, unabhängige KI-Prüfung korrigiert
+                                    das Skript auf Logik, Stil und Fakten.</li>
+                                <li><strong>Sprach-Optimierung:</strong> Das Skript wird für eine natürliche Aussprache
+                                    durch die Text-to-Speech-Engine optimiert.</li>
+                                <li><strong>Wörterbuch-Erstellung:</strong> Das System extrahiert Fachbegriffe und
+                                    erstellt eine phonetische Übersetzung für die korrekte Aussprache.</li>
+                                <li><strong>Audio-Generierung (Optional):</strong> Aus dem finalen Skript werden
+                                    automatisch mehrere verschiedene Stimm-Versionen als Audio-Dateien erzeugt.</li>
                             </ol>
                         </div>
                     </div>
@@ -251,14 +367,15 @@
         <div class="container mx-auto px-6 py-8 text-center text-gray-400">
             <div class="flex justify-center space-x-6 mb-4">
                 <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
-                <a href="datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
+                <a href="datenschutz.html"
+                    class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
             </div>
             <p>&copy; 2026 Wissens-Akku. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             if (mobileMenuButton) {
@@ -275,7 +392,7 @@
                         e.preventDefault();
                         document.body.classList.add('modal-open');
                         workflowModal.classList.remove('hidden');
-                        if(mobileMenu) mobileMenu.classList.add('hidden');
+                        if (mobileMenu) mobileMenu.classList.add('hidden');
                     });
                 });
                 closeWorkflowModalButton.addEventListener('click', () => {
@@ -300,7 +417,7 @@
                         e.preventDefault();
                         document.body.classList.add('modal-open');
                         contactModal.classList.remove('hidden');
-                        if(mobileMenu) mobileMenu.classList.add('hidden');
+                        if (mobileMenu) mobileMenu.classList.add('hidden');
                     });
                 });
                 closeContactModalButton.addEventListener('click', () => {
@@ -317,4 +434,5 @@
         });
     </script>
 </body>
+
 </html>

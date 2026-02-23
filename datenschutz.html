@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="de" class="scroll-smooth">
+
 <head>
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9" type="text/javascript" async></script>
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9"
+        type="text/javascript" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Datenschutzerklärung | Wissens-Akku</title>
@@ -28,30 +30,78 @@
     <link href="assets/css/local-fonts.css" rel="stylesheet">
     <link href="assets/css/tailwind.css" rel="stylesheet">
     <style>
-        details > summary { list-style: none; }
-        details > summary::-webkit-details-marker { display: none; }
-        details[open] summary .arrow { transform: rotate(90deg); }
-        .prose-custom a { color: #22D3EE; }
-        .prose-custom a:hover { color: #06B6D4; }
-        .prose-custom ul { list-style-position: inside; padding-left: 0; }
-        .prose-custom li { margin-left: 1rem; }
-        .prose-custom h3 { margin-top: 1.5em; margin-bottom: 0.5em; }
-        .nav-link.active, .nav-link-button.active {
-            color: #22D3EE; /* text-brand-accent-400 */
+        details>summary {
+            list-style: none;
+        }
+
+        details>summary::-webkit-details-marker {
+            display: none;
+        }
+
+        details[open] summary .arrow {
+            transform: rotate(90deg);
+        }
+
+        .prose-custom a {
+            color: #22D3EE;
+        }
+
+        .prose-custom a:hover {
+            color: #06B6D4;
+        }
+
+        .prose-custom ul {
+            list-style-position: inside;
+            padding-left: 0;
+        }
+
+        .prose-custom li {
+            margin-left: 1rem;
+        }
+
+        .prose-custom h3 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        .nav-link.active,
+        .nav-link-button.active {
+            color: #22D3EE;
+            /* text-brand-accent-400 */
             border-bottom: 2px solid #22D3EE;
         }
+
         .nav-button {
             background: none;
             border: none;
-            padding: 0;
             cursor: pointer;
         }
-        .modal.hidden { display: none; }
-        .modal { display: flex; animation: fadeIn 0.3s ease-out; }
-        body.modal-open { overflow: hidden; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .modal.hidden {
+            display: none;
+        }
+
+        .modal {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
     </style>
 </head>
+
 <body class="text-brand-accent-400 font-sans">
 
     <!-- Global Fixed Background -->
@@ -60,63 +110,93 @@
     </div>
 
     <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+    <header
+        class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50 text-brand-accent-400">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html#home" class="flex items-center space-x-2 nav-link" data-section="home">
                 <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
                 <span class="text-xl font-heading font-bold">Wissens-Akku</span>
             </a>
             <nav class="hidden md:flex items-center space-x-6">
-                <a href="episoden.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
-                <a href="wissens-explorer.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Wissens-Explorer</a>
-                <a href="das-projekt.html" class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
-                <button class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
-                <a href="index.html#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
+                <a href="episoden.html"
+                    class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="wissens-explorer.html"
+                    class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Wissens-Explorer</a>
+                <a href="das-projekt.html"
+                    class="nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
+                <button
+                    class="nav-button nav-link text-lg hover:text-brand-accent-400 transition-colors pb-1 open-contact-modal">Kontakt</button>
+                <a href="index.html#follow"
+                    class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
             </nav>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden p-2">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
+        <div id="mobile-menu"
+            class="hidden bg-brand-dark border-t border-gray-700/50 absolute left-0 right-0 top-full shadow-lg pb-4">
             <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
             <a href="wissens-explorer.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Wissens-Explorer</a>
             <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
             <a href="#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
-            <button class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
+            <button
+                class="nav-button block w-full text-left py-2 px-6 text-sm hover:bg-gray-800 open-contact-modal">Kontakt</button>
         </div>
     </header>
 
     <main class="relative z-10 pt-24">
         <div class="container mx-auto px-6 py-12">
-            <div class="max-w-4xl mx-auto bg-gray-900/30 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8 md:p-12 text-gray-300 prose-custom">
+            <div
+                class="max-w-4xl mx-auto bg-gray-900/30 backdrop-blur-sm rounded-xl border border-gray-700/50 p-8 md:p-12 text-gray-300 prose-custom">
                 <h1 class="text-4xl font-bold font-heading text-center mb-4 text-white">Datenschutzerklärung</h1>
                 <p class="text-center text-lg text-gray-400 mb-12">Stand: 12. Februar 2026</p>
-                
+
                 <div class="space-y-4">
 
                     <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden" open>
                         <summary class="p-6 cursor-pointer flex justify-between items-center">
                             <h2 class="text-xl font-heading font-bold text-white">1. Datenschutz auf einen Blick</h2>
-                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </summary>
                         <div class="p-6 pt-0 text-gray-400 space-y-4">
-                            <p>Diese Datenschutzerklärung informiert Sie über Art, Umfang und Zweck der Verarbeitung von personenbezogenen Daten (nachfolgend „Daten“) innerhalb meines Onlineangebotes. Ich nehme den Schutz Ihrer persönlichen Daten sehr ernst und behandle Ihre Daten vertraulich und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser Datenschutzerklärung.</p>
+                            <p>Diese Datenschutzerklärung informiert Sie über Art, Umfang und Zweck der Verarbeitung von
+                                personenbezogenen Daten (nachfolgend „Daten“) innerhalb meines Onlineangebotes. Ich
+                                nehme den Schutz Ihrer persönlichen Daten sehr ernst und behandle Ihre Daten vertraulich
+                                und entsprechend der gesetzlichen Datenschutzvorschriften sowie dieser
+                                Datenschutzerklärung.</p>
                             <p><strong>Verantwortlicher:</strong> Die im Impressum genannte verantwortliche Stelle.</p>
-                            <p><strong>Datenerfassung:</strong> Ihre Daten werden einerseits durch Ihre Eingaben (z.B. im Kontaktformular) und andererseits automatisch durch IT-Systeme beim Besuch der Website erfasst (v.a. technische Daten wie IP-Adresse). Bestimmte Datenverarbeitungen, insbesondere durch Drittanbieter, erfolgen nur mit Ihrer ausdrücklichen Einwilligung.</p>
+                            <p><strong>Datenerfassung:</strong> Ihre Daten werden einerseits durch Ihre Eingaben (z.B.
+                                im Kontaktformular) und andererseits automatisch durch IT-Systeme beim Besuch der
+                                Website erfasst (v.a. technische Daten wie IP-Adresse). Bestimmte Datenverarbeitungen,
+                                insbesondere durch Drittanbieter, erfolgen nur mit Ihrer ausdrücklichen Einwilligung.
+                            </p>
                         </div>
                     </details>
 
                     <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
                         <summary class="p-6 cursor-pointer flex justify-between items-center">
-                            <h2 class="text-xl font-heading font-bold text-white">2. Ihre Rechte als betroffene Person</h2>
-                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            <h2 class="text-xl font-heading font-bold text-white">2. Ihre Rechte als betroffene Person
+                            </h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </summary>
                         <div class="p-6 pt-0 text-gray-400">
-                            <p>Ihnen stehen bezüglich Ihrer bei mir verarbeiteten personenbezogenen Daten folgende Rechte gemäß der DSGVO zu:</p>
+                            <p>Ihnen stehen bezüglich Ihrer bei mir verarbeiteten personenbezogenen Daten folgende
+                                Rechte gemäß der DSGVO zu:</p>
                             <ul>
                                 <li>Recht auf Auskunft (Art. 15 DSGVO)</li>
                                 <li>Recht auf Berichtigung (Art. 16 DSGVO)</li>
@@ -126,49 +206,98 @@
                                 <li><strong>Widerspruchsrecht (Art. 21 DSGVO)</strong></li>
                                 <li><strong>Recht auf Widerruf Ihrer Einwilligung (Art. 7 Abs. 3 DSGVO)</strong></li>
                             </ul>
-                            <p class="mt-4">Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über die Verarbeitung Ihrer personenbezogenen Daten durch mich zu beschweren (Art. 77 DSGVO).</p>
+                            <p class="mt-4">Sie haben zudem das Recht, sich bei einer Datenschutz-Aufsichtsbehörde über
+                                die Verarbeitung Ihrer personenbezogenen Daten durch mich zu beschweren (Art. 77 DSGVO).
+                            </p>
                         </div>
                     </details>
 
                     <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
                         <summary class="p-6 cursor-pointer flex justify-between items-center">
-                            <h2 class="text-xl font-heading font-bold text-white">3. Cookies und Einwilligungsmanagement</h2>
-                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            <h2 class="text-xl font-heading font-bold text-white">3. Cookies und Einwilligungsmanagement
+                            </h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </summary>
                         <div class="p-6 pt-0 text-gray-400 space-y-4">
-                            <p>Meine Website verwendet Cookies und ähnliche Technologien. Cookies sind kleine Textdateien, die auf Ihrem Endgerät gespeichert werden. Einige sind für den Betrieb der Seite technisch notwendig (essenzielle Cookies), während andere mir helfen, mein Angebot zu verbessern oder zu finanzieren (funktionale, Marketing- oder Analyse-Cookies).</p>
-                            <p>Für den Einsatz von nicht-essenziellen Cookies und die damit verbundene Datenverarbeitung durch Drittanbieter hole ich über ein <strong>Cookie-Consent-Tool (Cookiebot)</strong> Ihre Einwilligung ein. Rechtsgrundlage für diese Verarbeitungen ist Ihre Einwilligung gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Verarbeitung essenzieller technischer Daten erfolgt auf Grundlage meines berechtigten Interesses an einem funktionsfähigen und sicheren Online-Angebot gemäß Art. 6 Abs. 1 lit. f DSGVO.</p>
-                            <p>Sie können Ihre Einwilligung jederzeit ändern oder widerrufen. Klicken Sie hier, um Ihre Cookie-Einstellungen anzupassen:</p>
-                            <p class="mt-2"><a href="javascript:Cookiebot.renew()" class="font-bold text-brand-accent-500 hover:underline">Cookie-Einstellungen ändern</a></p>
+                            <p>Meine Website verwendet Cookies und ähnliche Technologien. Cookies sind kleine
+                                Textdateien, die auf Ihrem Endgerät gespeichert werden. Einige sind für den Betrieb der
+                                Seite technisch notwendig (essenzielle Cookies), während andere mir helfen, mein Angebot
+                                zu verbessern oder zu finanzieren (funktionale, Marketing- oder Analyse-Cookies).</p>
+                            <p>Für den Einsatz von nicht-essenziellen Cookies und die damit verbundene Datenverarbeitung
+                                durch Drittanbieter hole ich über ein <strong>Cookie-Consent-Tool (Cookiebot)</strong>
+                                Ihre Einwilligung ein. Rechtsgrundlage für diese Verarbeitungen ist Ihre Einwilligung
+                                gemäß Art. 6 Abs. 1 lit. a DSGVO. Die Verarbeitung essenzieller technischer Daten
+                                erfolgt auf Grundlage meines berechtigten Interesses an einem funktionsfähigen und
+                                sicheren Online-Angebot gemäß Art. 6 Abs. 1 lit. f DSGVO.</p>
+                            <p>Sie können Ihre Einwilligung jederzeit ändern oder widerrufen. Klicken Sie hier, um Ihre
+                                Cookie-Einstellungen anzupassen:</p>
+                            <p class="mt-2"><a href="javascript:Cookiebot.renew()"
+                                    class="font-bold text-brand-accent-500 hover:underline">Cookie-Einstellungen
+                                    ändern</a></p>
                         </div>
                     </details>
 
                     <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
                         <summary class="p-6 cursor-pointer flex justify-between items-center">
-                            <h2 class="text-xl font-heading font-bold text-white">4. Datenverarbeitung auf der Website</h2>
-                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            <h2 class="text-xl font-heading font-bold text-white">4. Datenverarbeitung auf der Website
+                            </h2>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </summary>
                         <div class="p-6 pt-0 text-gray-400 space-y-4">
                             <h3 class="font-bold text-white">Hosting und Content Delivery Network (CDN)</h3>
-                            <p>Meine Website wird bei <strong>Netlify, Inc.</strong> (44 Montgomery Street, Suite 300, San Francisco, California 94104, USA) gehostet. Beim Besuch meiner Seite werden in Server-Log-Dateien automatisch Informationen erfasst, die Ihr Browser übermittelt. Dies sind: Browsertyp/-version, Betriebssystem, Referrer URL, Hostname und IP-Adresse des zugreifenden Rechners sowie die Uhrzeit der Serveranfrage.</p>
-                            <p>Rechtsgrundlage ist mein berechtigtes Interesse an einer sicheren, schnellen und effizienten Bereitstellung meines Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO). Die Datenübertragung in die USA stützt sich auf das EU-US Data Privacy Framework und/oder Standardvertragsklauseln, um ein angemessenes Datenschutzniveau zu gewährleisten.</p>
-                            
+                            <p>Meine Website wird bei <strong>Netlify, Inc.</strong> (44 Montgomery Street, Suite 300,
+                                San Francisco, California 94104, USA) gehostet. Beim Besuch meiner Seite werden in
+                                Server-Log-Dateien automatisch Informationen erfasst, die Ihr Browser übermittelt. Dies
+                                sind: Browsertyp/-version, Betriebssystem, Referrer URL, Hostname und IP-Adresse des
+                                zugreifenden Rechners sowie die Uhrzeit der Serveranfrage.</p>
+                            <p>Rechtsgrundlage ist mein berechtigtes Interesse an einer sicheren, schnellen und
+                                effizienten Bereitstellung meines Online-Angebots (Art. 6 Abs. 1 lit. f DSGVO). Die
+                                Datenübertragung in die USA stützt sich auf das EU-US Data Privacy Framework und/oder
+                                Standardvertragsklauseln, um ein angemessenes Datenschutzniveau zu gewährleisten.</p>
+
                             <h3 class="font-bold text-white">Kontaktformular (Netlify Forms)</h3>
-                            <p>Wenn Sie mich per Kontaktformular kontaktieren, werden Ihre Angaben inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von Anschlussfragen bei meinem Hosting-Anbieter Netlify verarbeitet und an mich weitergeleitet. Die Verarbeitung dieser Daten erfolgt auf Grundlage Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO), die Sie durch das Absenden des Formulars erteilen. Sie können diese Einwilligung jederzeit widerrufen. Die Daten verbleiben bei mir, bis Sie mich zur Löschung auffordern, Ihre Einwilligung widerrufen oder der Zweck für die Datenspeicherung entfällt.</p>
+                            <p>Wenn Sie mich per Kontaktformular kontaktieren, werden Ihre Angaben inklusive der von
+                                Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung der Anfrage und für den Fall von
+                                Anschlussfragen bei meinem Hosting-Anbieter Netlify verarbeitet und an mich
+                                weitergeleitet. Die Verarbeitung dieser Daten erfolgt auf Grundlage Ihrer Einwilligung
+                                (Art. 6 Abs. 1 lit. a DSGVO), die Sie durch das Absenden des Formulars erteilen. Sie
+                                können diese Einwilligung jederzeit widerrufen. Die Daten verbleiben bei mir, bis Sie
+                                mich zur Löschung auffordern, Ihre Einwilligung widerrufen oder der Zweck für die
+                                Datenspeicherung entfällt.</p>
                         </div>
                     </details>
 
                     <details class="bg-gray-800/50 border border-gray-700 rounded-lg overflow-hidden">
                         <summary class="p-6 cursor-pointer flex justify-between items-center">
                             <h2 class="text-xl font-heading font-bold text-white">5. Einbindung von Drittanbietern</h2>
-                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                            <svg class="w-6 h-6 text-brand-accent-400 transform transition-transform arrow"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
                         </summary>
                         <div class="p-6 pt-0 text-gray-400 space-y-4">
                             <h3 class="font-bold text-white">Podcast-Plattformen (Spotify, Apple, YouTube)</h3>
-                            <p>Ich verlinke auf die Plattformen von Drittanbietern wie Spotify, Apple Podcasts und YouTube. Wenn Sie auf einen dieser Links klicken, werden Sie zur jeweiligen Plattform weitergeleitet. Diese Anbieter verarbeiten Ihre Daten nach ihren eigenen Datenschutzrichtlinien.</p>
+                            <p>Ich verlinke auf die Plattformen von Drittanbietern wie Spotify, Apple Podcasts und
+                                YouTube. Wenn Sie auf einen dieser Links klicken, werden Sie zur jeweiligen Plattform
+                                weitergeleitet. Diese Anbieter verarbeiten Ihre Daten nach ihren eigenen
+                                Datenschutzrichtlinien.</p>
 
                             <h3 class="font-bold text-white">Wissens-Explorer (Google NotebookLM)</h3>
-                            <p>Ich biete einen Link zum "Wissens-Explorer", der auf <strong>Google NotebookLM</strong> basiert. Wenn Sie diesen Dienst nutzen, gelten die Datenschutzbestimmungen von Google.</p>
+                            <p>Ich biete einen Link zum "Wissens-Explorer", der auf <strong>Google NotebookLM</strong>
+                                basiert. Wenn Sie diesen Dienst nutzen, gelten die Datenschutzbestimmungen von Google.
+                            </p>
                         </div>
                     </details>
 
@@ -180,35 +309,51 @@
     </main>
 
     <!-- Contact Modal -->
-    <div id="contact-modal" class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
+    <div id="contact-modal"
+        class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="max-h-[75vh] overflow-y-auto">
             <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl w-full relative border border-gray-700">
                 <!-- Close Button -->
-                <button id="close-contact-modal" class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                <button id="close-contact-modal"
+                    class="absolute top-4 right-4 text-brand-accent-400 hover:text-brand-accent-500 transition-colors z-10">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                 </button>
                 <h2 class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
                 <form name="contact" method="POST" data-netlify="true" action="/success.html" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname (optional)</label>
-                            <input type="text" name="firstname" id="firstname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                            <label for="firstname" class="block text-sm font-medium text-brand-accent-400 mb-2">Vorname
+                                (optional)</label>
+                            <input type="text" name="firstname" id="firstname"
+                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
                         </div>
                         <div>
-                            <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name (optional)</label>
-                            <input type="text" name="lastname" id="lastname" class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                            <label for="lastname" class="block text-sm font-medium text-brand-accent-400 mb-2">Name
+                                (optional)</label>
+                            <input type="text" name="lastname" id="lastname"
+                                class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
                         </div>
                     </div>
                     <div>
-                        <label for="email" class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
-                        <input type="email" name="email" id="email" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
+                        <label for="email"
+                            class="block text-sm font-medium text-brand-accent-400 mb-2">E-Mail-Adresse</label>
+                        <input type="email" name="email" id="email" required
+                            class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none">
                     </div>
                     <div>
-                        <label for="message" class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
-                        <textarea name="message" id="message" rows="4" required class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
+                        <label for="message"
+                            class="block text-sm font-medium text-brand-accent-400 mb-2">Nachricht</label>
+                        <textarea name="message" id="message" rows="4" required
+                            class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
                     </div>
                     <div>
-                        <button type="submit" class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht senden</button>
+                        <button type="submit"
+                            class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht
+                            senden</button>
                     </div>
                 </form>
             </div>
@@ -219,54 +364,56 @@
         <div class="container mx-auto px-6 py-8 text-center text-gray-400">
             <div class="flex justify-center space-x-6 mb-4">
                 <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
-                <a href="datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
+                <a href="datenschutz.html"
+                    class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
             </div>
             <p>&copy; 2026 Wissens-Akku. Alle Rechte vorbehalten.</p>
         </div>
     </footer>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        if(mobileMenuButton) mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+        document.addEventListener('DOMContentLoaded', function () {
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenuButton) mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-        const details = document.querySelectorAll('details');
-        details.forEach(targetDetail => {
-            targetDetail.addEventListener('click', () => {
-                details.forEach(detail => {
-                    if (detail !== targetDetail) {
-                        detail.removeAttribute('open');
-                    }
+            const details = document.querySelectorAll('details');
+            details.forEach(targetDetail => {
+                targetDetail.addEventListener('click', () => {
+                    details.forEach(detail => {
+                        if (detail !== targetDetail) {
+                            detail.removeAttribute('open');
+                        }
+                    });
                 });
             });
-        });
 
-        const contactModal = document.getElementById('contact-modal');
-        const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
-        const closeContactModalButton = document.getElementById('close-contact-modal');
+            const contactModal = document.getElementById('contact-modal');
+            const openContactModalButtons = document.querySelectorAll('.open-contact-modal');
+            const closeContactModalButton = document.getElementById('close-contact-modal');
 
-        if (contactModal && openContactModalButtons.length && closeContactModalButton) {
-            openContactModalButtons.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    document.body.classList.add('modal-open');
-                    contactModal.classList.remove('hidden');
-                    if(mobileMenu) mobileMenu.classList.add('hidden');
+            if (contactModal && openContactModalButtons.length && closeContactModalButton) {
+                openContactModalButtons.forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.body.classList.add('modal-open');
+                        contactModal.classList.remove('hidden');
+                        if (mobileMenu) mobileMenu.classList.add('hidden');
+                    });
                 });
-            });
-            closeContactModalButton.addEventListener('click', () => {
-                contactModal.classList.add('hidden');
-                document.body.classList.remove('modal-open');
-            });
-            contactModal.addEventListener('click', (e) => {
-                if (e.target === contactModal) {
+                closeContactModalButton.addEventListener('click', () => {
                     contactModal.classList.add('hidden');
                     document.body.classList.remove('modal-open');
-                }
-            });
-        }
-    });
+                });
+                contactModal.addEventListener('click', (e) => {
+                    if (e.target === contactModal) {
+                        contactModal.classList.add('hidden');
+                        document.body.classList.remove('modal-open');
+                    }
+                });
+            }
+        });
     </script>
 </body>
+
 </html>

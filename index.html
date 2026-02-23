@@ -51,7 +51,6 @@
         .nav-button {
             background: none;
             border: none;
-            padding: 0;
             cursor: pointer;
         }
 
@@ -155,7 +154,8 @@
     </div>
 
     <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50">
+    <header
+        class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50 text-brand-accent-400">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#home" class="flex items-center space-x-2 nav-link" data-section="home">
                 <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
@@ -182,7 +182,8 @@
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden">
+        <div id="mobile-menu"
+            class="hidden bg-brand-dark border-t border-gray-700/50 absolute left-0 right-0 top-full shadow-lg pb-4">
             <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
             <a href="wissens-explorer.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Wissens-Explorer</a>
             <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
@@ -533,7 +534,7 @@
                     navLinks.forEach(link => {
                         link.classList.remove('active');
                         const section = link.getAttribute('data-section');
-                        if (section === currentSectionId) {
+                        if (section && section === currentSectionId) {
                             link.classList.add('active');
                         }
                     });
