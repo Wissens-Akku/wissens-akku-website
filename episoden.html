@@ -66,7 +66,7 @@
             display: flex;
         }
         @media (max-width: 768px) {
-            .episode-details-content {
+            .accordion-button.active + .episode-details-content {
                 max-height: 50vh;
                 overflow-y: auto;
                 padding-right: 1rem;
@@ -292,7 +292,7 @@
                             </button>
                             <div class="accordion-content episode-details-content">
                                                         <p class="text-gray-300 mb-6">${episode.contentSnippet}</p>
-                                                        <a href="${episode.link}" class="inline-block bg-green-500 text-white font-bold py-3 px-6 rounded-full hover:bg-green-600 transition-colors duration-300">Zur Episode</a>                                <div class="pt-6 border-t border-gray-700/50">
+                                                        <div class="pt-6 border-t border-gray-700/50">
                                     <h4 class="text-lg font-bold font-heading mb-4 text-center">Jetzt überall anhören</h4>
                                     <div class="flex justify-center items-center gap-4 md:gap-6 flex-wrap">
                                         <a href="${platforms.spotify}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform no-underline">Spotify</a>
