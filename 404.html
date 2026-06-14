@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seite nicht gefunden (404) | Wissens-Akku</title>
+    <link rel="icon" href="Bilder/wissenakku-logo.png">
+    <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
+    <link rel="alternate" type="application/rss+xml" title="Wissens-Akku Podcast" href="https://anchor.fm/s/107c46c58/podcast/rss">
+    <meta name="theme-color" content="#0F172A">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Diese Seite wurde nicht gefunden.">
+    <link href="assets/css/local-fonts.css" rel="stylesheet">
+    <link href="assets/css/tailwind.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-900 text-white font-sans flex flex-col min-h-screen">
+
+    <!-- Global Fixed Background -->
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.jpg');">
+        <div class="absolute inset-0 bg-brand-dark/80"></div>
+    </div>
+
+    <!-- Header & Navigation -->
+    <header
+        class="fixed top-0 left-0 right-0 bg-brand-dark/80 backdrop-blur-md z-50 border-b border-gray-700/50 text-brand-accent-400">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html#home" class="flex items-center space-x-2">
+                <img src="Bilder/wissenakku-logo.png" alt="Wissens-Akku Logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-heading font-bold">Wissens-Akku</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="episoden.html" class="text-lg hover:text-brand-accent-400 transition-colors pb-1">Episoden</a>
+                <a href="wissens-explorer.html" class="text-lg hover:text-brand-accent-400 transition-colors pb-1">Wissens-Explorer</a>
+                <a href="das-projekt.html" class="text-lg hover:text-brand-accent-400 transition-colors pb-1">Das Projekt</a>
+                <a href="index.html#follow" class="bg-brand-accent-500 text-white font-bold py-2 px-6 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Folgen</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden p-2" aria-label="Menü öffnen">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden bg-brand-dark border-t border-gray-700/50 absolute left-0 right-0 top-full shadow-lg pb-4">
+            <a href="episoden.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Episoden</a>
+            <a href="wissens-explorer.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Wissens-Explorer</a>
+            <a href="das-projekt.html" class="block py-2 px-6 text-sm hover:bg-gray-800">Das Projekt</a>
+            <a href="index.html#follow" class="block py-2 px-6 text-sm hover:bg-gray-800">Folgen</a>
+        </div>
+    </header>
+
+    <main class="relative z-10 pt-24 flex-grow flex items-center justify-center">
+        <div class="text-center px-6 py-24 max-w-xl mx-auto">
+            <p class="text-7xl md:text-8xl font-bold font-heading text-brand-accent-400 mb-4">404</p>
+            <h1 class="text-2xl md:text-3xl font-bold font-heading text-white mb-4">Diese Seite ließ sich nicht aufladen.</h1>
+            <p class="text-gray-400 mb-8">Die gesuchte Seite gibt es nicht (mehr). Vielleicht bringt dich einer dieser Wege weiter:</p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="index.html" class="w-full sm:w-auto bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform no-underline">Zur Startseite</a>
+                <a href="episoden.html" class="w-full sm:w-auto bg-transparent border-2 border-brand-accent-400 text-brand-accent-400 font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-400 hover:text-white transition-all no-underline">Alle Episoden</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-brand-dark/80 border-t border-gray-700/50 mt-24">
+        <div class="container mx-auto px-6 py-8 text-center text-gray-400">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="impressum.html" class="hover:text-brand-accent-400 transition-colors">Impressum</a>
+                <a href="datenschutz.html" class="hover:text-brand-accent-400 transition-colors">Datenschutzerklärung</a>
+            </div>
+            <p>&copy; 2026 Wissens-Akku. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var b = document.getElementById('mobile-menu-button');
+            var m = document.getElementById('mobile-menu');
+            if (b && m) b.addEventListener('click', function () { m.classList.toggle('hidden'); });
+        });
+    </script>
+</body>
+
+</html>

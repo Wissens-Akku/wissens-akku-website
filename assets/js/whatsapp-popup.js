@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Populate the popup's HTML
     popup.innerHTML = `
         <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
-            <img src="https://static.cdnlogo.com/logos/w/29/whatsapp-icon.svg" alt="WhatsApp Icon">
+            <img src="/Bilder/whatsapp.svg" alt="WhatsApp Icon">
             <span>Gruppe beitreten</span>
         </a>
         <div class="close-btn" id="close-whatsapp-popup">&times;</div>

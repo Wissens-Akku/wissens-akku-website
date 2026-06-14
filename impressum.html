@@ -2,13 +2,12 @@
 <html lang="de" class="scroll-smooth">
 
 <head>
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9"
-        type="text/javascript" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Impressum | Wissens-Akku</title>
     <link rel="icon" href="Bilder/wissenakku-logo.png">
     <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
+    <link rel="alternate" type="application/rss+xml" title="Wissens-Akku Podcast" href="https://anchor.fm/s/107c46c58/podcast/rss">
     <meta name="theme-color" content="#0F172A">
     <meta name="robots" content="noindex">
     <meta name="description" content="Impressum der Wissens-Akku Webseite.">
@@ -48,7 +47,7 @@
 <body class="text-brand-accent-400 font-sans">
 
     <!-- Global Fixed Background -->
-    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.jpg');">
         <div class="absolute inset-0 bg-brand-dark/80"></div>
     </div>
 
@@ -170,7 +169,17 @@
                         <textarea name="message" id="message" rows="4" required
                             class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
                     </div>
-                    <div>
+                                            <div class="flex items-start mb-6">
+                            <div class="flex items-center h-5">
+                                <input id="datenschutz_contact" name="datenschutz_contact" type="checkbox" required
+                                    class="w-4 h-4 bg-gray-900 border border-gray-600 rounded focus:ring-2 focus:ring-brand-accent-500">
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="datenschutz_contact" class="font-medium text-brand-accent-400">Datenschutz zustimmen</label>
+                                <p class="text-gray-400">Ich stimme zu, dass meine Daten zur Bearbeitung der Anfrage gesendet und verarbeitet werden. Weitere Informationen finden Sie in der <a href="/datenschutz.html" class="text-brand-accent-500 hover:underline" target="_blank">Datenschutzerklärung</a>.</p>
+                            </div>
+                        </div>
+<div>
                         <button type="submit"
                             class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht
                             senden</button>

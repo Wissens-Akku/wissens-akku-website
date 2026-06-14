@@ -2,13 +2,12 @@
 <html lang="de" class="scroll-smooth">
 
 <head>
-    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="e09e7a8c-187b-4477-8805-42800c5861f9"
-        type="text/javascript" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Episoden | Wissens-Akku</title>
     <link rel="icon" href="Bilder/wissenakku-logo.png">
     <link rel="apple-touch-icon" href="Bilder/wissenakku-logo.png">
+    <link rel="alternate" type="application/rss+xml" title="Wissens-Akku Podcast" href="https://anchor.fm/s/107c46c58/podcast/rss">
     <meta name="theme-color" content="#0F172A">
     <meta name="description"
         content="Alle Episoden des Wissens-Akku Podcasts. Dein faktenbasierter Gesundheits-Podcast für Gesundheit, Ernährung und Leistungsfähigkeit.">
@@ -99,7 +98,7 @@
 <body class="text-brand-accent-400 font-sans">
 
     <!-- Global Fixed Background -->
-    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.png');">
+    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('Bilder/hintergrund.jpg');">
         <div class="absolute inset-0 bg-brand-dark/80"></div>
     </div>
 
@@ -174,7 +173,7 @@
     </main>
 
     <!-- Modals -->
-    <div id="contact-modal"
+    <div id="contact-modal" role="dialog" aria-modal="true" aria-labelledby="contact-modal-title"
         class="modal hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 items-center justify-center p-4">
         <div class="max-h-[75vh] overflow-y-auto">
             <div class="bg-gray-800 rounded-xl shadow-2xl p-8 max-w-2xl w-full relative border border-gray-700">
@@ -187,7 +186,7 @@
                             d="M6 18L18 6M6 6l12 12" />
                     </svg>
                 </button>
-                <h2 class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
+                <h2 id="contact-modal-title" class="text-3xl font-bold font-heading text-center mb-8">Kontakt</h2>
                 <form name="contact" method="POST" data-netlify="true" action="/success.html" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
@@ -215,7 +214,17 @@
                         <textarea name="message" id="message" rows="4" required
                             class="w-full bg-gray-900/50 border border-gray-600 rounded-lg py-2 px-4 focus:ring-2 focus:ring-brand-accent-500 focus:outline-none"></textarea>
                     </div>
-                    <div>
+                                            <div class="flex items-start mb-6">
+                            <div class="flex items-center h-5">
+                                <input id="datenschutz_contact" name="datenschutz_contact" type="checkbox" required
+                                    class="w-4 h-4 bg-gray-900 border border-gray-600 rounded focus:ring-2 focus:ring-brand-accent-500">
+                            </div>
+                            <div class="ml-3 text-sm">
+                                <label for="datenschutz_contact" class="font-medium text-brand-accent-400">Datenschutz zustimmen</label>
+                                <p class="text-gray-400">Ich stimme zu, dass meine Daten zur Bearbeitung der Anfrage gesendet und verarbeitet werden. Weitere Informationen finden Sie in der <a href="/datenschutz.html" class="text-brand-accent-500 hover:underline" target="_blank">Datenschutzerklärung</a>.</p>
+                            </div>
+                        </div>
+<div>
                         <button type="submit"
                             class="w-full bg-brand-accent-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-brand-accent-600 transition-transform hover:scale-105 transform">Nachricht
                             senden</button>
@@ -357,13 +366,13 @@
                         const cleanContent = (episode.contentEncoded || episode.content || '').replace(/<br><br>/g, '</p><p>');
                         const platforms = {
                             spotify: episode.link || 'https://open.spotify.com/show/4cvMLk6acssF3L31vMHy9H',
-                            apple: 'https://podcasts.apple.com/us/podcast/wissens-akku/id1833243965',
+                            apple: 'https://podcasts.apple.com/de/podcast/wissens-akku/id1833243965',
                             youtube: 'https://www.youtube.com/@Wissens-Akku'
                         };
 
                         return `
                         <div class="bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden">
-                            <button class="accordion-button w-full p-6 text-left flex justify-between items-center hover:bg-gray-700/50 transition-colors">
+                            <button class="accordion-button w-full p-6 text-left flex justify-between items-center hover:bg-gray-700/50 transition-colors" aria-expanded="false">
                                 <div class="flex-grow">
                                     <p class="text-xs text-brand-accent-400 uppercase tracking-wider">${episode.category}</p>
                                     <h3 class="text-xl font-bold font-heading text-white">${episode.title}</h3>
@@ -375,14 +384,7 @@
                             </button>
                             <div class="accordion-content episode-details-content">
                                                         <p class="text-gray-300 mb-6">${episode.contentSnippet}</p>
-                                                        <div class="pt-6 border-t border-gray-700/50">
-                                    <h4 class="text-lg font-bold font-heading mb-4 text-center">Jetzt überall anhören</h4>
-                                    <div class="flex justify-center items-center gap-4 md:gap-6 flex-wrap">
-                                        <a href="${platforms.spotify}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-green-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-green-700 transition-transform hover:scale-105 transform no-underline">Spotify</a>
-                                        <a href="${platforms.apple}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-purple-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-purple-700 transition-transform hover:scale-105 transform no-underline">Apple Podcasts</a>
-                                        <a href="${platforms.youtube}" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto flex-grow sm:flex-grow-0 bg-red-600 text-white font-bold py-3 px-6 rounded-lg text-center hover:bg-red-700 transition-transform hover:scale-105 transform no-underline">YouTube</a>
-                                    </div>
-                                </div>
+                                                        <a href="episode/${episode.safe_title}.html" class="inline-block bg-brand-accent-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-brand-accent-600 transition-colors no-underline">Zur Folge &rarr;</a>
                             </div>
                         </div>
                         `;
@@ -393,9 +395,11 @@
                             document.querySelectorAll('.accordion-button').forEach(otherButton => {
                                 if (otherButton !== button) {
                                     otherButton.classList.remove('active');
+                                    otherButton.setAttribute('aria-expanded', 'false');
                                 }
                             });
-                            button.classList.toggle('active');
+                            const isOpen = button.classList.toggle('active');
+                            button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
                         });
                     });
                 } else {
@@ -414,7 +418,7 @@
                 if (searchTerm) {
                     filteredEpisodes = filteredEpisodes.filter(episode => {
                         const title = episode.title.toLowerCase();
-                        const content = (episode.contentEncoded || episode.content || '').toLowerCase();
+                        const content = (episode.contentSnippet || '').toLowerCase();
                         return title.includes(searchTerm) || content.includes(searchTerm);
                     });
                 }
@@ -460,7 +464,7 @@
             setupModal(contactModal, openContactModalButtons, closeContactModalButton);
 
             try {
-                const response = await fetch('assets/js/episodes.json');
+                const response = await fetch('assets/js/episodes-list.json');
                 if (!response.ok) throw new Error('Episoden-Daten konnten nicht geladen werden.');
                 const data = await response.json();
                 allEpisodes = data.items;

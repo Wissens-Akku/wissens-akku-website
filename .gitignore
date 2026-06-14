@@ -1,5 +1,13 @@
 RSS.json
+
+# Build-Artefakte (werden bei `npm run build` erzeugt – Netlify generiert sie beim Deploy)
 /assets/css/tailwind.css
 /episoden/
+/episode/
+/kategorie/
 /assets/js/episodes.json
+/assets/js/episodes-list.json
 /Themen/
+
+# Interne Backups – nicht ins oeffentliche Deploy
+Bilder/_backup_vor_KI/

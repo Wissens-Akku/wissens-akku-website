@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Amazon Music">
+  <defs>
+    <linearGradient id="amBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4BD5F0"/>
+      <stop offset="1" stop-color="#1B6CE0"/>
+    </linearGradient>
+  </defs>
+  <!-- App-Icon Hintergrund -->
+  <rect x="16" y="16" width="480" height="480" rx="108" fill="url(#amBg)"/>
+  <!-- Notenkopf -->
+  <circle cx="196" cy="328" r="56" fill="#ffffff"/>
+  <!-- Notenhals -->
+  <rect x="236" y="150" width="28" height="178" rx="14" fill="#ffffff"/>
+  <!-- Amazon-Smile als Notenfahne / Bogen -->
+  <path d="M250 150
+           C 326 150 372 196 372 268"
+        fill="none" stroke="#ffffff" stroke-width="28" stroke-linecap="round"/>
+  <path d="M150 392
+           C 214 432 298 432 362 392"
+        fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round"/>
+</svg>

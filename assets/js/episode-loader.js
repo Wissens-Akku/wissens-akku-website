@@ -36,7 +36,7 @@ async function fetchAndCacheEpisodes() {
         }
 
         console.log("Fetching fresh episodes.");
-        const response = await fetch('assets/js/episodes.json');
+        const response = await fetch('assets/js/episodes-list.json');
         if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -76,7 +76,7 @@ function renderEpisodes(gridElement, episodes) {
                     <p class="text-gray-400 line-clamp-3 flex-grow">${description}</p>
                 </div>
                 <div class="p-6 pt-0 mt-auto">
-                     <a href="${episode.link}" target="_blank" rel="noopener noreferrer" class="inline-block bg-brand-accent-500 text-white font-bold py-2 px-4 rounded-lg text-sm hover:bg-brand-accent-600 transition-colors">
+                     <a href="episode/${episode.safe_title}.html" class="inline-block bg-brand-accent-500 text-white font-bold py-2 px-4 rounded-lg text-sm hover:bg-brand-accent-600 transition-colors">
                         Zur Folge
                     </a>
                 </div>
