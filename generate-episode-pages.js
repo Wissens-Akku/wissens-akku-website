@@ -120,7 +120,7 @@ function renderHeaderFooter() {
     header: `
 <body class="bg-gray-900 text-white font-sans flex flex-col min-h-screen">
 
-    <div class="fixed inset-0 z-[-10] bg-cover bg-center" style="background-image: url('../Bilder/hintergrund.jpg');">
+    <div class="fixed inset-0 z-[-10] bg-cover" style="background-image: url('../Bilder/hintergrund.jpg'); background-position: right bottom;">
         <div class="absolute inset-0 bg-brand-dark/80"></div>
     </div>
 
