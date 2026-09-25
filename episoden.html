@@ -168,6 +168,15 @@
                 <div id="episode-accordion" class="space-y-4">
                     <!-- Episode items will be loaded here -->
                 </div>
+
+                <!-- Themen-Uebersicht: Links zu den Kategorie-Seiten -->
+                <div id="category-links-section"
+                    class="mt-12 p-6 bg-gray-800/50 backdrop-blur-sm rounded-xl border border-gray-700/50 hidden">
+                    <h2 class="text-xl font-bold font-heading text-white mb-4">Alle Folgen zum Thema &hellip;</h2>
+                    <div id="category-links" class="flex flex-wrap gap-2">
+                        <!-- Category page links will be loaded here -->
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -484,6 +493,24 @@
                         applyFiltersAndSort();
                     });
                 });
+
+                // Links zu den generierten Kategorie-Seiten (kategorie/<slug>.html).
+                // Slug-Logik identisch zu categorySlug() in generate-episode-pages.js.
+                const categorySlug = (cat) => String(cat || 'Allgemein').toLowerCase()
+                    .replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
+                    .replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+                const categoryLinksSection = document.getElementById('category-links-section');
+                const categoryLinksContainer = document.getElementById('category-links');
+                if (categoryLinksSection && categoryLinksContainer) {
+                    const pageCategories = [...new Set(allEpisodes.map(ep => ep.category || 'Allgemein'))]
+                        .sort((a, b) => (a === 'Allgemein') - (b === 'Allgemein') || a.localeCompare(b, 'de'));
+                    if (pageCategories.length) {
+                        categoryLinksContainer.innerHTML = pageCategories.map(cat =>
+                            `<a href="kategorie/${categorySlug(cat)}.html" class="px-4 py-2 text-base rounded-full border border-gray-600 hover:bg-brand-accent-400 hover:text-brand-dark transition-colors no-underline">${cat}</a>`
+                        ).join('');
+                        categoryLinksSection.classList.remove('hidden');
+                    }
+                }
 
                 applyFiltersAndSort();
 
