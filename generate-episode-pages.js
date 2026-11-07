@@ -379,7 +379,7 @@ ${navHtml}
 function renderCategoryPage(catName, slug, episodes) {
   const canonical = `${SITE_URL}/kategorie/${slug}.html`;
   const title = escapeHtml(catName);
-  const metaDesc = escapeHtml(truncate(`Alle ${episodes.length} Folgen aus dem Bereich ${catName} des Wissens-Akku Podcasts – faktenbasiert und verständlich erklärt.`, 155));
+  const metaDesc = escapeHtml(truncate(`Alle ${episodes.length} Folgen aus dem Bereich ${catName} des Wissens-Akku Podcasts, faktenbasiert und verständlich erklärt.`, 155));
   const image = escapeHtml(SITE_URL + '/Bilder/wissenakku-logo.png');
 
   const jsonLd = jsonLdScript(
@@ -402,7 +402,7 @@ function renderCategoryPage(catName, slug, episodes) {
                     </li>`;
   }).join('\n');
 
-  return renderHead({ title: title + ' – Alle Folgen', metaDesc, canonical, image, ogType: 'website', jsonLd }) + header + `
+  return renderHead({ title: title + ': Alle Folgen', metaDesc, canonical, image, ogType: 'website', jsonLd }) + header + `
 
     <main class="relative z-10 pt-24 flex-grow">
         <div class="container mx-auto px-6 py-12">
